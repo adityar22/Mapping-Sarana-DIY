@@ -11,7 +11,7 @@ const Navbar = () => {
   const active = "bg-white text-orange font-bold";
   const deactive = "text-gray-300";
   const Menus = [
-    { title: "Map", src: menu_map, link: "../../pages/map" },
+    { title: "Map", src: menu_map, link: "../mainpage" },
     { title: "List", src: list },
   ];
 
