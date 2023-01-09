@@ -36,7 +36,19 @@ exports.getAllCategory = (req, res) =>{
 }
 
 exports.getCategoryByID = (req, res)=>{
+    const category = req.params.category
+    client.query(`select * from category where catname = '${category}'`, (err, result)=>{
+        if(!err){
+            res.send(result.rows)
+        }
+        else{
+            res.send(err.message)
+        }
+    })
+}
 
+exports.addAttribut = (req, res)=>{
+    
 }
 
 exports.deleteCategory = (req, res) =>{
