@@ -8,7 +8,7 @@ route.post('/', catControl.createCategory);
 route.get('/',catControl.getAllCategory);
 route.get('/:category',catControl.getCategoryByID);
 
-route.put('/:id', catControl.addAttribut);
-route.delete('/:id,catControl.deleteCategory');
+route.put('/:category', catControl.addAttribut);
+route.delete('/:category,catControl.deleteCategory');
 
 module.exports= route
