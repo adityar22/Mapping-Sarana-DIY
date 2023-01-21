@@ -16,8 +16,8 @@ client.connect(err=>{
 });
 
 app.use(bodyParser.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/api/mapping', mapRouter);
 app.use('/api/category', catRouter);
