@@ -1,14 +1,14 @@
 const client = require('../database/client')
 
 exports.createMapping = (req, res)=>{
-    const {name, coordinat, timestamp, cat, atr1, atr2, atr3, atr4, atr5} = req.body
+    const {name, coordinat, timestamp, cat, imageURL, condition, atr1, atr2, atr3, atr4, atr5} = req.body
 
     client.query(
                     `
                         insert into facility(
-                            facName, facCat, facCoordinat, facTimestamp,facAtr1, facAtr2, facAtr3, facAtr4, facAtr5
+                            facName, facCat, facCoordinat, facTimestamp, imageURL, condition, facAtr1, facAtr2, facAtr3, facAtr4, facAtr5, status
                         )
-                        values('${name}','${cat}', '${coordinat}', '${timestamp}', '${atr1}', '${atr2}', '${atr3}', '${atr4}', '${atr5}');
+                        values('${name}','${cat}', '${coordinat}', '${timestamp}', '${imageURL}', '${condition}', '${atr1}', '${atr2}', '${atr3}', '${atr4}', '${atr5}', 'active');
                     `, (err, result)=>{
                     if(!err){
                         res.send("Inventory added!")
@@ -56,9 +56,13 @@ exports.getMappingByID = (req, res)=>{
     })
 }
 
+exports.searchMapping = (req, res)=>{
+
+}
+
 exports.editMapping = (req, res)=>{
     const id = req.params.id
-    const {name, coordinat, timestamp, atr1, atr2, atr3, atr4, atr5} = req.body
+    const {name, coordinat, timestamp, imageURL, condition, atr1, atr2, atr3, atr4, atr5} = req.body
     client.query(
                     `
                         update facility
@@ -66,6 +70,8 @@ exports.editMapping = (req, res)=>{
                             facName = '${name}', 
                             facCoordinat = '${coordinat}', 
                             facTimestamp = '${timestamp}',
+                            imageURL = '${imageURL}',
+                            condition = '${condition}',
                             facAtr1 = '${atr1}', 
                             facAtr2 = '${atr2}', 
                             facAtr3 = '${atr3}', 
@@ -87,7 +93,9 @@ exports.editMapping = (req, res)=>{
 exports.deleteMapping = (req, res)=>{
     client.query(
         `
-            delete from facility where facID='${req.params.id}'
+            update facility
+            set status = 'deactive'
+            where facID='${req.params.id}'
         `, (err, result) =>{
             if(!err){
                 res.send("Inventory deleted")
