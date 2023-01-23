@@ -5,6 +5,17 @@ import Navbar from "../components/public/Navbar";
 import { useRef } from "react";
 
 export default function BasicMap() {
+  const [chooseCatModal, setChooseCatModal] = useState(false);
+  const openChooseCat = () =>{
+    setChooseCatModal(true);
+  }
+  const closeChooseCat = () =>{
+    setChooseCatModal(false);
+  }
+
+  const [editFacModal, setEditFacModal] = useState(false);
+  const [miniInfo, setMiniInfo] = useState(false);
+
   const [center] = useState({
     lat: -7.795425632583776,
     lng: 110.36814965123658,

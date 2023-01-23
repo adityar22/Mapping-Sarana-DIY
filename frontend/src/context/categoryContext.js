@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-export const categoryContext = createContext();
+export const CategoryContext = createContext();
 
 export const categoryReducer = (state, action) => {
     switch(action.type){
@@ -29,16 +29,16 @@ export const categoryReducer = (state, action) => {
     }
 }
 
-const categoriesContextProvider = ({children})=>{
+const CategoriesContextProvider = ({children})=>{
     const [state, dispatch] = useReducer(categoryReducer, {
         categories: null
     })
 
     return(
-        <categoryContext.Provider value={{ ...state, dispatch}}>
+        <CategoryContext.Provider value={{ ...state, dispatch}}>
             {children}
-        </categoryContext.Provider>
+        </CategoryContext.Provider>
     )
 }
 
-export default categoriesContextProvider
+export default CategoriesContextProvider

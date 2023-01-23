@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import {useFacilityHandleAdd} from "../../hooks/useFacilityHandleAdd";
 
-const addfacility = ({openPopUp, closePopUp, setLoading, url, setError}) =>{
+const addFacility = ({openPopUp, closePopUp, setLoading, url, setError}) =>{
     const {dispatch} = useFacilityContext();
 
     const [facName, setFacName] = useState("");
@@ -25,4 +25,4 @@ const addfacility = ({openPopUp, closePopUp, setLoading, url, setError}) =>{
         </div>
     )
 }
-export default addfacility;
+export default addFacility;

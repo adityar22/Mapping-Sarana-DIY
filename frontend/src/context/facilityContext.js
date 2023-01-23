@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-export const facilityContext = createContext();
+export const FacilityContext = createContext();
 
 export const facilityReducer = (state, action) => {
     switch(action.type){
@@ -29,16 +29,16 @@ export const facilityReducer = (state, action) => {
     }
 }
 
-const facilitesContextProvider = ({children})=>{
+const FacilitesContextProvider = ({children})=>{
     const [state, dispatch] = useReducer(facilityReducer, {
         facilities: null
     })
 
     return(
-        <facilityContext.Provider value={{ ...state, dispatch}}>
+        <FacilityContext.Provider value={{ ...state, dispatch}}>
             {children}
-        </facilityContext.Provider>
+        </FacilityContext.Provider>
     )
 }
 
-export default facilitesContextProvider
+export default FacilitesContextProvider
