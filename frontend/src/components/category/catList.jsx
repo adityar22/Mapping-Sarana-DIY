@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const catList=({category, setLoading, seterror})=>{
+const CatList=({category, setLoading, seterror})=>{
     return(
         <>
             <option key={category.catID}>
@@ -10,4 +10,4 @@ const catList=({category, setLoading, seterror})=>{
     )
 }
 
-export default catList;
+export default CatList;

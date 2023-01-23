@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './components/loading.css'
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
-import DisplayContextProvider from './context/displayContext';
-import FacilitesContextProvider from './context/facilityContext';
-import CategoriesContextProvider from './context/categoryContext';
+
+import DisplayContextProvider from './context/DisplayContext';
+import FacilitesContextProvider from './context/FacilityContext';
+import CategoriesContextProvider from './context/CategoryContext';
 
 
 
@@ -15,7 +18,7 @@ root.render(
     <DisplayContextProvider>
       <CategoriesContextProvider>
         <FacilitesContextProvider>
-          <App/>
+          <App />
         </FacilitesContextProvider>
       </CategoriesContextProvider>
     </DisplayContextProvider>

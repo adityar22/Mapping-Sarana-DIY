@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { facilityContext } from "../context/facilityContext";
+import { FacilityContext } from "../context/FacilityContext";
 
 export const useFacilityContext=()=>{
-    const context = useContext(facilityContext);
+    const context = useContext(FacilityContext);
 
     if(!context){
         throw Error('Something bad occured on useFacilityContext')

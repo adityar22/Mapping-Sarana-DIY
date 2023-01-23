@@ -1,16 +1,13 @@
 import { useState } from "react";
 
-import { useCategoryContext } from "../../hooks/usecategoryContext";
+import { useCategoryContext } from "../../hooks/useCategoryContext";
 import { useDisplayContext } from "../../hooks/useDisplayContext";
 import useFetch from "../../hooks/useFetch";
 
-import catList from "../category/catList";
+import CatList from "../category/catList";
 import addFacility from "./addFacility";
 
-const chooseCategory=({openPopup, closePopup, setLoading, url, setError})=>{
-    const {categories, dispatch} = useCategoryContext();
-    const {notify, isPending, error, setLoading, setError} = useDisplayContext();
-
+const ChooseCategory=({categories, openPopup, closePopup, setLoading, url, setError})=>{
     const [addCatModal, setAddCatModal] = useState(false);
     const openAddCatModal = () =>{
         setAddCatModal(true);
@@ -26,9 +23,6 @@ const chooseCategory=({openPopup, closePopup, setLoading, url, setError})=>{
        setAddFacModal(false);
     }
 
-    const url = '/api/category';
-    useFetch({url, dispatch, setError, setLoading, type:'GET_CATEGORIES'});
-
     const [catName, setCatName] = useState("");
 
     return(
@@ -42,7 +36,7 @@ const chooseCategory=({openPopup, closePopup, setLoading, url, setError})=>{
                         </label>
                         <select>
                             {categories && categories.map(category=>(
-                                <catList key={category.catID} category={category} setLoading={setLoading} setError={setError} />
+                                <CatList key={category.catID} category={category} setLoading={setLoading} setError={setError} />
                             ))}
                         </select>
                     </div>
@@ -60,3 +54,4 @@ const chooseCategory=({openPopup, closePopup, setLoading, url, setError})=>{
         </div>
     )
 }
+export default ChooseCategory;
