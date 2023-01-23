@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import DisplayContextProvider from './context/displayContext';
+import FacilitesContextProvider from './context/facilityContext';
+import CategoriesContextProvider from './context/categoryContext';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <DisplayContextProvider>
+      <CategoriesContextProvider>
+        <FacilitesContextProvider>
+          <App/>
+        </FacilitesContextProvider>
+      </CategoriesContextProvider>
+    </DisplayContextProvider>
   </React.StrictMode>
 );
 
