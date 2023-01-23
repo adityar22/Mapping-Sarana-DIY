@@ -1,20 +1,46 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import osm from "../components/maptiler/osm-providers";
-import Navbar from "../components/public/Navbar";
 import { useRef } from "react";
 
+
+import { useFacilityContext } from "../hooks/useFacilityContext";
+import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useDisplayContext } from "../hooks/useDisplayContext";
+import useFetch from "../hooks/useFetch";
+
+import Navbar from "../components/public/Navbar";
+import SearchBar from "../components/searchbar/searchbar";
+import ChooseCategory from "../components/modal/chooseCategory";
+
 export default function BasicMap() {
+  const { facilities, dispatch } = useFacilityContext();
+  const { categories, dispatch2 } = useCategoryContext();
+  const { notify, isPending, error, setLoading, setError } = useDisplayContext();
+
   const [chooseCatModal, setChooseCatModal] = useState(false);
-  const openChooseCat = () =>{
+  const openChooseCat = () => {
     setChooseCatModal(true);
   }
-  const closeChooseCat = () =>{
+  const closeChooseCat = () => {
     setChooseCatModal(false);
   }
 
-  const [editFacModal, setEditFacModal] = useState(false);
   const [miniInfo, setMiniInfo] = useState(false);
+  const openMiniInfo = () => {
+    setMiniInfo(true);
+  }
+  const closeMiniInfo = () => {
+    setMiniInfo(false);
+  }
+
+  const url = '/api/mapping/';
+  const url2 = '/api/category/';
+  useFetch({ url, dispatch, setError, setLoading, type: 'GET_FACILITIES' });
+  useFetch({ url2, dispatch2, setError, setLoading, type: 'GET_CATEGORIES' });
+
+  console.log(categories);
+  console.log(facilities);
 
   const [center] = useState({
     lat: -7.795425632583776,
@@ -25,6 +51,7 @@ export default function BasicMap() {
 
   return (
     <>
+      <SearchBar></SearchBar>
       <MapContainer
         center={center}
         zoom={ZOOM_LEVEL}
@@ -36,6 +63,14 @@ export default function BasicMap() {
           attribution={osm.maptiler.attribution}
         />
       </MapContainer>
+      <div className="align-middle" >
+        <button
+          type="button"
+          className="button p-3 mb-10 sm:mb-12 mr-7 relative"
+          onClick={openChooseCat}
+        > Add Task + </button>
+      </div>
+      {chooseCatModal && <ChooseCategory />}
     </>
   );
 }
