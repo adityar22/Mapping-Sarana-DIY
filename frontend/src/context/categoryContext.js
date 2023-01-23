@@ -1,0 +1,44 @@
+import { createContext, useReducer } from "react";
+
+export const categoryContext = createContext();
+
+export const categoryReducer = (state, action) => {
+    switch(action.type){
+        case 'GET_CATEGORIES':
+            return{
+                categories: action.payload
+            }
+        case 'ADD_CATEGORIES':
+            return{
+                categories:[action.payload, ...state.categories]
+            }
+        case 'EDIT_CATEGORIES':
+            return{
+                categories: state.categories.map((item)=>{
+                    return item.facID !== action.payload.facID ? item:action.payload
+                })
+            }
+        case 'DELETE_CATEGORIES':
+            return{
+                categories: state.categories.filter((item)=>{
+                    return item.facID !== action.payload.facID
+                })
+            }
+        default:
+            return state
+    }
+}
+
+const categoriesContextProvider = ({children})=>{
+    const [state, dispatch] = useReducer(categoryReducer, {
+        categories: null
+    })
+
+    return(
+        <categoryContext.Provider value={{ ...state, dispatch}}>
+            {children}
+        </categoryContext.Provider>
+    )
+}
+
+export default categoriesContextProvider
