@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import osm from "../components/maptiler/osm-providers";
 import { useRef } from "react";
+import axios from 'axios';
 
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
@@ -34,13 +35,33 @@ export default function BasicMap() {
     setMiniInfo(false);
   }
 
-  const url = '/api/mapping/';
-  const url2 = '/api/category/';
+  const url = 'http://localhost:3100/api/mapping';
+  const url2 = 'http://localhost:3100/api/category';
   useFetch({ url, dispatch, setError, setLoading, type: 'GET_FACILITIES' });
   useFetch({ url2, dispatch2, setError, setLoading, type: 'GET_CATEGORIES' });
 
-  console.log(categories);
-  console.log(facilities);
+  // const getMapping = async (e) => {
+  //   // e.preventDefault();
+  //   try {
+  //     // GET request for products from fakestore API
+  //     await axios({
+  //       method: "get",
+  //       baseURL: "https://localhost:3100",
+  //       url: "/mapping/",
+  //     })
+  //       .then(function (response) {
+  //         // handle success
+  //         console.log(response);
+  //       })
+  //       .catch(function (error) {
+  //         // handle error
+  //         console.log(error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // };
+  // getMapping();
 
   const [center] = useState({
     lat: -7.795425632583776,

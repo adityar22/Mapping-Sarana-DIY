@@ -12,7 +12,7 @@ function App() {
       
         <Router>
           <Routes>
-            <Route path="/pages/map" element={<Map />} exact />
+            <Route path="/mapping" element={<Map />} exact />
             <Route path="/mainpage" element={<Mainpage />} />
             <Route path="/" element={<Map />} />
           </Routes>

@@ -23,6 +23,7 @@ exports.getAllMapping = (req, res)=>{
     console.log("loading data")
     client.query(`select * from facility`, (err, result)=>{
         if(!err){
+            console.log(result.rows)
             res.send(result.rows)
         }
         else{
