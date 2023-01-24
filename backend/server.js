@@ -5,6 +5,7 @@ const client = require('./server/database/client');
 const mapRouter = require('./server/routes/mapRouter');
 const catRouter = require('./server/routes/catRouter');
 const app = express();
+const cors = require('cors');
 
 client.connect(err=>{
     if(err){
@@ -15,7 +16,9 @@ client.connect(err=>{
     }
 });
 
+
 app.use(bodyParser.json());
+app.use(cors({credentials:true, origin:'http://localhost:3000'}))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
