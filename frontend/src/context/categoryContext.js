@@ -30,12 +30,12 @@ export const categoryReducer = (state, action) => {
 }
 
 const CategoriesContextProvider = ({children})=>{
-    const [state, dispatch] = useReducer(categoryReducer, {
+    const [state, dispatch2] = useReducer(categoryReducer, {
         categories: null
     })
 
     return(
-        <CategoryContext.Provider value={{ ...state, dispatch}}>
+        <CategoryContext.Provider value={{ ...state, dispatch2}}>
             {children}
         </CategoryContext.Provider>
     )

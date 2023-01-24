@@ -36,32 +36,14 @@ export default function BasicMap() {
   }
 
   const url = 'http://localhost:3100/api/mapping';
-  const url2 = 'http://localhost:3100/api/category';
   useFetch({ url, dispatch, setError, setLoading, type: 'GET_FACILITIES' });
-  useFetch({ url2, dispatch2, setError, setLoading, type: 'GET_CATEGORIES' });
 
-  // const getMapping = async (e) => {
-  //   // e.preventDefault();
-  //   try {
-  //     // GET request for products from fakestore API
-  //     await axios({
-  //       method: "get",
-  //       baseURL: "https://localhost:3100",
-  //       url: "/mapping/",
-  //     })
-  //       .then(function (response) {
-  //         // handle success
-  //         console.log(response);
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // };
-  // getMapping();
+  const url2 = 'http://localhost:3100/api/category';
+  useFetch({ url:url2, dispatch:dispatch2, setError, setLoading, type: 'GET_CATEGORIES' });
+  
+  console.log(facilities)
+  console.log(categories)
+
 
   const [center] = useState({
     lat: -7.795425632583776,
@@ -91,7 +73,7 @@ export default function BasicMap() {
           onClick={openChooseCat}
         > Add Task + </button>
       </div>
-      {chooseCatModal && <ChooseCategory />}
+      {chooseCatModal && <ChooseCategory categories={categories} selfPopup={closeChooseCat} setLoading={setLoading} setError={setError}/>}
     </>
   );
 }
