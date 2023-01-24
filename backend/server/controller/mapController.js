@@ -10,7 +10,7 @@ exports.createMapping = async(req, res)=>{
             category: category,
             imageURL: imageURL,
             status: 'active',
-            atibut1: atr1,
+            atribut1: atr1,
             atribut2: atr2,
             atribut3: atr3,
             atribut4: atr4,
@@ -42,11 +42,11 @@ exports.getAllMapping = async(req, res)=>{
 }
 
 exports.getMappingByCat = async(req, res)=>{
-    const category = req.params.category
+    const cat = req.params.category
     
     try {
         const facilities = await facility.findAll({
-            category: category
+            where:{category: cat}
         })
         res.status(200).json({
             success: true,
@@ -60,10 +60,11 @@ exports.getMappingByCat = async(req, res)=>{
 
 exports.getMappingByID = async(req, res)=>{
     const id = req.params.id
+    console.log(id)
     
     try {
         const facilities = await facility.findAll({
-            id: id
+            where:{id: id}
         })
         res.status(200).json({
             success: true,

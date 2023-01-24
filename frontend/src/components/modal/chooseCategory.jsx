@@ -2,9 +2,7 @@ import { useState } from "react";
 
 import CatList from "../category/catList";
 
-const ChooseCategory = ({ categories, setCatName, selfPopup, addFacPopUp, addCatPopUp, setLoading, setError }) => {
-    console.log(categories)
-
+const ChooseCategory = ({ categories, choosedCat, selfPopup, addFacPopUp, addCatPopUp, setLoading, setError }) => {
     const addFacility = () => {
         addFacPopUp(true);
         selfPopup(false);
@@ -13,6 +11,9 @@ const ChooseCategory = ({ categories, setCatName, selfPopup, addFacPopUp, addCat
     const addCategory = () => {
         addCatPopUp(true);
         selfPopup(false);
+    }
+    const chooseCategory=(cat)=>{
+        choosedCat(cat)
     }
 
     return (
@@ -25,7 +26,7 @@ const ChooseCategory = ({ categories, setCatName, selfPopup, addFacPopUp, addCat
                         <label>
                             Kategori
                         </label>
-                        <select onChange={(e) => setCatName(e.target.value)}>
+                        <select onChange={(e) => chooseCategory(e.target.value)}>
                             {categories && categories.map(category => (
                                 <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                             ))}

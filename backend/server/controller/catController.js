@@ -46,7 +46,7 @@ exports.getCategoryByID = async(req, res)=>{
     
     try {
         const categories = await category.findAll({
-            name: name
+            where:{name: name}
         })
         res.status(200).json({
             success: true,
