@@ -1,77 +1,86 @@
-const client = require('../database/client')
+const category = require('../model/categoryModel')
 
-exports.createCategory = (req, res)=>{
+exports.createCategory = async(req, res)=>{
     if(!req.body){
-        res.send("data cannot empty!")
+        res.send("Data cannot empty!")
     };
 
     //insert to table category
-    const {catName, catAtr, catAtrType, catIcon} = req.body
-    client.query(
-        `
-            insert into category(catname, catatr, catatrtype, catIcon, status) values('${catName}', '${catAtr}', '${catAtrType}', '${catIcon}', 'active');
-        `,
-        (err, result)=>{
-            if(!err){
-                res.send("category added!")
-            }
-            else{
-                res.send(err.message)
-            }
-        }
-    );
+    const {name, icon, atribut, atributType} = req.body
     
+    try {
+        await category.create({
+            name: name,
+            icon: icon,
+            status: 'active',
+            atribut: atribut,
+            atributType: atributType
+        });
+        res.status(200).json({
+            sucess: true,
+            message: 'New category added!',
+            data: req.body
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.getAllCategory = (req, res) =>{
-    client.query(`select * from category`, (err, result)=>{
-        if(!err){
-            res.send(result.rows)
-        }
-        else{
-            res.send(err.message)
-        }
-    })
+exports.getAllCategory = async(req, res) =>{
+    try {
+        const categories = await category.findAll({
+            status: 'active'
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Facilities exist!',
+            data: categories
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.getCategoryByID = (req, res)=>{
-    const category = req.params.category
-    client.query(`select * from category where catname = '${category}'`, (err, result)=>{
-        if(!err){
-            res.send(result.rows)
-        }
-        else{
-            res.send(err.message)
-        }
-    })
+exports.getCategoryByID = async(req, res)=>{
+    const name = req.params.category
+    
+    try {
+        const categories = await category.findAll({
+            name: name
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Category exist!',
+            data: categories
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 exports.addAttribut = (req, res)=>{
     const category = req.params.category
     const {atr, atrtype} = req.body
-    client.query(
-        `
-            update category
-            set catatr = '${atr}',
-                catatrtype = '${atrtype}'
-            where catname = '${category}'
-        `
-    )
+    
 }
 
-exports.deleteCategory = (req, res) =>{
-    const category = req.params.id
-    client.query(
-        `
-        update category set status = 'deactive' where catName = '${category}';
-        update facility set status = 'deactive' where facCat = '${category}';
-        `,(err,reesult)=>{
-            if(!err){
-                res.send("facilities deleted!")
+exports.deleteCategory = async(req, res) =>{
+    const name = req.params.id
+    
+    try {
+        const categories = await category.update({
+            status: 'deactive'
+        }, {
+            where:{
+                name: name
             }
-            else{
-                (err.message);
-            }
-        }
-    )
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Category deleted!',
+            data: categories
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }

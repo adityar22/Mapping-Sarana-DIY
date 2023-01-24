@@ -1,110 +1,133 @@
-const client = require('../database/client')
+const facility = require('../model/facilityModel')
 
-exports.createMapping = (req, res)=>{
-    const {name, coordinat, timestamp, cat, imageURL, condition, atr1, atr2, atr3, atr4, atr5} = req.body
+exports.createMapping = async(req, res)=>{
+    const {name, coordinat, category, imageURL, atr1, atr2, atr3, atr4, atr5} = req.body
 
-    client.query(
-                    `
-                        insert into facility(
-                            facName, facCat, facCoordinat, facTimestamp, imageURL, condition, facAtr1, facAtr2, facAtr3, facAtr4, facAtr5, status
-                        )
-                        values('${name}','${cat}', '${coordinat}', '${timestamp}', '${imageURL}', '${condition}', '${atr1}', '${atr2}', '${atr3}', '${atr4}', '${atr5}', 'active');
-                    `, (err, result)=>{
-                    if(!err){
-                        res.send("Inventory added!")
-                    }
-                    else{
-                        res.send(err.message)
-                    }
-                })
+    try {
+        await facility.create({
+            name: name,
+            coordinat: coordinat,
+            category: category,
+            imageURL: imageURL,
+            status: 'active',
+            atibut1: atr1,
+            atribut2: atr2,
+            atribut3: atr3,
+            atribut4: atr4,
+            atribut5: atr5
+        });
+        res.status(200).json({
+            sucess: true,
+            message: 'New facility added!',
+            data: req.body
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.getAllMapping = (req, res)=>{
-    console.log("loading data")
-    client.query(`select * from facility`, (err, result)=>{
-        if(!err){
-            console.log(result.rows)
-            res.send(result.rows)
-        }
-        else{
-            res.send(err.message)
-        }
-    })
+exports.getAllMapping = async(req, res)=>{
+    try {
+        const facilities = await facility.findAll({
+            status: 'active'
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Facilities exist!',
+            data: facilities
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.getMappingByCat = (req, res)=>{
+exports.getMappingByCat = async(req, res)=>{
     const category = req.params.category
-    console.log(category)
-    client.query(`select * from facility where faccat='${category}'`, (err, result)=>{
-        if(!err){
-            res.send(result.rows)
-        }
-        else{
-            res.send(err.message)
-        }
-    })
+    
+    try {
+        const facilities = await facility.findAll({
+            category: category
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Facilities exist!',
+            data: facilities
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.getMappingByID = (req, res)=>{
+exports.getMappingByID = async(req, res)=>{
     const id = req.params.id
-    client.query(`select * from facility where facid='${id}'`, (err, result)=>{
-        if(!err){
-            res.send(result.rows)
-        }
-        else{
-            res.send(err.message)
-        }
-    })
+    
+    try {
+        const facilities = await facility.findAll({
+            id: id
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Facility exist!',
+            data: facilities
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 exports.searchMapping = (req, res)=>{
 
 }
 
-exports.editMapping = (req, res)=>{
+exports.editMapping = async(req, res)=>{
     const id = req.params.id
-    const {name, coordinat, timestamp, imageURL, condition, atr1, atr2, atr3, atr4, atr5} = req.body
-    client.query(
-                    `
-                        update facility
-                        set
-                            facName = '${name}', 
-                            facCoordinat = '${coordinat}', 
-                            facTimestamp = '${timestamp}',
-                            imageURL = '${imageURL}',
-                            condition = '${condition}',
-                            facAtr1 = '${atr1}', 
-                            facAtr2 = '${atr2}', 
-                            facAtr3 = '${atr3}', 
-                            facAtr4 = '${atr4}', 
-                            facAtr5 = '${atr5}'
-                        where facid = '${id}'
-                    `, (err, result)=>{
-                    if(!err){
-                        console.log(id)
-                        res.send("Inventory updated!")
-                    }
-                    else{
-                        console.log(id)
-                        res.send(err.message)
-                    }
-                })
+    const {name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5} = req.body
+    
+    try {
+        await facility.update({
+            name: name,
+            coordinat: coordinat,
+            imageURL: imageURL,
+            atribut1: atr1,
+            atribut2: atr2,
+            atribut3: atr3,
+            atribut4: atr4,
+            atribut5: atr5
+        },{
+            where:{
+                id: id
+            }
+        })
+
+        res.status(200).json({
+            success: true,
+            message: 'Facility updated!',
+            data: req.body
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-exports.deleteMapping = (req, res)=>{
-    client.query(
-        `
-            update facility
-            set status = 'deactive'
-            where facID='${req.params.id}'
-        `, (err, result) =>{
-            if(!err){
-                res.send("Inventory deleted")
+exports.deleteMapping = async(req, res)=>{
+    const id = req.params.id;
+
+    try {
+        await facility.update({
+            status:'deactive'
+        },{
+            where:{
+                id:id
             }
-            else{
-                res.send(err.message)
-            }
-        }
-    )
+        })
+
+        res.status(200).json({
+            success: true,
+            message: 'facility deactived!',
+            data: req.params.id
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
