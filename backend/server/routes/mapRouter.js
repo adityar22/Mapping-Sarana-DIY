@@ -6,8 +6,8 @@ const route = express.Router();
 route.post('/', mapControl.createMapping);
 
 route.get('/',mapControl.getAllMapping );
-route.get('/category/:category', mapControl.getMappingByCat);
-route.get('/id/:id',mapControl.getMappingByID);
+route.get('/:category', mapControl.getMappingByCat);
+route.get('/:id',mapControl.getMappingByID);
 
 route.put('/:id',mapControl.editMapping);
 

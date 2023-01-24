@@ -18,7 +18,7 @@ export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
   const { notify, isPending, error, setLoading, setError } = useDisplayContext();
-  const [catName, setCatName] = useState("");
+  const [choosedCat, setChoosedCat ] = useState("");
 
   const [miniInfo, setMiniInfo] = useState(false);
   const [chooseCatModal, setChooseCatModal] = useState(false);
@@ -76,12 +76,13 @@ export default function BasicMap() {
         selfPopup={chooseCatPopUp}
         addFacPopUp={addFacPopUp}
         addCatPopUp={addCatPopUp}
+        choosedCat={setChoosedCat}
         setLoading={setLoading}
         setError={setError} />}
 
       {addFacModal && <AddFacility
         url={url}
-        category={catName}
+        category={choosedCat}
         selfPopUp={addFacPopUp}
         chooseCatPopUp={chooseCatPopUp}
         setLoading={setLoading}
