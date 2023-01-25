@@ -1,23 +1,29 @@
-const facility = require('../model/facilityModel')
+const facility = require('../model/facilityModel');
+const cloudinary = require('../database/cloudinary');
 
 exports.createMapping = async(req, res)=>{
     const {name, coordinat, category, imageURL, atr1, atr2, atr3, atr4, atr5} = req.body
 
     try {
+        const resImage = await cloudinary.uploader.upload(imageURL, {
+            folder: 'MappingDIY',
+            width: 720,
+            crop: "scale"
+        })
         await facility.create({
             name: name,
             coordinat: coordinat,
             category: category,
-            imageURL: imageURL,
+            imageURL: resImage.secure_url,
             status: 'active',
             atribut1: atr1,
             atribut2: atr2,
             atribut3: atr3,
             atribut4: atr4,
             atribut5: atr5
-        });
+        })
         res.status(200).json({
-            sucess: true,
+            success: true,
             message: 'New facility added!',
             data: req.body
         })
