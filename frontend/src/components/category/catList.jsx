@@ -1,8 +1,7 @@
 const CatList=({category, setLoading, seterror})=>{
-    console.log(category.name)
     return(
         <>
-            <option key={category.name} value={category.name}>
+            <option key={category.name} value={JSON.stringify(category)}>
                 {category.name}
             </option>
         </>
