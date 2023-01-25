@@ -17,6 +17,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
     const [atr3, setAtr3] = useState("")
     const [atr4, setAtr4] = useState("")
     const [atr5, setAtr5] = useState("")
+    const catName = JSON.stringify(category.name).replace(/"/g, '')
 
     const atrVal = [
         atr1, atr2, atr3, atr4, atr5
@@ -35,8 +36,20 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
         addButtonVisible(true)
     }
 
-    const newFacility = {}
-    const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closeAddPopUp: closeAdd })
+    const handleImage = (e) =>{
+        const file = e.target.files[0];
+        setFileToBase(file)
+    }
+    const setFileToBase = (file) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend=()=>{
+            setImageURL(reader.result);
+        }
+    }
+
+    const newFacility = {name, coordinat, category:catName, imageURL, atr1, atr2, atr3, atr4, atr5}
+    const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd })
 
     return (
         <>
@@ -83,6 +96,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                             className=""
                             id="coordinat"
                             type="file"
+                            onChange={handleImage}
                             accept="image/png, image/jpeg"
                         />
                     </div>
