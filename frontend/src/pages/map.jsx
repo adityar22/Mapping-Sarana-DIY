@@ -18,19 +18,25 @@ export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
   const { notify, isPending, error, setLoading, setError } = useDisplayContext();
-  const [choosedCat, setChoosedCat ] = useState("");
+  const [choosedCat, setChoosedCat] = useState({});
+
+  const [addButton, setAddButton] = useState(true);
+  const addButtonVisible = (state) => {
+    setAddButton(state)
+  }
 
   const [miniInfo, setMiniInfo] = useState(false);
   const [chooseCatModal, setChooseCatModal] = useState(false);
-  const chooseCatPopUp = (state)=>{
+  const chooseCatPopUp = (state) => {
     setChooseCatModal(state)
+    addButtonVisible(false)
   }
   const [addCatModal, setAddCatModal] = useState(false);
-  const addCatPopUp = (state)=>{
+  const addCatPopUp = (state) => {
     setAddCatModal(state)
   }
   const [addFacModal, setAddFacModal] = useState(false);
-  const addFacPopUp = (state)=>{
+  const addFacPopUp = (state) => {
     setAddFacModal(state)
   }
 
@@ -64,19 +70,23 @@ export default function BasicMap() {
           attribution={osm.maptiler.attribution}
         />
       </MapContainer>
-      <div className="align-middle" >
-        <button
-          className="button p-3 mb-10 sm:mb-12 mr-7 relative"
-          onClick={(e) => chooseCatPopUp(true)}
-        > Add Task + </button>
-      </div>
+
+      {addButton &&
+        <div className="align-middle" >
+          <button
+            className="button p-3 mb-10 sm:mb-12 mr-7 relative"
+            onClick={(e) => chooseCatPopUp(true)}
+          > Add Task + </button>
+        </div>
+      }
 
       {chooseCatModal && <ChooseCategory
         categories={categories}
         selfPopup={chooseCatPopUp}
         addFacPopUp={addFacPopUp}
         addCatPopUp={addCatPopUp}
-        choosedCat={setChoosedCat}
+        choosedCat={choosedCat}
+        setChoosedCat={setChoosedCat}
         setLoading={setLoading}
         setError={setError} />}
 
@@ -85,6 +95,7 @@ export default function BasicMap() {
         category={choosedCat}
         selfPopUp={addFacPopUp}
         chooseCatPopUp={chooseCatPopUp}
+        addButtonVisible={addButtonVisible}
         setLoading={setLoading}
         setError={setError} />}
 

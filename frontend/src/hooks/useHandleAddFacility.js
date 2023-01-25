@@ -10,7 +10,7 @@ export const useHandleAddFacility = ({ url, data, type, dispatch, setLoading, se
 
         if (json.success) {
             dispatch({ type: type, payload: json.data });
-            closeAddPopUp();
+            closeAddPopUp(false);
             setLoading(false);
             setError(null);
         }
