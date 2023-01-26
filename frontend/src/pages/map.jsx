@@ -4,7 +4,7 @@ import osm from "../components/maptiler/osm-providers";
 import { useRef } from "react";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
