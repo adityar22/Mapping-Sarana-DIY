@@ -12,25 +12,23 @@ const Navbar = () => {
   const active = "bg-white text-orange font-poppins font-bold";
   const deactive = "text-gray font-poppins font-bold";
   const Menus = [
-    { title: "Map", src: menu_map, link: "../mainpage" },
+    { title: "Map", src: menu_map, link: "/" },
     { title: "List", src: list, link: "/" },
   ];
 
   return (
     <>
       <div
-        className={`${
-          open ? "w-screen sm:w-72" : "w-screen sm:w-20 h-20 sm:h-screen"
-        }
-            bg-blue p-5  sm:pt-8 relative duration-300 fixed sm:relative z-40`}
+        className={`${open ? "w-screen sm:w-72" : "w-screen sm:w-20 h-20 sm:h-screen"
+          }
+            bg-blue p-5  sm:pt-8 duration-300 fixed sm:relative z-40`}
       >
         <img
           src={controller}
-          className={`absolute cursor-pointer -right-0 mr-6 sm:mr-0 sm:-right-3 w-5 scale-150 rounded-full  ${
-            !open
+          className={`absolute cursor-pointer -right-0 mr-6 sm:mr-0 sm:-right-3 w-5 scale-150 rounded-full  ${!open
               ? "top-9 rotate-90 sm:rotate-0"
               : "-bottom-0 sm:top-9 -rotate-90 sm:rotate-180"
-          }`}
+            }`}
           onClick={() => setOpen(!open)}
           alt=""
         />
@@ -56,9 +54,8 @@ const Navbar = () => {
                     >
                       <img src={menu.src} className="w-5 h-5" alt="" />
                       <span
-                        className={`${
-                          !open && "hidden"
-                        } origin-left duration-200 text-base`}
+                        className={`${!open && "hidden"
+                          } origin-left duration-200 text-base`}
                       >
                         {menu.title}
                       </span>
