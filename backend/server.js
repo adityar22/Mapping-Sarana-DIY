@@ -16,7 +16,6 @@ const connection = async(req, res)=>{
     try {
         await db.authenticate()
         console.log('Database Connected')
-        await db.sync()
     } catch (error) {
         console.log(error)
     }
@@ -32,7 +31,7 @@ app.use(express.json());
 
 app.use('/api/mapping', mapRouter);
 app.use('/api/category', catRouter);
-// app.use('/api/user', route)
+app.use('/api/account', route)
 
 app.listen(5000, ()=>{
     console.log('Server is running')
