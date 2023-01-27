@@ -1,0 +1,23 @@
+GET http://localhost:5000/api/loginusers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJCdWRpIiwiaWF0IjoxNjc0ODEwODMzLCJleHAiOjE2NzQ4MTA4NTN9.MHq_isAb01cDoEKtV7mGuK-bsnXheL9unNW6y7MQ_u4
+
+###
+POST http://localhost:5000/api/login/users
+Content-Type: application/json
+
+{
+    "name": "Budi",
+    "password": "restan"
+}
+###
+POST http://localhost:5000/api/login/login
+Content-Type: application/json
+
+{
+    "name": "Budi",
+    "password": "restan"
+}
+###
+GET http://localhost:5000/token
+###
+DELETE http://localhost:5000/logout

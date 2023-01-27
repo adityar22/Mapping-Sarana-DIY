@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const db = require('./server/database/client');
-
-// const route = require('./server/routes/loginRouter')
+const db = require('./server/config/database');
+const route = require('./server/routes/loginRouter')
+const client = require('./server/database/client');
 const mapRouter = require('./server/routes/mapRouter');
 const catRouter = require('./server/routes/catRouter');
 
@@ -16,7 +16,6 @@ const connection = async(req, res)=>{
     try {
         await db.authenticate()
         console.log('Database Connected')
-        await db.sync()
     } catch (error) {
         console.log(error)
     }
@@ -32,8 +31,8 @@ app.use(express.json());
 
 app.use('/api/mapping', mapRouter);
 app.use('/api/category', catRouter);
-// app.use('/api/user', route)
+app.use('/api/account', route)
 
-app.listen(3100, ()=>{
+app.listen(5000, ()=>{
     console.log('Server is running')
 })
