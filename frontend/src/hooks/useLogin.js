@@ -5,7 +5,7 @@ import { useAuthContext } from "./useAuthContext";
 export const useLogin = ({ setError, setLoading }) => {
     const { dispatch } = useAuthContext();
     const [isPending, setIsPending] = useState(null);
-    const url = '/api/users/login';
+    const url = 'http://localhost:3100/api/users/login';
 
     const login = async (name, password) => {
         setIsPending(true);
