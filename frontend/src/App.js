@@ -8,6 +8,7 @@ import Mainpage from "./pages/mainpage";
 
 function App() {
   const {user} = useAuthContext();
+  console.log(user)
   return (
     <>
       <div className="max-w-screen flex-row sm:flex">

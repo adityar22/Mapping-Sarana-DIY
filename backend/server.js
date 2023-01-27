@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv')
+const path = require('path')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const db = require('./server/database/client');
@@ -8,7 +9,7 @@ const loginRouter = require('./server/routes/loginRouter');
 const mapRouter = require('./server/routes/mapRouter');
 const catRouter = require('./server/routes/catRouter');
 
-dotenv.config()
+dotenv.config({ path:"config.env"})
 const app = express();
 
 const connection = async(req, res)=>{
