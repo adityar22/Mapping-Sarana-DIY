@@ -87,6 +87,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                             placeholder="Koordinat fasilitas"
                             onChange={(e) => setCoordinat(e.target.value)}
                             value={coordinat}
+                            
                         />
                     </div>
                     <div className="mb-4">
