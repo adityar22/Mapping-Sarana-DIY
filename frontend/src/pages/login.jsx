@@ -16,7 +16,7 @@ export const Login = () => {
                 name: name,
                 password: password
             })
-            navigate("/mainpage")
+            navigate.push("/mainpage")
         } catch (error) {
             if(error.response){
                 console.log(error)
@@ -41,7 +41,7 @@ export const Login = () => {
                     <label className="text-left px-2">Password</label>     
                     <input className="rounded-lg bg-gray-300 mt-2 p-2 focus:border-blue-500 focus:bg-gray-500 focus:outline-none" type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="rounded-lg bg-gray-800 mt-4 py-2 px-5 text-white">
+                <button className="rounded-lg bg-slate-700 mt-4 py-2 px-5 text-white">
                     Submit
                 </button>
             </form>
