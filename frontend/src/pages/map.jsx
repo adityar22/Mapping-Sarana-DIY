@@ -102,7 +102,7 @@ export default function BasicMap() {
 
   function ToggleButton() {
     return (
-      <div className="bottom-0 right-0 mx-10 my-10">
+      <div className="bottom-0 right-0 mx-10 my-4">
         {editMode ?
           <div className="flex justify-end z-400">
             <button
@@ -127,7 +127,7 @@ export default function BasicMap() {
   return (
     <>
       <SearchBar></SearchBar>
-
+      <ToggleButton />
       <MapContainer
         id="maps"
         center={center}
@@ -137,9 +137,9 @@ export default function BasicMap() {
       >
         {editMode && <ClickLocation />}
 
-        <div className="leaflet-top flex items-end justify-end w-screen h-screen">
+        {/* <div className="leaflet-top flex items-end justify-end w-screen h-screen">
           <ToggleButton />
-        </div>
+        </div> */}
 
         <TileLayer
           className="z-10 absolute"
