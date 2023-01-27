@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/usecategoryContext";
+import { useCategoryContext } from "../../hooks/useCategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import { useFacilityHandleAdd } from "../../hooks/useFacilityHandleAdd";
 import useFetch from "../../hooks/useFetch";
