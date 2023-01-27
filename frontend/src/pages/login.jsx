@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import useAuthContext from '../hooks/useAuthContext'
@@ -11,7 +12,7 @@ export const Login = () => {
                 <img src={logoKota} className=' flex h-48 w-auto mx-auto'></img>
                 <div className="flex flex-col text-black py-2">
                     <label className="text-left px-2">Username</label>
-                    <input className="rounded-lg bg-gray-300 mt-2 p-2 focus:border-blue-500 focus:bg-gray-500 focus:outline-none" type="text" />
+                    <input className="rounded-lg bg-gray-300 mt-2 p-2 focus:border-blue-500 focus:bg-gray-500 focus:outline-none" type="text" id="username" onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div className="flex flex-col text-black py-2">
                     <label className="text-left px-2">Password</label>
