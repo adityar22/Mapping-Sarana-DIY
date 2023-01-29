@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai"
 import CatList from "../category/catList";
 
 
-const SearchBar = ({ categories, setChoosedCat, setLoading, setError }) => {
-    const chooseCategory = (cat) => {
-        setChoosedCat(JSON.parse(cat))
-        console.log(JSON.parse(cat))
+const SearchBar = ({ categories, facilities, setLoading, setError, catView, setCatView, filtered, setFiltered }) => {
+    const filterCat = (cat) => {
+        setCatView(JSON.parse(cat))
+        setFiltered(facilities.filter(function(item){return item.category==catView.name}))
+        console.log(filtered)
     }
+
     return (
         <div className="relative flex items-start rounded-lg w-full">
             <div className="z-10 w-1/5 pl-3 py-3">
-                <select className=" bg-black px-4 w-full flex justify-between font-bold text-lg rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3" onChange={(e) => chooseCategory(e.target.value)}>
+                <select
+                    onChange={(e) => filterCat(e.target.value)}
+                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-lg rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
+                >
                     {categories && categories.map(category => (
                         <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                     ))}
@@ -25,7 +29,7 @@ const SearchBar = ({ categories, setChoosedCat, setLoading, setError }) => {
                         placeholder="Search Facility"
                         autoComplete="off"
                         aria-label="Search Facility"
-                        className="px-3 py-3 font-semibold rounded-lg border-transparent w-full text-lg rounded-xl"
+                        className="px-3 py-3 font-semibold rounded-lg border-transparent w-full text-lg"
                     >
 
                     </input>
