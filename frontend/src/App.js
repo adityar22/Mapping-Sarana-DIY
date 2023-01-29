@@ -15,9 +15,7 @@ function App() {
         <div className='sm:overflow-y-scroll relative w-screen'>
           <Router>
             <Routes>
-              <Route path="/mapping" element={<Map />} exact />
-              <Route path="/mainpage" element={<Mainpage />} />
-              <Route path="/login" element={<Login />} />
+              <Route exact path="/*" element={!user ? <Login /> : <Mainpage />} />
             </Routes>
           </Router>
         </div>
