@@ -27,6 +27,8 @@ export default function BasicMap() {
   const { notify, isPending, error, setLoading, setError } =
     useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
+  const [catView, setCatView] = useState({});
+  const [filtered, setFiltered] = useState({})
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -134,7 +136,16 @@ export default function BasicMap() {
 
   return (
     <div className="max-h-screen">
-      <SearchBar />
+      <SearchBar 
+        categories={categories}
+        facilities={facilities}
+        setLoading={setLoading}
+        setError={setError}
+        catView={catView}
+        setCatView={setCatView}
+        filtered={filtered}
+        setFiltered={setFiltered}
+        />
       <ToggleButton />
       <MapContainer
         id="maps"
