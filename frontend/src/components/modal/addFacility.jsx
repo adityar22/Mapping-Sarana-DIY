@@ -95,7 +95,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                         <input
                             required
                             className=""
-                            id="coordinat"
+                            id="image"
                             type="file"
                             onChange={handleImage}
                             accept="image/png, image/jpeg"

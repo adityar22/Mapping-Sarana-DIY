@@ -110,22 +110,20 @@ export default function BasicMap() {
 
   function ToggleButton() {
     return (
-      <div className="bottom-0 right-0 mx-10 my-4">
-        {editMode ? (
+      <div className="bottom-0 right-0 mx-4 my-2">
+        {editMode ?
           <div className="flex justify-end z-400">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
-              onClick={(e) => toggleMapMode(false)}
-            >
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              onClick={(e) => toggleMapMode(false)}>
               Edit Mode
             </button>
           </div>
         ) : (
           <div className="flex justify-end z-400">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
-              onClick={(e) => toggleMapMode(true)}
-            >
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              onClick={(e) => toggleMapMode(true)}>
               View Mode
             </button>
           </div>
@@ -135,7 +133,7 @@ export default function BasicMap() {
   }
 
   return (
-    <>
+    <div className="max-h-screen">
       <SearchBar></SearchBar>
       <ToggleButton />
       <MapContainer
@@ -147,14 +145,11 @@ export default function BasicMap() {
       >
         {editMode && <ClickLocation />}
 
-        {/* <div className="leaflet-top flex items-end justify-end w-screen h-screen">
+        {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
           <ToggleButton />
         </div> */}
 
         <TileLayer
-          minZoom={3}
-          maxZoom={20}
-          className="z-10 absolute"
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
         />
@@ -185,8 +180,15 @@ export default function BasicMap() {
         />
       )}
 
-      {addCatModal && <AddCategory />}
-    </>
+      {addCatModal && <AddCategory 
+        url={url2}
+        selfPopUp={addCatPopUp}
+        chooseCatPopUp={chooseCatPopUp}
+        addButtonVisible={toggleMapMode}
+        setLoading={setLoading}
+        setError={setError}
+      />}
+    </div>
   );
 }
 
