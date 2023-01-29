@@ -7,8 +7,8 @@ import SearchBar from "../components/searchbar/Searchbar";
 const Mainpage = () => {
   return (
     <div className="max-w-screen flex-row sm:flex">
-      {/* <Navbar /> */}
-      <div>
+      <Navbar />
+      <div className="sm:overflow-y-scroll relative w-screen">
         <Routes>
 
           <Route path='/' element={<Map />} />
