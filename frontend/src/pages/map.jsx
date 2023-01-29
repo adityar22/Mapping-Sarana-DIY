@@ -11,7 +11,7 @@ import { useRef } from "react";
 import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/usecategoryContext";
+import { useCategoryContext } from "../hooks/useCategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
@@ -119,7 +119,7 @@ export default function BasicMap() {
               Edit Mode
             </button>
           </div>
-        ) : (
+          :
           <div className="flex justify-end z-400">
             <button
               className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
@@ -127,14 +127,14 @@ export default function BasicMap() {
               View Mode
             </button>
           </div>
-        )}
+        }
       </div>
     );
   }
 
   return (
     <div className="max-h-screen">
-      <SearchBar></SearchBar>
+      <SearchBar />
       <ToggleButton />
       <MapContainer
         id="maps"
@@ -180,7 +180,7 @@ export default function BasicMap() {
         />
       )}
 
-      {addCatModal && <AddCategory 
+      {addCatModal && <AddCategory
         url={url2}
         selfPopUp={addCatPopUp}
         chooseCatPopUp={chooseCatPopUp}

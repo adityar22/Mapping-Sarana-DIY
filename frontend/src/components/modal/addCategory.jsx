@@ -8,59 +8,57 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
 
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
-    const [atribut, setAtribut] = useState([""])
-    const [atributType, setAtributType] = useState([""])
+    const [atribut, setAtribut] = useState([])
+    const [atributType, setAtributType] = useState([])
 
+    const [addAtribut, setAddAtribut] = useState(false)
     const [atributTotal, setAtributTotal] = useState(0);
-    function delAtr() {
-        this.parentElement.remove()
-
+    function delAtr(index) {
+        setAtribut(atribut.filter((el, i) => i !== index))
+        setAtributType(atributType.filter((el, i) => i !== index))
         setAtributTotal(prevTotal => prevTotal - 1)
     }
-    const addAtribut = () => {
-        var inputAtrField = document.getElementById('inputAtr')
+    function changeAtrType(e, index) {
+        e.stopPropagation();
 
-        var newAtribut = document.createElement('input')
-        newAtribut.setAttribute('type', 'text')
-        newAtribut.setAttribute('placeholder', 'Nama Atribut...')
-        newAtribut.className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2 my-2"
+        const value = e.target.value
+        const newAtrType = [...atributType]
+        newAtrType[index] = value
+        setAtributType(newAtrType)
 
-        var newAtributType = document.createElement('select')
-        newAtributType.className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2"
+        e.preventDefault();
+    }
+    function changeAtr(e, index) {
+        e.stopPropagation();
 
-        var typeOptText = document.createElement('option')
-        typeOptText.value = ('text')
-        typeOptText.text = ('text')
-        var typeOptNumber = document.createElement('option')
-        typeOptNumber.value = ('number')
-        typeOptNumber.text = ('number')
-        var typeOptDate = document.createElement('option')
-        typeOptDate.value = ('date')
-        typeOptDate.text = ('date')
+        const value = e.target.value
+        const newAtr = [...atribut]
+        newAtr[index] = value
+        setAtribut(newAtr)
+        console.log(atribut)
+        console.log(index)
 
-        var delAtrBtn = document.createElement('a')
-        delAtrBtn.innerHTML = "&times"
-        delAtrBtn.addEventListener('click', delAtr)
-
-        var divAtr = document.createElement('div')
-        divAtr.className = "flex"
-
-        inputAtrField.appendChild(divAtr)
-        divAtr.appendChild(newAtribut)
-        divAtr.appendChild(newAtributType)
-        divAtr.appendChild(delAtrBtn)
-        newAtributType.appendChild(typeOptText)
-        newAtributType.appendChild(typeOptNumber)
-        newAtributType.appendChild(typeOptDate)
-
-        console.log(newAtributType.value)
-        setAtributTotal(prevTotal => prevTotal + 1)
+        e.preventDefault();
+    }
+    function handleKeyDown(e){
+        e.stopPropagation();
+        
+        if(e.key!=='Enter')return
+        const value = e.target.value
+        if(!value.trim())return
+        setAtribut([...atribut, value])
+        setAtributType([...atributType, "text"])
+        e.target.value=''
+        setAtributTotal(prevTotal=>prevTotal+1)
         console.log(atributTotal)
+        e.preventDefault();
+        console.log(atribut)
+        console.log(atributType)
     }
 
     const [displayIcon, setDisplayIcon] = useState(false)
-    const toggleChooseIcon = ()=>{
-        {displayIcon==true ? setDisplayIcon(false) : setDisplayIcon(true)}
+    const toggleChooseIcon = () => {
+        { displayIcon == true ? setDisplayIcon(false) : setDisplayIcon(true) }
         console.log(displayIcon)
     }
 
@@ -99,32 +97,59 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                         />
                     </div>
                     <div className="mb-4">
-                        {name != "" && <label className="">Icon : </label>}
-                        <input
-                            required
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="name"
-                            type="text"
-                            placeholder="Pilih icon..."
-                            onChange={(e) => setIcon(e.target.value)}
-                            value={icon}
-                            onClick={(e) => toggleChooseIcon}
-                            readOnly
-                        />
+                        <div className="flex justify-between">
+                            <input
+                                required
+                                className="shadow appearance-none border rounded mr-2 w-5/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="name"
+                                type="text"
+                                placeholder="Pilih icon..."
+                                onChange={(e) => setIcon(e.target.value)}
+                                value={icon}
+                                onClick={(e) => toggleChooseIcon}
+                                readOnly
+                            />
+                            <div className="items-center py-2">
+                                <label onClick={(e) => toggleChooseIcon()}>Cari Icon</label>
+                            </div>
+                        </div>
+
                     </div>
                     {displayIcon &&
                         <div className="mb-4">
-                            <ChooseIcon setIcon={setIcon}/>
+                            <ChooseIcon setIcon={setIcon} />
                         </div>
                     }
                     <div id="inputAtr" className="mb-4">
-
+                        {atributTotal != 0 && atribut.map((atr, index) => (
+                            <div className="flex mb-4" key={index}>
+                                <input
+                                    required
+                                    type='text'
+                                    value={atribut[index]}
+                                    className="shadow appearance-none border rounded mr-2 w-5/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    onChange={(e) => changeAtr(e, index)}
+                                />
+                                <select
+                                    onChange={(e) => changeAtrType(e, index)}
+                                    className="shadow appearance-none border rounded mr-2 w-1/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                >
+                                    <option value={'text'}>Text</option>
+                                    <option value={'number'}>Number</option>
+                                    <option value={'date'}>Date</option>
+                                </select>
+                                <label onClick={(e)=>delAtr(index)}>x</label>
+                            </div>
+                        ))}
                     </div>
                     {atributTotal != 5 &&
-                        <div className="mb-4">
-                            <label onClick={(e) => addAtribut()}>
-                                +Tambah Atribut
-                            </label>
+                        <div>
+                            <input
+                                onKeyDown={handleKeyDown}
+                                type="text"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 mt-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="type and enter to add new atribut "
+                            />
                         </div>
                     }
                     <div className="flex justify-end">
