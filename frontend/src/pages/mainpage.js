@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Navbar from "../components/public/Navbar";
 import Map from "./map";
+import SearchBar from "../components/searchbar/Searchbar";
 
 const Mainpage = () => {
   return (
@@ -9,7 +10,8 @@ const Mainpage = () => {
       {/* <Navbar /> */}
       <div>
         <Routes>
-          <Route path='/' element={<Map/>}/>
+
+          <Route path='/' element={<Map />} />
         </Routes>
       </div>
     </div>

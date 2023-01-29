@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/useCategoryContext";
+import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import { useFacilityHandleAdd } from "../../hooks/useFacilityHandleAdd";
 import useFetch from "../../hooks/useFetch";
@@ -36,19 +36,19 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
         addButtonVisible(true)
     }
 
-    const handleImage = (e) =>{
+    const handleImage = (e) => {
         const file = e.target.files[0];
         setFileToBase(file)
     }
-    const setFileToBase = (file) =>{
+    const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend=()=>{
+        reader.onloadend = () => {
             setImageURL(reader.result);
         }
     }
 
-    const newFacility = {name, coordinat, category:catName, imageURL, atr1, atr2, atr3, atr4, atr5}
+    const newFacility = { name, coordinat, category: catName, imageURL, atr1, atr2, atr3, atr4, atr5 }
     const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd })
 
     return (
@@ -87,7 +87,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                             placeholder="Koordinat fasilitas"
                             onChange={(e) => setCoordinat(e.target.value)}
                             value={coordinat}
-                            
+
                         />
                     </div>
                     <div className="mb-4">

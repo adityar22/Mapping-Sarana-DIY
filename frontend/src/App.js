@@ -7,7 +7,7 @@ import { Login } from "./pages/login";
 import Mainpage from "./pages/mainpage";
 
 function App() {
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   console.log(user)
   return (
     <>
@@ -15,7 +15,7 @@ function App() {
         <div className='sm:overflow-y-scroll relative w-screen'>
           <Router>
             <Routes>
-              <Route exact path="/*" element={!user? <Login /> : <Mainpage/>} />
+              <Route exact path="/*" element={!user ? <Mainpage /> : <Mainpage />} />
             </Routes>
           </Router>
         </div>

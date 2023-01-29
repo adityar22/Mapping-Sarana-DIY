@@ -1,8 +1,7 @@
-GET http://localhost:5000/api/loginusers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJCdWRpIiwiaWF0IjoxNjc0ODEwODMzLCJleHAiOjE2NzQ4MTA4NTN9.MHq_isAb01cDoEKtV7mGuK-bsnXheL9unNW6y7MQ_u4
-
+GET http://localhost:3100/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJCdWRpIiwiaWF0IjoxNjc0ODk0MDM3LCJleHAiOjE2NzQ4OTQwNTJ9.BP59t7hAgIyLAtpOfmPHiogPFifPdJPcjVRkxfZ4EU8
 ###
-POST http://localhost:5000/api/login/users
+POST http://localhost:3100/api/users/users
 Content-Type: application/json
 
 {
@@ -10,7 +9,7 @@ Content-Type: application/json
     "password": "restan"
 }
 ###
-POST http://localhost:5000/api/login/login
+POST http://localhost:3100/api/users/login
 Content-Type: application/json
 
 {
@@ -18,6 +17,6 @@ Content-Type: application/json
     "password": "restan"
 }
 ###
-GET http://localhost:5000/token
+GET http://localhost:3100/api/users/token
 ###
-DELETE http://localhost:5000/logout
+DELETE http://localhost:3100/api/users/logout

@@ -6,9 +6,9 @@ import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
-import DisplayContextProvider from './context/DisplayContext';
-import FacilitesContextProvider from './context/FacilityContext';
-import CategoriesContextProvider from './context/CategoryContext';
+import DisplayContextProvider from './context/displayContext';
+import FacilitesContextProvider from './context/facilityContext';
+import CategoriesContextProvider from './context/categoryContext';
 import AuthContextProvider from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

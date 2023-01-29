@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/useCategoryContext";
+import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useCategoryHandleAdd } from "../../hooks/useCategoryHandleAdd";
 
-const AddCategory = ({url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError}) => {
-    const {dispatch2} = useCategoryContext();
+const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError }) => {
+    const { dispatch2 } = useCategoryContext();
 
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
@@ -19,15 +19,15 @@ const AddCategory = ({url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoadi
         addButtonVisible(true)
     }
 
-    const newCategory = {name, icon, atribut, atributType};
-    const {handleAdd: handleSubmit} = useCategoryHandleAdd({url, type:'ADD_CATEGORIES', dispatch2, data:newCategory, setLoading, setError, closePopUp:backChooseCat})
+    const newCategory = { name, icon, atribut, atributType };
+    const { handleAdd: handleSubmit } = useCategoryHandleAdd({ url, type: 'ADD_CATEGORIES', dispatch2, data: newCategory, setLoading, setError, closePopUp: backChooseCat })
 
-    return ( 
+    return (
         <>
             {/* <div className="overlay z-100"></div> */}
             <div className="container w-fit mx-auto">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-                <div className="flex justify-between">
+                    <div className="flex justify-between">
                         <button className="" onClick={(e) => backChooseCat()}>kembali</button>
                         <button className="" onClick={(e) => closeAdd()}>x</button>
                     </div>
@@ -55,7 +55,7 @@ const AddCategory = ({url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoadi
                 </form>
             </div>
         </>
-     );
+    );
 }
- 
+
 export default AddCategory;

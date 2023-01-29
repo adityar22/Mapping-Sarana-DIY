@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { FacilityContext } from "../context/FacilityContext";
+import { FacilityContext } from "../context/facilityContext";
 
-export const useFacilityContext=()=>{
+export const useFacilityContext = () => {
     const context = useContext(FacilityContext);
 
-    if(!context){
+    if (!context) {
         throw Error('Something bad occured on useFacilityContext')
     };
 
