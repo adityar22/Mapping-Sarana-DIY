@@ -102,11 +102,11 @@ export default function BasicMap() {
 
   function ToggleButton() {
     return (
-      <div className="bottom-0 right-0 mx-10 my-4">
+      <div className="bottom-0 right-0 mx-4 my-2">
         {editMode ?
           <div className="flex justify-end z-400">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
               Edit Mode
             </button>
@@ -114,7 +114,7 @@ export default function BasicMap() {
           :
           <div className="flex justify-end z-400">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(true)}>
               View Mode
             </button>
@@ -125,7 +125,7 @@ export default function BasicMap() {
   }
 
   return (
-    <>
+    <div className="max-h-screen">
       <SearchBar></SearchBar>
       <ToggleButton />
       <MapContainer
@@ -137,12 +137,11 @@ export default function BasicMap() {
       >
         {editMode && <ClickLocation />}
 
-        {/* <div className="leaflet-top flex items-end justify-end w-screen h-screen">
+        {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
           <ToggleButton />
         </div> */}
 
         <TileLayer
-          className="z-10 absolute"
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
         />
@@ -167,8 +166,15 @@ export default function BasicMap() {
         setLoading={setLoading}
         setError={setError} />}
 
-      {addCatModal && <AddCategory />}
-    </>
+      {addCatModal && <AddCategory 
+        url={url2}
+        selfPopUp={addCatPopUp}
+        chooseCatPopUp={chooseCatPopUp}
+        addButtonVisible={toggleMapMode}
+        setLoading={setLoading}
+        setError={setError}
+      />}
+    </div>
   );
 }
 
