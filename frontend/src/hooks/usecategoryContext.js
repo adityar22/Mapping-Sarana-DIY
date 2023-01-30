@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { CategoryContext } from "../context/categoryContext";
+import { CategoryContext } from "../context/CategoryContext";
 
-export const useCategoryContext=()=>{
+export const useCategoryContext = () => {
     const context = useContext(CategoryContext);
 
-    if(!context){
+    if (!context) {
         throw Error('Something bad occured on useCategoryContext')
     };
 

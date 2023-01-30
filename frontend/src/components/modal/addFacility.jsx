@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/usecategoryContext";
+import { useCategoryContext } from "../../hooks/useCategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import { useFacilityHandleAdd } from "../../hooks/useFacilityHandleAdd";
 import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError }) => {
+const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError, pos }) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState("")
-    const [coordinat, setCoordinat] = useState("")
+    const [coordinat, setCoordinat] = useState(pos)
     const [imageURL, setImageURL] = useState("")
     const [atr1, setAtr1] = useState("")
     const [atr2, setAtr2] = useState("")
@@ -36,24 +36,24 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
         addButtonVisible(true)
     }
 
-    const handleImage = (e) =>{
+    const handleImage = (e) => {
         const file = e.target.files[0];
         setFileToBase(file)
     }
-    const setFileToBase = (file) =>{
+    const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend=()=>{
+        reader.onloadend = () => {
             setImageURL(reader.result);
         }
     }
 
-    const newFacility = {name, coordinat, category:catName, imageURL, atr1, atr2, atr3, atr4, atr5}
+    const newFacility = { name, coordinat, category: catName, imageURL, atr1, atr2, atr3, atr4, atr5 }
     const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd })
 
     return (
         <>
-            <div className="overlay z-100"></div>
+            {/* <div className="overlay z-100"></div> */}
             <div className="container w-fit mx-auto">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-between">
@@ -87,7 +87,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                             placeholder="Koordinat fasilitas"
                             onChange={(e) => setCoordinat(e.target.value)}
                             value={coordinat}
-                            
+                            readOnly
                         />
                     </div>
                     <div className="mb-4">
@@ -95,7 +95,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                         <input
                             required
                             className=""
-                            id="coordinat"
+                            id="image"
                             type="file"
                             onChange={handleImage}
                             accept="image/png, image/jpeg"

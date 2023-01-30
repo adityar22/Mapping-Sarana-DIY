@@ -1,4 +1,5 @@
 const category = require('../model/categoryModel')
+const cloudinary = require('../database/cloudinary')
 
 exports.createCategory = async(req, res)=>{
     if(!req.body){
@@ -9,15 +10,21 @@ exports.createCategory = async(req, res)=>{
     const {name, icon, atribut, atributType} = req.body
     
     try {
+        const resImage = await cloudinary.uploader.upload(icon, {
+            folder: 'MappingDIY/icon',
+            width: 32,
+            crop: "scale"
+        })
+
         await category.create({
             name: name,
-            icon: icon,
+            icon: resImage.secret_url,
             status: 'active',
             atribut: atribut,
             atributType: atributType
         });
         res.status(200).json({
-            sucess: true,
+            success: true,
             message: 'New category added!',
             data: req.body
         })

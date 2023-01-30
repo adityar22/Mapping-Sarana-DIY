@@ -1,52 +1,67 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, useMapEvents, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  Popup,
+} from "react-leaflet";
 import osm from "../components/maptiler/osm-providers";
 import { useRef } from "react";
-import L from "leaflet/dist/leaflet"
+import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/usecategoryContext";
+import { useCategoryContext } from "../hooks/useCategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/searchbar";
+import SearchBar from "../components/searchbar/Searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
-
+import MarkerView from "../components/maptiler/marker";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
-  const { notify, isPending, error, setLoading, setError } = useDisplayContext();
+  const { notify, isPending, error, setLoading, setError } =
+    useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
+  const [catView, setCatView] = useState({});
+  const [filtered, setFiltered] = useState({})
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
     setEditMode(mode);
-  }
+  };
 
   const [miniInfo, setMiniInfo] = useState(false);
   const [chooseCatModal, setChooseCatModal] = useState(false);
   const chooseCatPopUp = (state) => {
-    setChooseCatModal(state)
-    toggleMapMode(false)
-  }
+    setChooseCatModal(state);
+    toggleMapMode(false);
+  };
   const [addCatModal, setAddCatModal] = useState(false);
   const addCatPopUp = (state) => {
-    setAddCatModal(state)
-  }
+    setAddCatModal(state);
+  };
   const [addFacModal, setAddFacModal] = useState(false);
   const addFacPopUp = (state) => {
-    setAddFacModal(state)
-  }
+    setAddFacModal(state);
+  };
 
-  const url = 'http://localhost:3100/api/mapping';
-  useFetch({ url, dispatch, setError, setLoading, type: 'GET_FACILITIES' });
+  const url = "http://localhost:3100/api/mapping";
+  useFetch({ url, dispatch, setError, setLoading, type: "GET_FACILITIES" });
 
-  const url2 = 'http://localhost:3100/api/category';
-  useFetch({ url: url2, dispatch: dispatch2, setError, setLoading, type: 'GET_CATEGORIES' });
+  const url2 = "http://localhost:3100/api/category";
+  useFetch({
+    url: url2,
+    dispatch: dispatch2,
+    setError,
+    setLoading,
+    type: "GET_CATEGORIES",
+  });
 
   // console.log(facilities)
   // console.log(categories)
@@ -58,117 +73,138 @@ export default function BasicMap() {
   const ZOOM_LEVEL = 14;
   const mapRef = useRef();
 
-  const [selectedPosition, setSelectedPosition] = useState(null)
+  const [selectedPosition, setSelectedPosition] = useState(null);
   function ClickLocation() {
     const map = useMapEvents({
       click(e) {
-        setSelectedPosition(e.latlng)
-        console.log('selected: ' + selectedPosition)
+        setSelectedPosition(e.latlng);
+        console.log("selected: " + selectedPosition);
       },
-    })
+    });
     return selectedPosition === null ? null : (
       <Marker position={selectedPosition}>
         <Popup on>
-          <span onClick={(e) => chooseCatPopUp(true)}>
-            +Tambah Lokasi
-          </span>
+          <span onClick={(e) => chooseCatPopUp(true)}>+Tambah Lokasi</span>
         </Popup>
       </Marker>
-    )
+    );
   }
-
-  const [currentPos, setCurrentPos] = useState(null)
+  const [currentPos, setCurrentPos] = useState(null);
   function CurrentLocation() {
     const map = useMapEvents({
       click() {
-        map.locate()
+        map.locate();
       },
       locationfound(e) {
-        setCurrentPos(e.latlng)
-        console.log('selected: ' + currentPos)
-        map.flyTo(e.latlng, map.getZoom())
-      }
-    })
+        setCurrentPos(e.latlng);
+        console.log("selected: " + currentPos);
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
     return currentPos === null ? null : (
       <Marker position={currentPos}>
         <Popup on>
-          <span onClick={(e) => chooseCatPopUp(true)}>
-            +Tambah Lokasi
-          </span>
+          <span onClick={(e) => chooseCatPopUp(true)}>+Tambah Lokasi</span>
         </Popup>
       </Marker>
-    )
+    );
   }
 
   function ToggleButton() {
     return (
-      <div className="bottom-0 right-0 mx-10 my-10">
+      <div className="mx-4 my-2">
         {editMode ?
-          <div className="flex justify-end z-400">
+          <div className="flex justify-end">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
               Edit Mode
             </button>
           </div>
           :
-          <div className="flex justify-end z-400">
+          <div className="flex justify-end">
             <button
-              className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(true)}>
               View Mode
             </button>
           </div>
         }
       </div>
-    )
+    );
   }
 
   return (
-    <>
-      <SearchBar></SearchBar>
-
-      <MapContainer
-        id="maps"
-        center={center}
-        zoom={ZOOM_LEVEL}
-        ref={mapRef}
-        style={{ width: "100vw", height: "100vh" }}
-      >
-        {editMode && <ClickLocation />}
-
-        <div className="leaflet-top flex items-end justify-end w-screen h-screen">
-          <ToggleButton />
-        </div>
-
-        <TileLayer
-          className="z-10 absolute"
-          url={osm.maptiler.url}
-          attribution={osm.maptiler.attribution}
+    <div className="max-h-screen flex-row">
+      <div className="top-0 sticky flex justify-end">
+        <SearchBar
+          categories={categories}
+          facilities={facilities}
+          setLoading={setLoading}
+          setError={setError}
+          catView={catView}
+          setCatView={setCatView}
+          filtered={filtered}
+          setFiltered={setFiltered}
         />
-      </MapContainer>
+        <ToggleButton />
+      </div>
+      <div className="">
+        <MapContainer
+          id="maps"
+          center={center}
+          zoom={ZOOM_LEVEL}
+          ref={mapRef}
+          style={{ width: "100vw", height: "100vh" }}
+        >
+          {editMode && <ClickLocation />}
+          {filtered.length > 0 && <MarkerView filter={filtered} />}
 
-      {chooseCatModal && <ChooseCategory
-        categories={categories}
-        selfPopup={chooseCatPopUp}
-        addFacPopUp={addFacPopUp}
-        addCatPopUp={addCatPopUp}
-        choosedCat={choosedCat}
-        setChoosedCat={setChoosedCat}
-        setLoading={setLoading}
-        setError={setError} />}
+          {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
+          <ToggleButton />
+        </div> */}
 
-      {addFacModal && <AddFacility
-        url={url}
-        category={choosedCat}
-        selfPopUp={addFacPopUp}
+          <TileLayer
+            url={osm.maptiler.url}
+            attribution={osm.maptiler.attribution}
+          />
+        </MapContainer>
+      </div>
+      {chooseCatModal && (
+        <ChooseCategory
+          categories={categories}
+          selfPopup={chooseCatPopUp}
+          addFacPopUp={addFacPopUp}
+          addCatPopUp={addCatPopUp}
+          choosedCat={choosedCat}
+          setChoosedCat={setChoosedCat}
+          setLoading={setLoading}
+          setError={setError}
+        />
+      )}
+
+      {addFacModal && (
+        <AddFacility
+          url={url}
+          category={choosedCat}
+          selfPopUp={addFacPopUp}
+          chooseCatPopUp={chooseCatPopUp}
+          addButtonVisible={toggleMapMode}
+          setLoading={setLoading}
+          setError={setError}
+          pos={selectedPosition}
+        />
+      )}
+
+      {addCatModal && <AddCategory
+        url={url2}
+        selfPopUp={addCatPopUp}
         chooseCatPopUp={chooseCatPopUp}
         addButtonVisible={toggleMapMode}
         setLoading={setLoading}
-        setError={setError} />}
-
-      {addCatModal && <AddCategory />}
-    </>
+        setError={setError}
+      />}
+    </div>
   );
 }
 
