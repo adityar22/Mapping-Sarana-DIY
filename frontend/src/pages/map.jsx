@@ -21,6 +21,7 @@ import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import MarkerView from "../components/maptiler/marker";
+import { useFilter } from "../hooks/useFilter";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
@@ -134,18 +135,18 @@ export default function BasicMap() {
     );
   }
 
+  const {filterResult, getFilterTerm, inputEl, filterTerm} = useFilter(facilities);
+
   return (
     <div className="max-h-screen flex-row">
       <div className="top-0 sticky flex justify-end">
         <SearchBar
           categories={categories}
-          facilities={facilities}
           setLoading={setLoading}
           setError={setError}
-          catView={catView}
-          setCatView={setCatView}
-          filtered={filtered}
-          setFiltered={setFiltered}
+          filterTerm={filterTerm}
+          getFilterTerm={getFilterTerm}
+          inputEl={inputEl}
         />
         <ToggleButton />
       </div>
