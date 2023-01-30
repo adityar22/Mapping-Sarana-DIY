@@ -9,7 +9,7 @@ const facility = db.define('facility',{
         type: DataTypes.STRING
     },
     coordinat:{
-        type: DataTypes.STRING
+        type: DataTypes.ARRAY(DataTypes.FLOAT)
     },
     category:{
         type: DataTypes.STRING,

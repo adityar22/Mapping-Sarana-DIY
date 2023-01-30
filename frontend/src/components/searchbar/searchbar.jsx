@@ -28,7 +28,6 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                         aria-label="Search Facility"
                         className="px-3 py-3 font-semibold rounded-lg border-transparent w-full text-lg"
                     >
-
                     </input>
                 </form>
 

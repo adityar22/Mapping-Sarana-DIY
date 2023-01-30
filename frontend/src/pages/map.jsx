@@ -26,11 +26,8 @@ import { useFilter } from "../hooks/useFilter";
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
-  const { notify, isPending, error, setLoading, setError } =
-    useDisplayContext();
+  const { notify, isPending, error, setLoading, setError } = useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
-  const [catView, setCatView] = useState({});
-  const [filtered, setFiltered] = useState({})
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -135,7 +132,7 @@ export default function BasicMap() {
     );
   }
 
-  const {filterResult, getFilterTerm, inputEl, filterTerm} = useFilter(facilities);
+  const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities);
 
   return (
     <div className="max-h-screen flex-row">
@@ -159,12 +156,7 @@ export default function BasicMap() {
           style={{ width: "100vw", height: "100vh" }}
         >
           {editMode && <ClickLocation />}
-          {filtered.length > 0 && <MarkerView filter={filtered} />}
-
-          {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
-          <ToggleButton />
-        </div> */}
-
+          {!editMode && filterResult.length > 0 && <MarkerView filter={filterResult} />}
           <TileLayer
             url={osm.maptiler.url}
             attribution={osm.maptiler.attribution}
