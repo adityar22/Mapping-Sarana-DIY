@@ -11,7 +11,7 @@ exports.createCategory = async(req, res)=>{
     
     try {
         const resImage = await cloudinary.uploader.upload(icon, {
-            folder: 'MappingDIY/icon',
+            folder: 'MappingDIY',
             width: 32,
             crop: "scale"
         })

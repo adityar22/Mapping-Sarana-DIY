@@ -1,5 +1,6 @@
 export const useFacilityHandleAdd = ({url, data, type, dispatch, setLoading, setError, closePopUp}) => {
     const add = async()=>{
+        console.log(data)
         setLoading(true);
         const response = await fetch(url, {
             method: 'POST',
