@@ -3,6 +3,7 @@ import { useState } from "react";
 import CatList from "../category/catList";
 
 const ChooseCategory = ({ categories, choosedCat, setChoosedCat, selfPopup, addFacPopUp, addCatPopUp, setLoading, setError }) => {
+    const [chooseState, setChooseState] = useState(false)
     const addFacility = () => {
         addFacPopUp(true);
         selfPopup(false);
@@ -31,6 +32,7 @@ const ChooseCategory = ({ categories, choosedCat, setChoosedCat, selfPopup, addF
                             Kategori
                         </label>
                         <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e) => chooseCategory(e.target.value)}>
+                            <option>Pilih Kategori</option>
                             {categories && categories.map(category => (
                                 <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                             ))}
@@ -43,8 +45,9 @@ const ChooseCategory = ({ categories, choosedCat, setChoosedCat, selfPopup, addF
                     </div>
                     <div className="flex justify-end">
                         <button
-                            className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
-                            onClick={addFacility}>
+                            className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline disabled:bg-slate-400"
+                            onClick={addFacility}
+                            >
                             Berikutnya
                         </button>
                     </div>

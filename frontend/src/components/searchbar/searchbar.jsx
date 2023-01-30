@@ -14,8 +14,9 @@ const SearchBar = ({ categories, facilities, setLoading, setError, catView, setC
             <div className="z-10 w-1/5 pl-3 py-3">
                 <select
                     onChange={(e) => filterCat(e.target.value)}
-                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-lg rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
+                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-sm rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
                 >
+                    <option>Pilih Kategori : </option>
                     {categories && categories.map(category => (
                         <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                     ))}

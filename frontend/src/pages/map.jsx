@@ -20,6 +20,7 @@ import SearchBar from "../components/searchbar/Searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
+import MarkerView from "../components/maptiler/marker";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
@@ -88,7 +89,6 @@ export default function BasicMap() {
       </Marker>
     );
   }
-
   const [currentPos, setCurrentPos] = useState(null);
   function CurrentLocation() {
     const map = useMapEvents({
@@ -112,9 +112,9 @@ export default function BasicMap() {
 
   function ToggleButton() {
     return (
-      <div className="bottom-0 right-0 mx-4 my-2">
+      <div className="mx-4 my-2">
         {editMode ?
-          <div className="flex justify-end z-400">
+          <div className="flex justify-end">
             <button
               className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
@@ -122,7 +122,7 @@ export default function BasicMap() {
             </button>
           </div>
           :
-          <div className="flex justify-end z-400">
+          <div className="flex justify-end">
             <button
               className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(true)}>
@@ -135,37 +135,41 @@ export default function BasicMap() {
   }
 
   return (
-    <div className="max-h-screen">
-      <SearchBar 
-        categories={categories}
-        facilities={facilities}
-        setLoading={setLoading}
-        setError={setError}
-        catView={catView}
-        setCatView={setCatView}
-        filtered={filtered}
-        setFiltered={setFiltered}
+    <div className="max-h-screen flex-row">
+      <div className="top-0 sticky flex justify-end">
+        <SearchBar
+          categories={categories}
+          facilities={facilities}
+          setLoading={setLoading}
+          setError={setError}
+          catView={catView}
+          setCatView={setCatView}
+          filtered={filtered}
+          setFiltered={setFiltered}
         />
-      <ToggleButton />
-      <MapContainer
-        id="maps"
-        center={center}
-        zoom={ZOOM_LEVEL}
-        ref={mapRef}
-        style={{ width: "100vw", height: "100vh" }}
-      >
-        {editMode && <ClickLocation />}
+        <ToggleButton />
+      </div>
+      <div className="">
+        <MapContainer
+          id="maps"
+          center={center}
+          zoom={ZOOM_LEVEL}
+          ref={mapRef}
+          style={{ width: "100vw", height: "100vh" }}
+        >
+          {editMode && <ClickLocation />}
+          {filtered.length > 0 && <MarkerView filter={filtered} />}
 
-        {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
+          {/* <div className="z-100 absolute flex items-end justify-end w-screen h-screen">
           <ToggleButton />
         </div> */}
 
-        <TileLayer
-          url={osm.maptiler.url}
-          attribution={osm.maptiler.attribution}
-        />
-      </MapContainer>
-
+          <TileLayer
+            url={osm.maptiler.url}
+            attribution={osm.maptiler.attribution}
+          />
+        </MapContainer>
+      </div>
       {chooseCatModal && (
         <ChooseCategory
           categories={categories}
@@ -188,6 +192,7 @@ export default function BasicMap() {
           addButtonVisible={toggleMapMode}
           setLoading={setLoading}
           setError={setError}
+          pos={selectedPosition}
         />
       )}
 

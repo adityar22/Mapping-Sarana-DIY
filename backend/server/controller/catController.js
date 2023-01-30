@@ -24,7 +24,7 @@ exports.createCategory = async(req, res)=>{
             atributType: atributType
         });
         res.status(200).json({
-            sucess: true,
+            success: true,
             message: 'New category added!',
             data: req.body
         })

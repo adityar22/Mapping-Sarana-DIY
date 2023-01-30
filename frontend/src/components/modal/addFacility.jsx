@@ -6,11 +6,11 @@ import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError }) => {
+const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError, pos }) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState("")
-    const [coordinat, setCoordinat] = useState("")
+    const [coordinat, setCoordinat] = useState(pos)
     const [imageURL, setImageURL] = useState("")
     const [atr1, setAtr1] = useState("")
     const [atr2, setAtr2] = useState("")
@@ -87,7 +87,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                             placeholder="Koordinat fasilitas"
                             onChange={(e) => setCoordinat(e.target.value)}
                             value={coordinat}
-
+                            readOnly
                         />
                     </div>
                     <div className="mb-4">
