@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/useCategoryContext";
+import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useCategoryHandleAdd } from "../../hooks/useCategoryHandleAdd";
 import ChooseIcon from "./chooseIcon";
 
