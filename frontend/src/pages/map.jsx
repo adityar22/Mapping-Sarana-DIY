@@ -135,8 +135,8 @@ export default function BasicMap() {
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities);
 
   return (
-    <div className="max-h-screen flex-row">
-      <div className="top-0 sticky flex justify-end">
+    <div className="max-h-screen flex-col">
+      <div className="top-0 sticky flex justify-end z-50">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -147,80 +147,62 @@ export default function BasicMap() {
         />
         <ToggleButton />
       </div>
-      <div className="">
-        <MapContainer
-          id="maps"
-          center={center}
-          zoom={ZOOM_LEVEL}
-          ref={mapRef}
-          style={{ width: "100vw", height: "100vh" }}
-        >
-          {editMode && <ClickLocation />}
-          {!editMode && filterResult.length > 0 && <MarkerView filter={filterResult} />}
-          <TileLayer
-            url={osm.maptiler.url}
-            attribution={osm.maptiler.attribution}
-          />
-        </MapContainer>
+      <div className="flex-col inline-flex">
+        <div id="mapview" className="z-0">
+          <MapContainer
+            id="maps"
+            center={center}
+            zoom={ZOOM_LEVEL}
+            ref={mapRef}
+            style={{ width: "100vw", height: "100vh" }}
+            maxZoom={18}
+            minZoom={2}
+          >
+            {editMode && <ClickLocation />}
+            {!editMode && filterResult.length > 0 && <MarkerView filter={filterResult} />}
+            <TileLayer
+              url={osm.maptiler.url}
+              attribution={osm.maptiler.attribution}
+            />
+          </MapContainer>
+        </div>
+        <div className="">  
+          {chooseCatModal && (
+            <ChooseCategory
+              categories={categories}
+              selfPopup={chooseCatPopUp}
+              addFacPopUp={addFacPopUp}
+              addCatPopUp={addCatPopUp}
+              choosedCat={choosedCat}
+              setChoosedCat={setChoosedCat}
+              setLoading={setLoading}
+              setError={setError}
+            />
+          )}
+
+          {addFacModal && (
+            <AddFacility
+              url={url}
+              category={choosedCat}
+              selfPopUp={addFacPopUp}
+              chooseCatPopUp={chooseCatPopUp}
+              addButtonVisible={toggleMapMode}
+              setLoading={setLoading}
+              setError={setError}
+              pos={selectedPosition}
+            />
+          )}
+
+          {addCatModal && <AddCategory
+            url={url2}
+            selfPopUp={addCatPopUp}
+            chooseCatPopUp={chooseCatPopUp}
+            addButtonVisible={toggleMapMode}
+            setLoading={setLoading}
+            setError={setError}
+          />}
+        </div>
       </div>
-      {chooseCatModal && (
-        <ChooseCategory
-          categories={categories}
-          selfPopup={chooseCatPopUp}
-          addFacPopUp={addFacPopUp}
-          addCatPopUp={addCatPopUp}
-          choosedCat={choosedCat}
-          setChoosedCat={setChoosedCat}
-          setLoading={setLoading}
-          setError={setError}
-        />
-      )}
-
-      {addFacModal && (
-        <AddFacility
-          url={url}
-          category={choosedCat}
-          selfPopUp={addFacPopUp}
-          chooseCatPopUp={chooseCatPopUp}
-          addButtonVisible={toggleMapMode}
-          setLoading={setLoading}
-          setError={setError}
-          pos={selectedPosition}
-        />
-      )}
-
-      {addCatModal && <AddCategory
-        url={url2}
-        selfPopUp={addCatPopUp}
-        chooseCatPopUp={chooseCatPopUp}
-        addButtonVisible={toggleMapMode}
-        setLoading={setLoading}
-        setError={setError}
-      />}
     </div>
   );
 }
-
-// import React from "react";
-// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
-// const center = [-7.79517159918859, 110.36797836775261];
-// export default function App() {
-//   return (
-//     <MapContainer
-//       center={center}
-//       zoom={300}
-//       style={{ width: "100vw", height: "100vh" }}
-//     >
-//       <TileLayer
-//         url="https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=bAw0nCk1tkpX6xjoL9u0"
-//         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-//       />
-//       <Marker position={center}>
-//         <Popup>
-//           Yeay we did it. <br /> wadidaw.
-//         </Popup>
-//       </Marker>
-//     </MapContainer>
-//   );
-// }

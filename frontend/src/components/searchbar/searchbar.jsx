@@ -19,7 +19,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                 </select>
             </div>
             <div className="flex justify-between py-3 px-3 pr-6 bg-gray-50 border-none z-0 w-4/5">
-                <form action="" className="w-full">
+                <div className="w-full">
                     <input
                         type='text'
                         name="search"
@@ -29,7 +29,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                         className="px-3 py-3 font-semibold rounded-lg border-transparent w-full text-lg"
                     >
                     </input>
-                </form>
+                </div>
 
             </div>
 
