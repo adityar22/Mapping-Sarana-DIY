@@ -11,12 +11,12 @@ import { useRef } from "react";
 import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/usecategoryContext";
+import { useCategoryContext } from "../hooks/useCategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/searchbar";
+import SearchBar from "../components/searchbar/Searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
