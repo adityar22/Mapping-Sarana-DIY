@@ -104,9 +104,6 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                                 id="name"
                                 type="text"
                                 placeholder="Pilih icon..."
-                                onChange={(e) => setIcon(e.target.value)}
-                                value={icon}
-                                onClick={(e) => toggleChooseIcon}
                                 readOnly
                             />
                             <div className="items-center py-2">

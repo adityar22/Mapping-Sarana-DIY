@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 
-export const useFilter = (data) => {
+export const useFilter = (data, data2) => {
     const [filterTerm, setFilterTerm] = useState("");
     const inputEl = useRef("");
     const [filterResult, setFilterResult] = useState([]);
+    const [category, setCategory] = useState([]);
 
     const filterHandler = (filterTerm) => {
         setFilterTerm(filterTerm);
@@ -13,6 +14,11 @@ export const useFilter = (data) => {
             });
             setFilterResult(newDataList)
             console.log(newDataList);
+            const choosedCategory = data2.filter((item)=>{
+                return item.name == filterTerm;
+            });
+            setCategory(choosedCategory);
+            console.log(choosedCategory);
         }
         else {
             setFilterResult(data)
@@ -29,5 +35,5 @@ export const useFilter = (data) => {
             filterHandler("")
         }
     }
-    return { filterResult, filterHandler, getFilterTerm, inputEl, filterTerm }
+    return { filterResult, category, filterHandler, getFilterTerm, inputEl, filterTerm }
 }
