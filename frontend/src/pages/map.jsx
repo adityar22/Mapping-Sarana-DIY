@@ -132,7 +132,7 @@ export default function BasicMap() {
     );
   }
 
-  const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities);
+  const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
 
   return (
     <div className="max-h-screen flex-col">
@@ -147,26 +147,7 @@ export default function BasicMap() {
         />
         <ToggleButton />
       </div>
-      <div className="flex-col inline-flex">
-        <div id="mapview" className="z-0">
-          <MapContainer
-            id="maps"
-            center={center}
-            zoom={ZOOM_LEVEL}
-            ref={mapRef}
-            style={{ width: "100vw", height: "100vh" }}
-            maxZoom={18}
-            minZoom={2}
-          >
-            {editMode && <ClickLocation />}
-            {!editMode && filterResult.length > 0 && <MarkerView filter={filterResult} />}
-            <TileLayer
-              url={osm.maptiler.url}
-              attribution={osm.maptiler.attribution}
-            />
-          </MapContainer>
-        </div>
-        <div className="">  
+      <div className="z-50">  
           {chooseCatModal && (
             <ChooseCategory
               categories={categories}
@@ -201,6 +182,29 @@ export default function BasicMap() {
             setLoading={setLoading}
             setError={setError}
           />}
+        </div>
+      <div className="flex-col inline-flex">
+        <div id="mapview" className="z-0 w-full items-center justify-center">
+          <MapContainer
+            id="maps"
+            center={center}
+            zoom={ZOOM_LEVEL}
+            ref={mapRef}
+            style={{ width: "90vw", height: "85vh" }}
+            maxZoom={18}
+            minZoom={2}
+          >
+            {editMode && <ClickLocation />}
+            {!editMode && filterResult.length > 0 && 
+              <MarkerView 
+                filter={filterResult}
+                category={category} 
+                />}
+            <TileLayer
+              url={osm.maptiler.url}
+              attribution={osm.maptiler.attribution}
+            />
+          </MapContainer>
         </div>
       </div>
     </div>
