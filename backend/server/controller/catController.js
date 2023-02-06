@@ -18,7 +18,7 @@ exports.createCategory = async(req, res)=>{
 
         await category.create({
             name: name,
-            icon: resImage.secret_url,
+            icon: resImage.secure_url,
             status: 'active',
             atribut: atribut,
             atributType: atributType
