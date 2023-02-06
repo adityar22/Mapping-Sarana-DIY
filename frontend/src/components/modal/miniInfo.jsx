@@ -4,7 +4,8 @@ import { useFacilityContext } from ".../hooks/useFacilityContext"
 const MiniInfo = ({ facility, category, selfPopUp }) => {
     return (
         <div>
-            <div className="container">
+
+            <div className="container w-fit mx-auto absolute z-50 top-1/2 right-3/4 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <div>
                     <img alt=""></img>
                     <h3>{facility.name}</h3>

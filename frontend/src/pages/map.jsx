@@ -147,7 +147,7 @@ export default function BasicMap() {
         />
         <ToggleButton />
       </div>
-      <div className="z-50">  
+      <div className="z-10">  
           {chooseCatModal && (
             <ChooseCategory
               categories={categories}
