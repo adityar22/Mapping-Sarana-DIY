@@ -10,7 +10,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState("")
-    const [coordinat, setCoordinat] = useState(pos)
+    const [coordinat, setCoordinat] = useState([pos.lat, pos.lng])
     const [imageURL, setImageURL] = useState("")
     const [atr1, setAtr1] = useState("")
     const [atr2, setAtr2] = useState("")
