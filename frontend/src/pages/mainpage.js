@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Navbar from "../components/public/Navbar";
 import Map from "./map";
-import SearchBar from "../components/searchbar/Searchbar";
+import SearchBar from "../components/searchbar/searchbar";
 
 const Mainpage = () => {
   return (
