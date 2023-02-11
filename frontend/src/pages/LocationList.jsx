@@ -2,12 +2,12 @@ import React from "react";
 import { useRef, useState } from "react";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/Searchbar";
+import SearchBar from "../components/searchbar/searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
@@ -68,26 +68,27 @@ export default function LocationList() {
         inputEl={inputEl}
       />
 
-      <div className=" bg-gray h-screen">
-        <div className="mx-9 my-4 md:mx-[100px] md:my-[0px] flex flex-col">
-          <div className="flex flex-col">
+      <div className=" p-4 bg-gray h-screen">
+        <div className="mx-9 my-10 md:mx-[100px] flex flex-col">
+          <div className="flex flex-col md:w-68">
             {filterResult &&
               filterResult.map((facility) => (
                 <>
-                  <div class="flex justify-between py-2 px-4 lg:py-[5px] lg:px-[5px] bg-blue mb-[20px] rounded-[12px] hover:drop-shadow-xl transition">
+                  <div class="flex justify-between py-2 px-2 lg:py-[6px] lg:px-[6px] bg-blue mb-[25px] rounded-2xl">
                     <div className="justify-start flex-row inline-flex">
                       <img
-                        class=" object-cover w-24 lg:w-36 h-auto"
+                        class=" object-cover w-36 lg:w-36 h-auto rounded-xl"
                         src={facility.imageURL}
                         alt=""
                       />
-                      <div class="justify-content-start p-10 flex flex-col ">
-                        <h5 class="text-white text-3xl font-poppins font-bold mb-5">
-                          {facility.name}
-                        </h5>
-                        <p class="text-white text-2xl text-poppins font-medium mb-4">
-                          {facility.coordinat}
-                        </p>
+                      <div class="justify-content-start p-8 flex flex-col ">
+                        <h3 class="text-white text-2xl font-poppins font-semibold mb-3">{facility.name}</h3>
+                          <p class="text-white text-xl text-poppins font-medium mb-3 w-1/2"> Koordinat : {facility.coordinat}</p>
+                          <p class="text-white text-2xl text-poppins font-medium mb-3">{facility.atr1}</p>
+                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr2}</p>
+                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr3}</p>
+                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr4}</p>
+                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr5}</p>
                       </div>
                     </div>
 
