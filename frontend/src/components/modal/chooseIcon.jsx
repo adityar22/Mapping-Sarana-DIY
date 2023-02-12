@@ -14,7 +14,7 @@ import iconStreetLight from "../../assets/iconStreetLight.png"
 import iconTransportation from "../../assets/iconTransportation.png"
 import iconDefault from "../../assets/iconDefault.png"
 
-const ChooseIcon = ({setIcon}) => {
+const ChooseIcon = ({setIcon, setIconName}) => {
     const Icons = [
         { name: "cctv", src: iconCCTV },
         { name: "traffic light", src: iconTrafficLight },
@@ -30,8 +30,9 @@ const ChooseIcon = ({setIcon}) => {
         { name: "transportation", src: iconTransportation },
         { name: "default", src: iconDefault },
     ]
-    const choosedIcon = (src) => {
-        setFileToBase(src)
+    const choosedIcon = (src, name) => {
+        setIconName(name)
+        setIcon(src)
     }
     const handleImage = (e) => {
         const file = e.target.files[0];
@@ -42,6 +43,7 @@ const ChooseIcon = ({setIcon}) => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setIcon(reader.result);
+            setIconName("Uploaded image")
         }
     }
     return (
@@ -51,7 +53,7 @@ const ChooseIcon = ({setIcon}) => {
                     <div className="mr-4">
                         <img
                             src={icon.src}
-                            onClick={(e) => choosedIcon(icon.src)}
+                            onClick={(e) => choosedIcon(e.target.src, icon.name)}
                             alt="" />
                     </div>
                 ))}
