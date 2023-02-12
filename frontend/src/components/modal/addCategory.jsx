@@ -11,6 +11,8 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
     const [atribut, setAtribut] = useState([])
     const [atributType, setAtributType] = useState([])
 
+    const [iconName, setIconName] = useState("")
+
     const [addAtribut, setAddAtribut] = useState(false)
     const [atributTotal, setAtributTotal] = useState(0);
     function delAtr(index) {
@@ -103,6 +105,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                                 className="shadow appearance-none border rounded mr-2 w-5/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="name"
                                 type="text"
+                                value={iconName}
                                 placeholder="Pilih icon..."
                                 readOnly
                             />
@@ -114,7 +117,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                     </div>
                     {displayIcon &&
                         <div className="mb-4">
-                            <ChooseIcon setIcon={setIcon} />
+                            <ChooseIcon setIcon={setIcon} setIconName={setIconName}/>
                         </div>
                     }
                     <div id="inputAtr" className="mb-4">

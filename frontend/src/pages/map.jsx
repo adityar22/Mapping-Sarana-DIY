@@ -76,7 +76,7 @@ export default function BasicMap() {
     const map = useMapEvents({
       click(e) {
         setSelectedPosition(e.latlng);
-        console.log("selected: " + selectedPosition);
+        console.log("selected: " + e.latlng);
       },
     });
     return selectedPosition === null ? null : (
@@ -99,6 +99,7 @@ export default function BasicMap() {
         map.flyTo(e.latlng, map.getZoom());
       },
     });
+    
     return currentPos === null ? null : (
       <Marker position={currentPos}>
         <Popup on>
@@ -136,7 +137,7 @@ export default function BasicMap() {
 
   return (
     <div className="max-h-screen flex-col">
-      <div className="top-0 sticky flex justify-end z-50">
+      <div className="top-0 sticky flex justify-end z-10">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -146,6 +147,12 @@ export default function BasicMap() {
           inputEl={inputEl}
         />
         <ToggleButton />
+      </div>
+      <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
+        <span>
+          Current Pos
+        </span>
+        
       </div>
       <div className="z-10">  
           {chooseCatModal && (
@@ -204,6 +211,7 @@ export default function BasicMap() {
               url={osm.maptiler.url}
               attribution={osm.maptiler.attribution}
             />
+            
           </MapContainer>
         </div>
       </div>
