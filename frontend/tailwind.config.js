@@ -8,7 +8,8 @@ module.exports = {
         white: "#fafafa",
         gray: "#CCD0D7",
         lightblue: "#608CF7",
-        orange: "#E89A50",
+        lightorange: "E89A50",
+        orange: "#E86C2E",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
