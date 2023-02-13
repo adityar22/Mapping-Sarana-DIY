@@ -11,6 +11,8 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
     const [atribut, setAtribut] = useState([])
     const [atributType, setAtributType] = useState([])
 
+    const [iconName, setIconName] = useState("")
+
     const [addAtribut, setAddAtribut] = useState(false)
     const [atributTotal, setAtributTotal] = useState(0);
     function delAtr(index) {
@@ -76,8 +78,8 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
 
     return (
         <>
-            {/* <div className="overlay z-100"></div> */}
-            <div className="container w-fit mx-auto">
+            <div className="overlay z-20"></div>
+            <div className="container w-fit mx-auto absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-between">
                         <button className="" onClick={(e) => backChooseCat()}>kembali</button>
@@ -103,10 +105,8 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                                 className="shadow appearance-none border rounded mr-2 w-5/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="name"
                                 type="text"
+                                value={iconName}
                                 placeholder="Pilih icon..."
-                                onChange={(e) => setIcon(e.target.value)}
-                                value={icon}
-                                onClick={(e) => toggleChooseIcon}
                                 readOnly
                             />
                             <div className="items-center py-2">
@@ -117,7 +117,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                     </div>
                     {displayIcon &&
                         <div className="mb-4">
-                            <ChooseIcon setIcon={setIcon} />
+                            <ChooseIcon setIcon={setIcon} setIconName={setIconName}/>
                         </div>
                     }
                     <div id="inputAtr" className="mb-4">

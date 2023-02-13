@@ -76,7 +76,7 @@ export default function BasicMap() {
     const map = useMapEvents({
       click(e) {
         setSelectedPosition(e.latlng);
-        console.log("selected: " + selectedPosition);
+        console.log("selected: " + e.latlng);
       },
     });
     return selectedPosition === null ? null : (
@@ -99,6 +99,7 @@ export default function BasicMap() {
         map.flyTo(e.latlng, map.getZoom());
       },
     });
+    
     return currentPos === null ? null : (
       <Marker position={currentPos}>
         <Popup on>
@@ -132,11 +133,11 @@ export default function BasicMap() {
     );
   }
 
-  const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities);
+  const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
 
   return (
-    <div className="max-h-screen flex-row">
-      <div className="top-0 sticky flex justify-end">
+    <div className="max-h-screen flex-col">
+      <div className="top-0 sticky flex justify-end z-10">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -147,80 +148,73 @@ export default function BasicMap() {
         />
         <ToggleButton />
       </div>
-      <div className="">
-        <MapContainer
-          id="maps"
-          center={center}
-          zoom={ZOOM_LEVEL}
-          ref={mapRef}
-          style={{ width: "100vw", height: "100vh" }}
-        >
-          {editMode && <ClickLocation />}
-          {!editMode && filterResult.length > 0 && <MarkerView filter={filterResult} />}
-          <TileLayer
-            url={osm.maptiler.url}
-            attribution={osm.maptiler.attribution}
-          />
-        </MapContainer>
+      <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
+        <span>
+          Current Pos
+        </span>
+        
       </div>
-      {chooseCatModal && (
-        <ChooseCategory
-          categories={categories}
-          selfPopup={chooseCatPopUp}
-          addFacPopUp={addFacPopUp}
-          addCatPopUp={addCatPopUp}
-          choosedCat={choosedCat}
-          setChoosedCat={setChoosedCat}
-          setLoading={setLoading}
-          setError={setError}
-        />
-      )}
+      <div className="z-10">  
+          {chooseCatModal && (
+            <ChooseCategory
+              categories={categories}
+              selfPopup={chooseCatPopUp}
+              addFacPopUp={addFacPopUp}
+              addCatPopUp={addCatPopUp}
+              choosedCat={choosedCat}
+              setChoosedCat={setChoosedCat}
+              setLoading={setLoading}
+              setError={setError}
+            />
+          )}
 
-      {addFacModal && (
-        <AddFacility
-          url={url}
-          category={choosedCat}
-          selfPopUp={addFacPopUp}
-          chooseCatPopUp={chooseCatPopUp}
-          addButtonVisible={toggleMapMode}
-          setLoading={setLoading}
-          setError={setError}
-          pos={selectedPosition}
-        />
-      )}
+          {addFacModal && (
+            <AddFacility
+              url={url}
+              category={choosedCat}
+              selfPopUp={addFacPopUp}
+              chooseCatPopUp={chooseCatPopUp}
+              addButtonVisible={toggleMapMode}
+              setLoading={setLoading}
+              setError={setError}
+              pos={selectedPosition}
+            />
+          )}
 
-      {addCatModal && <AddCategory
-        url={url2}
-        selfPopUp={addCatPopUp}
-        chooseCatPopUp={chooseCatPopUp}
-        addButtonVisible={toggleMapMode}
-        setLoading={setLoading}
-        setError={setError}
-      />}
+          {addCatModal && <AddCategory
+            url={url2}
+            selfPopUp={addCatPopUp}
+            chooseCatPopUp={chooseCatPopUp}
+            addButtonVisible={toggleMapMode}
+            setLoading={setLoading}
+            setError={setError}
+          />}
+        </div>
+      <div className="flex-col inline-flex">
+        <div id="mapview" className="z-0 w-full items-center justify-center">
+          <MapContainer
+            id="maps"
+            center={center}
+            zoom={ZOOM_LEVEL}
+            ref={mapRef}
+            style={{ width: "90vw", height: "85vh" }}
+            maxZoom={18}
+            minZoom={2}
+          >
+            {editMode && <ClickLocation />}
+            {!editMode && filterResult.length > 0 && 
+              <MarkerView 
+                filter={filterResult}
+                category={category} 
+                />}
+            <TileLayer
+              url={osm.maptiler.url}
+              attribution={osm.maptiler.attribution}
+            />
+            
+          </MapContainer>
+        </div>
+      </div>
     </div>
   );
 }
-
-// import React from "react";
-// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
-// const center = [-7.79517159918859, 110.36797836775261];
-// export default function App() {
-//   return (
-//     <MapContainer
-//       center={center}
-//       zoom={300}
-//       style={{ width: "100vw", height: "100vh" }}
-//     >
-//       <TileLayer
-//         url="https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=bAw0nCk1tkpX6xjoL9u0"
-//         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-//       />
-//       <Marker position={center}>
-//         <Popup>
-//           Yeay we did it. <br /> wadidaw.
-//         </Popup>
-//       </Marker>
-//     </MapContainer>
-//   );
-// }
