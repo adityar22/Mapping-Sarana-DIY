@@ -42,16 +42,16 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
 
         e.preventDefault();
     }
-    function handleKeyDown(e){
+    function handleKeyDown(e) {
         e.stopPropagation();
-        
-        if(e.key!=='Enter')return
+
+        if (e.key !== 'Enter') return
         const value = e.target.value
-        if(!value.trim())return
+        if (!value.trim()) return
         setAtribut([...atribut, value])
         setAtributType([...atributType, "text"])
-        e.target.value=''
-        setAtributTotal(prevTotal=>prevTotal+1)
+        e.target.value = ''
+        setAtributTotal(prevTotal => prevTotal + 1)
         console.log(atributTotal)
         e.preventDefault();
         console.log(atribut)
@@ -138,7 +138,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                                     <option value={'number'}>Number</option>
                                     <option value={'date'}>Date</option>
                                 </select>
-                                <label onClick={(e)=>delAtr(index)}>x</label>
+                                <label onClick={(e) => delAtr(index)}>x</label>
                             </div>
                         ))}
                     </div>

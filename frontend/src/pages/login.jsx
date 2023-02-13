@@ -30,9 +30,9 @@ export const Login = () => {
     setLoading(false)
 
     return (
-        <div className="bg-white flex flex-col justify-center font-poppins top-1/2 mt-10">
-            <form className="max-w-[400px] w-full m-auto p-8 px-8 rounded-lg border-2" onSubmit={handleSubmit}>
-                <img src={logoKota} className=' flex h-48 w-auto mx-auto'></img>
+        <div className=" flex flex-col justify-center font-poppins top-1/2 h-screen bg-white ">
+            <form className=" max-w-sm sm:max-w-[400px] sm:w-screen mx-auto p-8 px-8 rounded-lg border-2" onSubmit={handleSubmit}>
+                <img src={logoKota} className=' flex h-36 w-auto mx-auto'></img>
                 <div className="flex flex-col text-black py-2">
                     {name != "" && <label className="text-left px-2">Username</label>}
                     <input
@@ -53,7 +53,7 @@ export const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-center">
                     <button
                         className="rounded-lg bg-lightblue mt-4 py-2 px-5 text-white"
                     >
