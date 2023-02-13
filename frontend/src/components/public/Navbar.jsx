@@ -9,7 +9,7 @@ import "../../App.css";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const active = "bg-white text-orange font-poppins font-bold";
+  const active = "bg-white text-white font-poppins font-bold";
   const deactive = "text-gray font-poppins font-bold";
   const Menus = [
     { title: "Map", src: menu_map, link: "/" },
@@ -20,7 +20,7 @@ const Navbar = () => {
     <>
       <div
         className={`${
-          open ? "w-screen sm:w-72" : "w-screen sm:w-20 h-20 sm:h-screen"
+          open ? "w-screen sm:w-64" : "w-screen sm:w-20 h-20 sm:h-screen"
         }
             bg-blue p-5  sm:pt-8 duration-300 fixed sm:relative z-40`}
       >
@@ -51,7 +51,7 @@ const Navbar = () => {
                     )}
                     <li
                       className={` flex gap-3 rounded-md p-2 cursor-pointer hover:bg-lightblue text-sm items-center transition-all duration-300 gap-x-4
-                                ${menu.gap ? "mt-7" : "mt-6"}
+                                ${menu.gap ? "mt-7" : "mt-3"}
                                 ${index === 0 && "bg-light-white"} `}
                     >
                       <img src={menu.src} className="w-5 h-5" alt="" />

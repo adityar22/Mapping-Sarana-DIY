@@ -39,13 +39,13 @@ const ChooseCategory = ({ categories, choosedCat, setChoosedCat, selfPopup, addF
                         </select>
                     </div>
                     <div className="mb-4">
-                        <label onClick={addCategory}>
-                            Tambah Kategori
+                        <label onClick={addCategory} className="text-orange cursor-pointer">
+                            + Tambah Kategori
                         </label>
                     </div>
                     <div className="flex justify-end">
                         <button
-                            className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline disabled:bg-slate-400"
+                            className="bg-orange mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline disabled:bg-slate-400"
                             onClick={addFacility}
                             >
                             Berikutnya
