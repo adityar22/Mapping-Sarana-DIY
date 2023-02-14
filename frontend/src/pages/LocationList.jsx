@@ -2,7 +2,7 @@ import React from "react";
 import { useRef, useState } from "react";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import { useHandleDelete } from "../hooks/useFacilityHandleDelete";
 import useFetch from "../hooks/useFetch";

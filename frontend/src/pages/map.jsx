@@ -11,7 +11,7 @@ import { useRef } from "react";
 import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 

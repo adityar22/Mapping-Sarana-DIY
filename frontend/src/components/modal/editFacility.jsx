@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/useCategoryContext";
+import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
-import {useFacilityHandleEdit} from "../../hooks/useFacilityHandleEdit"
+import { useFacilityHandleEdit } from "../../hooks/useFacilityHandleEdit"
 import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const EditLocation = ({facility, url, category, togglePopup, setLoading, setError}) => {
+const EditLocation = ({ facility, url, category, togglePopup, setLoading, setError }) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState(facility.name)
@@ -38,8 +38,8 @@ const EditLocation = ({facility, url, category, togglePopup, setLoading, setErro
     }
 
     const updatedData = { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 }
-    const {handleEdit: handleSubmit} = useFacilityHandleEdit({url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp:togglePopup})
-    
+    const { handleEdit: handleSubmit } = useFacilityHandleEdit({ url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp: togglePopup })
+
 
     return (
         <>
