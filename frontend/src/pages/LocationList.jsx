@@ -2,16 +2,18 @@ import React from "react";
 import { useRef, useState } from "react";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/useCategoryContext";
+import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
+import { useHandleDelete } from "../hooks/useFacilityHandleDelete";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/Searchbar";
+import SearchBar from "../components/searchbar/searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import { useFilter } from "../hooks/useFilter";
+import ModalDelete from "../components/modal/ModalDelete";
 
 import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
@@ -22,6 +24,7 @@ export default function LocationList() {
   const { notify, isPending, error, setLoading, setError } =
     useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
+  const [confirmPopup, setConfirmPopup] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -54,8 +57,17 @@ export default function LocationList() {
     type: "GET_CATEGORIES",
   });
 
+  const toggleConfirmPopup = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setConfirmPopup(!confirmPopup);
+}
+
   const { filterResult, category, getFilterTerm, inputEl, filterTerm } =
     useFilter(facilities, categories);
+
+
+    // const { remove, handleRemove} = useHandleDelete(url, facilities, 'DELETE_FACILITIES', dispatch, setLoading, setError, );
 
   return (
     <>
@@ -93,10 +105,10 @@ export default function LocationList() {
                     </div>
 
                     <div className="flex justify-between l:flex-row mx-2">
-                      <div className="inline-block cursor pointer flex">
+                      <div className="inline-block cursor pointer flex" >
                         <img src={Edit} className={`w-8 h-8`} alt=""></img>
                       </div>
-                      <div className="inline-block ml-2 cursor pointer flex">
+                      <div className="inline-block ml-2 cursor pointer flex" onClick={toggleConfirmPopup}>
                         <img src={Delete} className={`w-8 h-8`} alt=""></img>
                       </div>
                     </div>
@@ -106,6 +118,7 @@ export default function LocationList() {
           </div>
         </div>
       </div>
+      {confirmPopup && <ModalDelete togglePopup={toggleConfirmPopup}/>}
     </>
   );
 }
