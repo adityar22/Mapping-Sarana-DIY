@@ -15,13 +15,13 @@ export const facilityReducer = (state, action) => {
         case 'EDIT_FACILITIES':
             return{
                 facilities: state.facilities.map((item)=>{
-                    return item.facID !== action.payload.facID ? item:action.payload
+                    return item.id !== action.payload.id ? item:action.payload
                 })
             }
         case 'DELETE_FACILITIES':
             return{
                 facilities: state.facilities.filter((item)=>{
-                    return item.facID !== action.payload.facID
+                    return item.id !== action.payload.id
                 })
             }
         default:

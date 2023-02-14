@@ -11,12 +11,12 @@ import { useRef } from "react";
 import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
-import { useCategoryContext } from "../hooks/usecategoryContext";
+import { useCategoryContext } from "../hooks/useCategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/searchbar";
+import SearchBar from "../components/searchbar/Searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
@@ -148,7 +148,7 @@ export default function BasicMap() {
         />
         <ToggleButton />
       </div>
-      <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
+      <div id="btnCurrent" className="z-10 absolute bottom-20 right-10 cursor-pointer px-2 py-2 bg-orange text-white rounded">
         <span>
           Current Pos
         </span>

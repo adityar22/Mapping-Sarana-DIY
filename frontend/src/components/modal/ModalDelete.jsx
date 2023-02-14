@@ -10,7 +10,7 @@ const ModalDelete = ({ handleDelete, togglePopup }) => {
             <div className="flex justify-center mt-4">
                         <div className="inline-block mr-3">
                             <button
-                                className="bg-orange hover:bg-gray-100 mr-3 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+                                className="bg-white hover:bg-gray-100 mr-3 text-orange font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
                                 onClick={togglePopup}>
                                 Tidak
                             </button>
