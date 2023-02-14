@@ -35,7 +35,7 @@ exports.createMapping = async(req, res)=>{
 exports.getAllMapping = async(req, res)=>{
     try {
         const facilities = await facility.findAll({
-            status: 'active'
+            where:{status: 'active'}
         })
         res.status(200).json({
             success: true,

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalDelete = ({ handleDelete, togglePopup }) => {
+const ModalDelete = ({handleDelete, togglePopup }) => {
     return (
         <div>
             <div className="overlay z-20"></div>
