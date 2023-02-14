@@ -1,8 +1,8 @@
-export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError, notify, closePopup}) => {
+export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError, closePopup}) => {
     const remove = async () => {
         setLoading(true);
         const response = await fetch(url + data._id, {
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
 
             }
