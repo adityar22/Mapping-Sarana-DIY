@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/useCategoryContext";
+import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useCategoryHandleAdd } from "../../hooks/useCategoryHandleAdd";
 import ChooseIcon from "./chooseIcon";
 
@@ -117,7 +117,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                     </div>
                     {displayIcon &&
                         <div className="mb-4">
-                            <ChooseIcon setIcon={setIcon} setIconName={setIconName}/>
+                            <ChooseIcon setIcon={setIcon} setIconName={setIconName} />
                         </div>
                     }
                     <div id="inputAtr" className="mb-4">

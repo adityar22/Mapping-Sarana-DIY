@@ -1,7 +1,7 @@
 const { Client } = require('pg')
 const { Sequelize } = require('sequelize')
 
-const db = new Sequelize('mappingDIY', 'postgres', 'raven03', {
+const db = new Sequelize('mappingDb', 'postgres', 'atA_251201', {
     host: 'localhost',
     dialect: 'postgres'
 });
