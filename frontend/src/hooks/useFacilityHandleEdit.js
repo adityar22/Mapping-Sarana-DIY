@@ -26,7 +26,7 @@ export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, s
     const handleEdit = async (e) => {
         e.stopPropagation();
         e.preventDefault();
-        await add();
+        await edit();
     }
 
     return {edit, handleEdit};

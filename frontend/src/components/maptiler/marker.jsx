@@ -29,7 +29,7 @@ const MarkerView = ({ filter, category }) => {
                     <Popup on>
                         <div className="flex-col items-center inline-flex">
                             <span>{item.name}</span>
-                            <span onClick={miniInfo}> Detail Info</span>
+                            <span onClick={miniInfo} className="text-orange cursor-pointer"> Detail Info</span>
                         </div>
                     </Popup>
                 </Marker>

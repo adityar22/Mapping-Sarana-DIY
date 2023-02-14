@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/usecategoryContext";
+import { useCategoryContext } from "../../hooks/useCategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import {useFacilityHandleEdit} from "../../hooks/useFacilityHandleEdit"
 import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const EditLocation = ({facility, url, category, selfPopUp, setLoading, setError, pos }) => {
+const EditLocation = ({facility, url, category, togglePopup, setLoading, setError}) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState(facility.name)
@@ -25,10 +25,6 @@ const EditLocation = ({facility, url, category, selfPopUp, setLoading, setError,
         setAtr1, setAtr2, setAtr3, setAtr4, setAtr5
     ]
 
-    const closeEdit = () => {
-        selfPopUp(false)
-    }
-
     const handleImage = (e) => {
         const file = e.target.files[0];
         setFileToBase(file)
@@ -42,7 +38,7 @@ const EditLocation = ({facility, url, category, selfPopUp, setLoading, setError,
     }
 
     const updatedData = { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 }
-    const {handleEdit: handleSubmit} = useFacilityHandleEdit({url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp:closeEdit})
+    const {handleEdit: handleSubmit} = useFacilityHandleEdit({url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp:togglePopup})
     
 
     return (
@@ -51,20 +47,19 @@ const EditLocation = ({facility, url, category, selfPopUp, setLoading, setError,
             <div className="container w-fit mx-auto absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-between">
-                        <button className="" onClick={(e) => closeEdit()}>x</button>
+                        <button className="" onClick={togglePopup}>x</button>
                     </div>
                     <h3 className="text-center text-2xl font -bold mb-12">Tambah Fasilitas</h3>
                     <div className="mb-4">
                         <label>Kategori : </label>
-                        <label>{facility.category}</label>
+                        <label></label>
                     </div>
                     <div className="mb-4">
-                        <img src={facility.imageURL} alt=""></img>
+                        <img src={imageURL} class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl" alt=""></img>
                     </div>
                     <div className="mb-4">
                         <label>Ubah Gambar : </label>
                         <input
-                            required
                             className=""
                             id="image"
                             type="file"
@@ -97,7 +92,7 @@ const EditLocation = ({facility, url, category, selfPopUp, setLoading, setError,
                             readOnly
                         />
                     </div>
-                    {category.atribut.length > 0 && category.atribut.map((atribut, index) => (
+                    {category[0].atribut.length > 0 && category[0].atribut.map((atribut, index) => (
                         <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} />
                     ))}
                     <div className="flex justify-end">
