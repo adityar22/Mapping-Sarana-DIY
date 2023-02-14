@@ -11,6 +11,6 @@ route.get('/:id',mapControl.getMappingByID);
 
 route.put('/:id',mapControl.editMapping);
 
-route.put('/:id',mapControl.deleteMapping);
+route.delete('/:id',mapControl.deleteMapping);
 
 module.exports= route

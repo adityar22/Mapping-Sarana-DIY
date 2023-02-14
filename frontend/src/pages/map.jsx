@@ -16,7 +16,7 @@ import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/Searchbar";
+import SearchBar from "../components/searchbar/searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
