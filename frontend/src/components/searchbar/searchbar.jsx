@@ -10,7 +10,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                 <select
                     ref={inputEl}
                     onChange={getFilterTerm}
-                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-sm rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
+                    className="bg-orange px-4 w-full flex justify-between font-bold text-sm rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
                 >
                     <option>Pilih Kategori : </option>
                     {categories && categories.map(category => (
