@@ -22,6 +22,7 @@ import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import MarkerView from "../components/maptiler/marker";
 import { useFilter } from "../hooks/useFilter";
+import FacilityDetail from "../components/facility/facilityDetail";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
@@ -48,6 +49,10 @@ export default function BasicMap() {
   const addFacPopUp = (state) => {
     setAddFacModal(state);
   };
+  const [detailModal, setDetailModal] = useState(false);
+  const showDetail = ()=>{
+    setDetailModal(!detailModal);
+  }
 
   const url = "http://localhost:3100/api/mapping";
   useFetch({ url, dispatch, setError, setLoading, type: "GET_FACILITIES" });
@@ -208,6 +213,8 @@ export default function BasicMap() {
               <MarkerView
                 filter={filterResult}
                 category={category}
+                detail={detailModal}
+                detailPopup={showDetail}
               />}
             <TileLayer
               url={osm.maptiler.url}
