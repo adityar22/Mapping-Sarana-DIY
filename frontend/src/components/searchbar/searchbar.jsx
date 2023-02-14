@@ -5,14 +5,15 @@ import CatList from "../category/catList";
 const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
 
     return (
-        <div className="relative flex items-start rounded-lg w-full">
+        <div className="invisible sm:visible relative flex items-start rounded-lg w-full">
             <div className="z-10 w-1/5 pl-3 py-3">
                 <select
                     ref={inputEl}
                     onChange={getFilterTerm}
-                    className="bg-orange px-4 w-full flex justify-between font-bold text-sm rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
+                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"
+                   
                 >
-                    <option>Pilih Kategori : </option>
+                    <option>Category </option>
                     {categories && categories.map(category => (
                         <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                     ))}
