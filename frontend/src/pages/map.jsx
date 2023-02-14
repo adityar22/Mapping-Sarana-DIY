@@ -99,7 +99,7 @@ export default function BasicMap() {
         map.flyTo(e.latlng, map.getZoom());
       },
     });
-    
+
     return currentPos === null ? null : (
       <Marker position={currentPos}>
         <Popup on>
@@ -113,7 +113,7 @@ export default function BasicMap() {
     return (
       <div className="mx-4 my-2">
         {editMode ?
-          <div className="flex justify-end">
+          <div className="flex sm:justify-end">
             <button
               className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
@@ -146,50 +146,52 @@ export default function BasicMap() {
           getFilterTerm={getFilterTerm}
           inputEl={inputEl}
         />
-        <ToggleButton />
+        <div className="hidden sm:block">
+          <ToggleButton />
+        </div>
       </div>
-      <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
+      {/* <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
         <span>
           Current Pos
         </span>
-        
-      </div>
-      <div className="z-10">  
-          {chooseCatModal && (
-            <ChooseCategory
-              categories={categories}
-              selfPopup={chooseCatPopUp}
-              addFacPopUp={addFacPopUp}
-              addCatPopUp={addCatPopUp}
-              choosedCat={choosedCat}
-              setChoosedCat={setChoosedCat}
-              setLoading={setLoading}
-              setError={setError}
-            />
-          )}
 
-          {addFacModal && (
-            <AddFacility
-              url={url}
-              category={choosedCat}
-              selfPopUp={addFacPopUp}
-              chooseCatPopUp={chooseCatPopUp}
-              addButtonVisible={toggleMapMode}
-              setLoading={setLoading}
-              setError={setError}
-              pos={selectedPosition}
-            />
-          )}
+      </div> */}
+      <div className="z-10">
+        {chooseCatModal && (
+          <ChooseCategory
+            categories={categories}
+            selfPopup={chooseCatPopUp}
+            addFacPopUp={addFacPopUp}
+            addCatPopUp={addCatPopUp}
+            choosedCat={choosedCat}
+            setChoosedCat={setChoosedCat}
+            setLoading={setLoading}
+            setError={setError}
+          />
+        )}
 
-          {addCatModal && <AddCategory
-            url={url2}
-            selfPopUp={addCatPopUp}
+        {addFacModal && (
+          <AddFacility
+            url={url}
+            category={choosedCat}
+            selfPopUp={addFacPopUp}
             chooseCatPopUp={chooseCatPopUp}
             addButtonVisible={toggleMapMode}
             setLoading={setLoading}
             setError={setError}
-          />}
-        </div>
+            pos={selectedPosition}
+          />
+        )}
+
+        {addCatModal && <AddCategory
+          url={url2}
+          selfPopUp={addCatPopUp}
+          chooseCatPopUp={chooseCatPopUp}
+          addButtonVisible={toggleMapMode}
+          setLoading={setLoading}
+          setError={setError}
+        />}
+      </div>
       <div className="flex-col inline-flex">
         <div id="mapview" className="z-0 w-full items-center justify-center">
           <MapContainer
@@ -202,18 +204,21 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && filterResult.length > 0 && 
-              <MarkerView 
+            {!editMode && filterResult.length > 0 &&
+              <MarkerView
                 filter={filterResult}
-                category={category} 
-                />}
+                category={category}
+              />}
             <TileLayer
               url={osm.maptiler.url}
               attribution={osm.maptiler.attribution}
             />
-            
+
           </MapContainer>
         </div>
+      </div>
+      <div className="z-10 absolute bottom-0 right-0 cursor-pointer sm:hidden">
+        <ToggleButton />
       </div>
     </div>
   );
