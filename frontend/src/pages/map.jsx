@@ -82,7 +82,7 @@ export default function BasicMap() {
     return selectedPosition === null ? null : (
       <Marker position={selectedPosition}>
         <Popup on>
-          <span onClick={(e) => chooseCatPopUp(true)}>+Tambah Lokasi</span>
+          <span className="cursor-pointer" onClick={(e) => chooseCatPopUp(true)}>+Tambah Lokasi</span>
         </Popup>
       </Marker>
     );
@@ -115,7 +115,7 @@ export default function BasicMap() {
         {editMode ?
           <div className="flex sm:justify-end">
             <button
-              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-orange hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
               Edit Mode
             </button>
@@ -123,7 +123,7 @@ export default function BasicMap() {
           :
           <div className="flex justify-end">
             <button
-              className="bg-lightblue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+              className="bg-orange hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(true)}>
               View Mode
             </button>

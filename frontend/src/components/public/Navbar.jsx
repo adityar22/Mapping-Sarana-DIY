@@ -11,7 +11,7 @@ import CatList from "../category/catList";
 
 const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
   const [open, setOpen] = useState(false);
-  const active = "bg-white text-orange font-poppins font-bold";
+  const active = "bg-white text-white font-poppins font-bold";
   const deactive = "text-gray font-poppins font-bold";
   const Menus = [
     { title: "Map", src: menu_map, link: "/" },
@@ -71,7 +71,7 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
                     )}
                     <li
                       className={` flex gap-3 rounded-md p-2 cursor-pointer hover:bg-lightblue text-sm items-center transition-all duration-300 gap-x-4
-                                ${menu.gap ? "mt-7" : "mt-6"}
+                                ${menu.gap ? "mt-7" : "mt-3"}
                                 ${index === 0 && "bg-light-white"} `}
                     >
                       <img src={menu.src} className="w-5 h-5" alt="" />

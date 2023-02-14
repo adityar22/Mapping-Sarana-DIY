@@ -11,6 +11,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                     ref={inputEl}
                     onChange={getFilterTerm}
                     className="bg-lightblue px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"
+                   
                 >
                     <option>Category </option>
                     {categories && categories.map(category => (
