@@ -54,8 +54,8 @@ export default function LocationList() {
     type: "GET_CATEGORIES",
   });
 
-  const { filterResult, getFilterTerm, inputEl, filterTerm } =
-    useFilter(facilities);
+  const { filterResult, category, getFilterTerm, inputEl, filterTerm } =
+    useFilter(facilities, categories);
 
   return (
     <>
@@ -68,35 +68,35 @@ export default function LocationList() {
         inputEl={inputEl}
       />
 
-      <div className=" p-4 bg-gray h-screen">
+      <div className=" p-2 bg-gray min-h-full lg:min-h-full">
         <div className="mx-9 my-10 md:mx-[100px] flex flex-col">
           <div className="flex flex-col md:w-68">
             {filterResult &&
               filterResult.map((facility) => (
                 <>
                   <div class="flex justify-between py-2 px-2 lg:py-[6px] lg:px-[6px] bg-blue mb-[25px] rounded-2xl">
-                    <div className="justify-start flex-row inline-flex">
+                    <div className="flex flex-col justify-start lg:flex-row inline-flex">
                       <img
-                        class=" object-cover w-36 lg:w-36 h-auto rounded-xl"
+                        class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl"
                         src={facility.imageURL}
                         alt=""
                       />
-                      <div class="justify-content-start p-8 flex flex-col ">
-                        <h3 class="text-white text-2xl font-poppins font-semibold mb-3">{facility.name}</h3>
-                          <p class="text-white text-xl text-poppins font-medium mb-3 w-1/2"> Koordinat : {facility.coordinat}</p>
-                          <p class="text-white text-2xl text-poppins font-medium mb-3">{facility.atr1}</p>
-                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr2}</p>
-                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr3}</p>
-                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr4}</p>
-                          <p class="text-white text-xl text-poppins font-medium mb-2">{facility.atr5}</p>
+                      <div class="justify-content-start px-8 py-2 flex flex-col ">
+                        <h3 class="text-white text-3xl font-poppins font-semibold mb-3">{facility.name}</h3>
+                          <p class="text-white text-xl text-poppins font-medium mb-1"> Koordinat : lat: {facility.coordinat[0]} lng: {facility.coordinat[1]}</p>
+                          {category[0].atribut[0] && <p class="text-white text-xl text-poppins font-medium mb-1">{category[0].atribut[0]} : {facility.atribut1}</p>}
+                          {category[0].atribut[1] && <p class="text-white text-xl text-poppins font-medium mb-1">{category[0].atribut[1]} : {facility.atribut2}</p>}
+                          {category[0].atribut[2] && <p class="text-white text-xl text-poppins font-medium mb-1">{category[0].atribut[2]} : {facility.atribut3}</p>}
+                          {category[0].atribut[3] && <p class="text-white text-xl text-poppins font-medium mb-1">{category[0].atribut[3]} : {facility.atribut4}</p>}
+                          {category[0].atribut[4] && <p class="text-white text-xl text-poppins font-medium mb-1">{category[0].atribut[4]} : {facility.atribut5}</p>}
                       </div>
                     </div>
 
-                    <div className="">
-                      <div className="inline-block cursor pointer">
+                    <div className="flex justify-between l:flex-row mx-2">
+                      <div className="inline-block cursor pointer flex">
                         <img src={Edit} className={`w-8 h-8`} alt=""></img>
                       </div>
-                      <div className="inline-block ml-2 cursor pointer">
+                      <div className="inline-block ml-2 cursor pointer flex">
                         <img src={Delete} className={`w-8 h-8`} alt=""></img>
                       </div>
                     </div>
