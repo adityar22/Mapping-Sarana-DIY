@@ -8,10 +8,9 @@ import {
 } from "react-leaflet";
 import L from "leaflet/dist/leaflet";
 
-const MarkerView = ({ filter, category }) => {  
-    
-    const miniInfo=()=>{
-        console.log("console here")
+const MarkerView = ({ filter, category, setDetailFacility, setDetailModal }) => {  
+    const showDetail=()=>{
+        
     }
     var icon = L.icon({
         iconUrl: category[0].icon,
@@ -29,7 +28,7 @@ const MarkerView = ({ filter, category }) => {
                     <Popup on>
                         <div className="flex-col items-center inline-flex">
                             <span>{item.name}</span>
-                            <span onClick={miniInfo} className="text-orange cursor-pointer"> Detail Info</span>
+                            <span onClick={showDetail} className="text-orange cursor-pointer"> Detail Info</span>
                         </div>
                     </Popup>
                 </Marker>
