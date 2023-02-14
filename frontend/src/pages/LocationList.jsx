@@ -7,11 +7,8 @@ import { useDisplayContext } from "../hooks/useDisplayContext";
 import { useHandleDelete } from "../hooks/useFacilityHandleDelete";
 import useFetch from "../hooks/useFetch";
 
-import Navbar from "../components/public/Navbar";
-import SearchBar from "../components/searchbar/searchbar";
-import ChooseCategory from "../components/modal/chooseCategory";
-import AddCategory from "../components/modal/addCategory";
-import AddFacility from "../components/modal/addFacility";
+
+import SearchBar from "../components/searchbar/Searchbar";
 import { useFilter } from "../hooks/useFilter";
 import ModalDelete from "../components/modal/ModalDelete";
 
@@ -23,27 +20,6 @@ export default function LocationList() {
   const { categories, dispatch2 } = useCategoryContext();
   const { notify, isPending, error, setLoading, setError } =
     useDisplayContext();
-  const [choosedCat, setChoosedCat] = useState({});
-  const [confirmPopup, setConfirmPopup] = useState(false);
-
-  const [editMode, setEditMode] = useState(false);
-  const toggleMapMode = (mode) => {
-    setEditMode(mode);
-  };
-
-  const [chooseCatModal, setChooseCatModal] = useState(false);
-  const chooseCatPopUp = (state) => {
-    setChooseCatModal(state);
-    toggleMapMode(false);
-  };
-  const [addCatModal, setAddCatModal] = useState(false);
-  const addCatPopUp = (state) => {
-    setAddCatModal(state);
-  };
-  const [addFacModal, setAddFacModal] = useState(false);
-  const addFacPopUp = (state) => {
-    setAddFacModal(state);
-  };
 
   const url = "http://localhost:3100/api/mapping";
   useFetch({ url, dispatch, setError, setLoading, type: "GET_FACILITIES" });
