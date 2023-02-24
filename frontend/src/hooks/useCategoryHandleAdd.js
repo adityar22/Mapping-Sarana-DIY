@@ -1,4 +1,4 @@
-export const useCategoryHandleAdd =({url, data, type, dispatch2, setLoading, setError, closePopUp})=>{
+export const useCategoryHandleAdd =({url, data, type, dispatch2, setLoading, setError, closePopUp, notify})=>{
     const add = async()=>{
         setLoading(true);
         const response = await fetch(url, {
@@ -15,11 +15,13 @@ export const useCategoryHandleAdd =({url, data, type, dispatch2, setLoading, set
             dispatch2({type: type, payload: json.data});
             closePopUp();
             setLoading(false);
-            setError(null)
+            setError(null);
+            notify.info(json.message);
         }
         if(!json.success){
             setLoading(false);
             setError(json.error);
+            notify.error(json.error);
         }
     }
 

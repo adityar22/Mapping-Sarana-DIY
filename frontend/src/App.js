@@ -15,6 +15,7 @@ function App() {
   console.log(user);
   return (
     <>
+    <ToastContainer/>
       <div className="max-w-screen flex-row sm:flex">
         <div className="sm:overflow-y-scroll relative w-screen">
           <Router>

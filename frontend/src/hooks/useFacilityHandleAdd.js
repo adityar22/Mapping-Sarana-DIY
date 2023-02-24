@@ -1,4 +1,4 @@
-export const useFacilityHandleAdd = ({url, data, type, dispatch, setLoading, setError, closePopUp}) => {
+export const useFacilityHandleAdd = ({url, data, type, dispatch, setLoading, setError, closePopUp, notify}) => {
     const add = async()=>{
         console.log(data)
         setLoading(true);
@@ -17,10 +17,12 @@ export const useFacilityHandleAdd = ({url, data, type, dispatch, setLoading, set
             closePopUp();
             setLoading(false);
             setError(null);
+            notify.info(json.message);
         }
         if (!json.success) {
             setLoading(false);
             setError(json.error);
+            notify.error(json.error);
         }
     }
 

@@ -6,7 +6,7 @@ import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError, pos }) => {
+const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError, pos, notify }) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState("")
@@ -49,7 +49,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
     }
 
     const newFacility = { name, coordinat, category: catName, imageURL, atr1, atr2, atr3, atr4, atr5 }
-    const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd })
+    const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd, notify })
 
     return (
         <>
@@ -102,7 +102,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                         />
                     </div>
                     {category.atribut.length > 0 && category.atribut.map((atribut, index) => (
-                        <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} />
+                        <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} notify={notify}/>
                     ))}
                     <div className="flex justify-end">
                         <button

@@ -6,7 +6,7 @@ import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
-const EditLocation = ({ facility, url, category, togglePopup, setLoading, setError }) => {
+const EditLocation = ({ facility, url, category, togglePopup, setLoading, setError, notify }) => {
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState(facility.name)
@@ -38,7 +38,7 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
     }
 
     const updatedData = { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 }
-    const { handleEdit: handleSubmit } = useFacilityHandleEdit({ url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp: togglePopup })
+    const { handleEdit: handleSubmit } = useFacilityHandleEdit({ url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp: togglePopup, notify })
 
 
     return (

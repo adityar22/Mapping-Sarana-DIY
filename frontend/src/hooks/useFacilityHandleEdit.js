@@ -1,4 +1,4 @@
-export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, setLoading, setError, closePopUp}) => {
+export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, setLoading, setError, closePopUp, notify }) => {
     const edit = async()=>{
         setLoading(true);
         const response = await fetch(url+data.id, {
@@ -16,10 +16,12 @@ export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, s
             closePopUp();
             setLoading(false);
             setError(null);
+            notify.info(json.message);
         }
         if (!json.success) {
             setLoading(false);
             setError(json.error);
+            notify.error(json.error);
         }
     }
 
