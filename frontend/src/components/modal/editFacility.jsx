@@ -10,6 +10,7 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
     const { dispatch } = useFacilityContext();
 
     const [name, setName] = useState(facility.name)
+    const [cat, setCat] = useState(facility.category)
     const [coordinat, setCoordinat] = useState(facility.coordinat)
     const [imageURL, setImageURL] = useState(facility.imageURL)
     const [atr1, setAtr1] = useState(facility.atribut1)
@@ -49,15 +50,15 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                     <div className="flex justify-between">
                         <button className="" onClick={togglePopup}>x</button>
                     </div>
-                    <h3 className="text-center text-2xl font -bold mb-12">Tambah Fasilitas</h3>
-                    <div className="mb-4">
+                    <h3 className="text-center text-2xl font -bold mb-3">Tambah Fasilitas</h3>
+                    <div className="mb-2">
                         <label>Kategori : </label>
-                        <label></label>
+                        <label>{cat}</label>
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <img src={imageURL} class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl" alt=""></img>
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <label>Ubah Gambar : </label>
                         <input
                             className=""
@@ -67,7 +68,7 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                             accept="image/png, image/jpeg"
                         />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-2">
                         {name != "" && <label className="">Nama : </label>}
                         <input
                             required
@@ -79,7 +80,7 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                             value={name}
                         />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-2">
                         {coordinat != "" && <label>Koordinat : </label>}
                         <input
                             required
@@ -96,6 +97,12 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                         <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} />
                     ))}
                     <div className="flex justify-end">
+                        <button
+                            onClick={togglePopup}
+                            className="mr-4 bg-white mt-3 hover:bg-blue-700 text-orange border-2 border-orange font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+                        >
+                            Batal
+                        </button>
                         <button
                             type="submit"
                             className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"

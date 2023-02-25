@@ -28,7 +28,7 @@ const FacilityCard = ({ facility, category, url, setLoading, setError }) => {
                 <div className="flex flex-col justify-start lg:flex-row inline-flex">
                     <img
                         class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl"
-                        src={facility.imageURL}
+                        src={facility.imageURL[0]}
                         alt=""
                     />
                     <div class="justify-content-start px-8 py-2 flex flex-col ">

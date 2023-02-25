@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import { useFacilityHandleAdd } from "../../hooks/useFacilityHandleAdd";
-import useFetch from "../../hooks/useFetch";
 
 import AtributColumn from '../facility/atributColumn'
 
@@ -11,13 +9,15 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
 
     const [name, setName] = useState("")
     const [coordinat, setCoordinat] = useState([pos.lat, pos.lng])
-    const [imageURL, setImageURL] = useState("")
+    const [imageURL, setImageURL] = useState([])
     const [atr1, setAtr1] = useState("")
     const [atr2, setAtr2] = useState("")
     const [atr3, setAtr3] = useState("")
     const [atr4, setAtr4] = useState("")
     const [atr5, setAtr5] = useState("")
     const catName = JSON.stringify(category.name).replace(/"/g, '')
+
+    const [totalImage, setTotalImage] = useState(0)
 
     const atrVal = [
         atr1, atr2, atr3, atr4, atr5
@@ -37,15 +37,19 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
     }
 
     const handleImage = (e) => {
+        e.stopPropagation()
         const file = e.target.files[0];
         setFileToBase(file)
+        e.target.files[0] = null;
+        e.preventDefault();
     }
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setImageURL(reader.result);
+            setImageURL([...imageURL, reader.result]);
         }
+        setTotalImage(prevTotal => prevTotal + 1);
     }
 
     const newFacility = { name, coordinat, category: catName, imageURL, atr1, atr2, atr3, atr4, atr5 }
@@ -92,14 +96,28 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                     </div>
                     <div className="mb-4">
                         <label>Image : </label>
-                        <input
-                            required
-                            className=""
-                            id="image"
-                            type="file"
-                            onChange={handleImage}
-                            accept="image/png, image/jpeg"
-                        />
+                        <div className="flex-col">
+                            <div className="inline-flex">
+                                {totalImage != 0 && imageURL.map((image, index) => (
+                                    <div key={index} className="mr-2">
+                                        <img
+                                            class=" object-cover w-32 lg:w-48 rounded-xl border-2"
+                                            src={image}
+                                            alt="" />
+                                    </div>
+                                ))}
+                            </div>
+                            {totalImage != 3 &&
+                                <input
+                                    required
+                                    className=""
+                                    id="image"
+                                    type="file"
+                                    onChange={handleImage}
+                                    accept="image/png, image/jpeg"
+                                />
+                            }
+                        </div>
                     </div>
                     {category.atribut.length > 0 && category.atribut.map((atribut, index) => (
                         <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} />

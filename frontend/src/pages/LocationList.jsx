@@ -47,6 +47,7 @@ export default function LocationList() {
       <div className=" p-2 bg-gray min-h-full lg:min-h-full">
         <div className="mx-9 my-10 md:mx-[100px] flex flex-col">
           <div className="flex flex-col md:w-68">
+            {inputEl=='Category' ?? <p>Pilih kategori untuk menampilkan data</p>}
             {filterResult &&
               filterResult.map((facility) => (
                 <>

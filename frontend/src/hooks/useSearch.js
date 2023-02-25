@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 
 export const useSearch=(data)=>{
     const [searchTerm, setSearchTerm] = useState("");
-    const inputEl = useRef("");
+    const searchEl = useRef("");
     const [searchResult, setSearchResult] = useState([]);
 
     const searchHandler = (searchTerm)=>{
@@ -21,7 +21,7 @@ export const useSearch=(data)=>{
         }
     };
     const getSearchTerm=()=>{
-        searchHandler(inputEl.current.value);
+        searchHandler(searchEl.current.value);
     }
-    return{searchResult, searchHandler, getSearchTerm, inputEl, searchTerm};
+    return{searchResult, searchHandler, getSearchTerm, searchEl, searchTerm};
 }

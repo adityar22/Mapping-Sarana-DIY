@@ -3,15 +3,14 @@ import { useFilter } from "../../hooks/useFilter";
 import CatList from "../category/catList";
 
 const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
-
+    const [open, setOpen] = useState(false)
     return (
         <div className="invisible sm:visible relative flex items-start rounded-lg w-full">
             <div className="z-10 w-1/5 pl-3 py-3">
                 <select
                     ref={inputEl}
                     onChange={getFilterTerm}
-                    className="bg-lightblue px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"
-                   
+                    className="bg-orange px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"  
                 >
                     <option>Category </option>
                     {categories && categories.map(category => (
@@ -21,7 +20,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
             </div>
             <div className="flex justify-between py-3 px-3 pr-6 bg-gray-50 border-none z-0 w-4/5">
                 <div className="w-full">
-                    <input
+                    <input        
                         type='text'
                         name="search"
                         placeholder="Search Facility"
@@ -31,9 +30,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                     >
                     </input>
                 </div>
-
             </div>
-
         </div>
     );
 }
