@@ -71,9 +71,9 @@ exports.login = async (req, res) => {
                 }
             })
         }
-        else if (!match) res.status(400).json({ msg: "Password tidak sesuai" })
+        else if (!match) res.status(400).json({ message: "Password tidak sesuai" })
     } catch (error) {
-        res.status(404).json({ msg: error.message })
+        res.status(404).json({ message: error.message })
     }
 }
 
