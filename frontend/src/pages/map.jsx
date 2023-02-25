@@ -8,7 +8,6 @@ import {
 } from "react-leaflet";
 import osm from "../components/maptiler/osm-providers";
 import { useRef } from "react";
-import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
 import { useCategoryContext } from "../hooks/usecategoryContext";
@@ -22,13 +21,14 @@ import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import MarkerView from "../components/maptiler/marker";
 import { useFilter } from "../hooks/useFilter";
-import FacilityDetail from "../components/facility/facilityDetail";
+import MiniInfo from "../components/modal/miniInfo";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
   const { notify, isPending, error, setLoading, setError } = useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
+  const [marker, setMarker] = useState({});
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -36,6 +36,9 @@ export default function BasicMap() {
   };
 
   const [miniInfo, setMiniInfo] = useState(false);
+  const infoPopup = (state) =>{
+    setMiniInfo(state)
+  }
   const [chooseCatModal, setChooseCatModal] = useState(false);
   const chooseCatPopUp = (state) => {
     setChooseCatModal(state);
@@ -49,10 +52,6 @@ export default function BasicMap() {
   const addFacPopUp = (state) => {
     setAddFacModal(state);
   };
-  const [detailModal, setDetailModal] = useState(false);
-  const showDetail = ()=>{
-    setDetailModal(!detailModal);
-  }
 
   const url = "http://localhost:3100/api/mapping";
   useFetch({ url, dispatch, setError, setLoading, type: "GET_FACILITIES" });
@@ -155,13 +154,14 @@ export default function BasicMap() {
           <ToggleButton />
         </div>
       </div>
-      {/* <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
-        <span>
-          Current Pos
-        </span>
-
-      </div> */}
       <div className="z-10">
+        {miniInfo && (
+          <MiniInfo
+            facility={marker}
+            selfPopUp={infoPopup}
+          />
+        )}
+
         {chooseCatModal && (
           <ChooseCategory
             categories={categories}
@@ -216,8 +216,8 @@ export default function BasicMap() {
               <MarkerView
                 filter={filterResult}
                 category={category}
-                detail={detailModal}
-                detailPopup={showDetail}
+                setMarker={setMarker}
+                infoPopup={infoPopup}
               />}
             <TileLayer
               url={osm.maptiler.url}

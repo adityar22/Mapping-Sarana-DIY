@@ -95,15 +95,19 @@ exports.editMapping = async (req, res) => {
     const { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 } = req.body
 
     try {
-        const resImage = await cloudinary.uploader.upload(imageURL, {
-            folder: 'MappingDIY',
-            width: 720,
-            crop: "scale"
-        })
+        const imgURL = []
+        for (let index = 0; index < imageURL.length; index++) {
+            const resImage = await cloudinary.uploader.upload(imageURL[index], {
+                folder: 'MappingDIY',
+                width: 720,
+                crop: "scale"
+            })
+            imgURL[index] = resImage.secure_url
+        }
         await facility.update({
             name: name,
             coordinat: coordinat,
-            imageURL: resImage.secure_url,
+            imageURL: imgURL,
             atribut1: atr1,
             atribut2: atr2,
             atribut3: atr3,

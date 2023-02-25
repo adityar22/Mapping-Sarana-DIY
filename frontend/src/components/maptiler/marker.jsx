@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import {
-    MapContainer,
-    TileLayer,
     Marker,
-    useMapEvents,
-    Popup,
+    Popup
 } from "react-leaflet";
 import L from "leaflet/dist/leaflet";
 
-const MarkerView = ({ filter, category, setDetailFacility, setDetailModal }) => {  
+const MarkerView = ({ filter, category, setMarker, infoPopup }) => {  
     const showDetail=()=>{
-        
+        infoPopup(true)
+        setMarker(filter)
     }
+    console.log(filter)
     var icon = L.icon({
         iconUrl: category[0].icon,
 
@@ -19,7 +18,6 @@ const MarkerView = ({ filter, category, setDetailFacility, setDetailModal }) => 
         iconAnchor:   [22, 94],
         popupAnchor:  [-3, -76]
     })
-    console.log(category[0].icon) 
 
     return (
         <div>

@@ -6,7 +6,7 @@ import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
-import DisplayContextProvider from './context/DisplayContext';
+import DisplayContextProvider from './context/displayContext';
 import FacilitesContextProvider from './context/FacilityContext';
 import CategoriesContextProvider from './context/CategoryContext';
 import AuthContextProvider from './context/AuthContext';
