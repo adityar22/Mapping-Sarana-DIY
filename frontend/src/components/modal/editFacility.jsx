@@ -41,11 +41,10 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
     const updatedData = { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 }
     const { handleEdit: handleSubmit } = useFacilityHandleEdit({ url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp: togglePopup, notify })
 
-
     return (
         <>
             <div className="overlay z-20"></div>
-            <div className="container w-fit mx-auto absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
+            <div className="container w-fit mx-auto absolute z-50 top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-between">
                         <button className="" onClick={togglePopup}>x</button>
@@ -56,17 +55,7 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                         <label>{cat}</label>
                     </div>
                     <div className="mb-2">
-                        <img src={imageURL} class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl" alt=""></img>
-                    </div>
-                    <div className="mb-2">
-                        <label>Ubah Gambar : </label>
-                        <input
-                            className=""
-                            id="image"
-                            type="file"
-                            onChange={handleImage}
-                            accept="image/png, image/jpeg"
-                        />
+                        <img src={imageURL[0]} class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl" alt=""></img>
                     </div>
                     <div className="mb-2">
                         {name != "" && <label className="">Nama : </label>}
