@@ -9,7 +9,7 @@ import ModalEdit from "../../components/modal/editFacility";
 import Edit from "../../assets/edit.png";
 import Delete from "../../assets/delete.png";
 
-const FacilityCard = ({ facility, category, url, setLoading, setError }) => {
+const FacilityCard = ({ facility, category, url, setLoading, setError, notify }) => {
     const { dispatch } = useFacilityContext();
 
     const [deleteModal, setDeleteModal] = useState(false)
@@ -21,7 +21,7 @@ const FacilityCard = ({ facility, category, url, setLoading, setError }) => {
         seteditModal(!editModal);
     }
 
-    const { remove: handleRemove } = useHandleDelete({ url: 'http://localhost:3100/api/mapping/', data: facility, type: 'DELETE_FACILITIES', dispatch, setLoading, setError, closePopup: toggleDelete });
+    const { remove: handleRemove } = useHandleDelete({ url: 'http://localhost:3100/api/mapping/', data: facility, type: 'DELETE_FACILITIES', dispatch, setLoading, setError, closePopup: toggleDelete, notify });
     return (
         <>
             <div class="flex justify-between py-2 px-2 lg:py-[6px] lg:px-[6px] bg-blue mb-[25px] rounded-2xl">
@@ -51,7 +51,7 @@ const FacilityCard = ({ facility, category, url, setLoading, setError }) => {
                     </div>
                 </div>
             </div>
-            {deleteModal && <ModalDelete handleDelete={handleRemove} togglePopup={toggleDelete} />}
+            {deleteModal && <ModalDelete handleDelete={handleRemove} togglePopup={toggleDelete}  />}
             {editModal && <ModalEdit facility={facility} url={url} category={category} togglePopup={toggleEdit} setLoading={setLoading} setError={setError} />}
         </>
     );

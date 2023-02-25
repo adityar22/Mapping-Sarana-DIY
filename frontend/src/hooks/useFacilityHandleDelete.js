@@ -1,4 +1,4 @@
-export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError, closePopup}) => {
+export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError, closePopup, notify}) => {
     const remove = async () => {
         setLoading(true);
         const response = await fetch(url + data.id, {
@@ -15,10 +15,12 @@ export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError
             setLoading(false);
             setError(null);
             dispatch({ type: type, payload: json.data });
+            notify.info(json.message);
         }
         if (!json.success) {
             setLoading(false);
             setError(json.error);
+            notify.error(json.error);
         }
     }
 

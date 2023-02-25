@@ -183,8 +183,10 @@ export default function BasicMap() {
             chooseCatPopUp={chooseCatPopUp}
             addButtonVisible={toggleMapMode}
             setLoading={setLoading}
+            notify={notify}
             setError={setError}
             pos={selectedPosition}
+            
           />
         )}
 
@@ -195,6 +197,7 @@ export default function BasicMap() {
           addButtonVisible={toggleMapMode}
           setLoading={setLoading}
           setError={setError}
+          notify={notify}
         />}
       </div>
       <div className="flex-col inline-flex">

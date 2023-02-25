@@ -50,7 +50,7 @@ export default function LocationList() {
             {filterResult &&
               filterResult.map((facility) => (
                 <>
-                  <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} />
+                  <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError}  notify={notify} />
                 </>
               ))}
           </div>

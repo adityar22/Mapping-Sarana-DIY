@@ -3,7 +3,7 @@ import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useCategoryHandleAdd } from "../../hooks/useCategoryHandleAdd";
 import ChooseIcon from "./chooseIcon";
 
-const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError }) => {
+const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoading, setError, notify }) => {
     const { dispatch2 } = useCategoryContext();
 
     const [name, setName] = useState("")
@@ -74,7 +74,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
     }
 
     const newCategory = { name, icon, atribut, atributType };
-    const { handleAdd: handleSubmit } = useCategoryHandleAdd({ url, type: 'ADD_CATEGORIES', dispatch2, data: newCategory, setLoading, setError, closePopUp: backChooseCat })
+    const { handleAdd: handleSubmit } = useCategoryHandleAdd({ url, type: 'ADD_CATEGORIES', dispatch2, data: newCategory, setLoading, setError, closePopUp: backChooseCat, notify })
 
     return (
         <>

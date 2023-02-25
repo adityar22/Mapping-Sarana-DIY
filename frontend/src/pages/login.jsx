@@ -9,25 +9,27 @@ import logoKota from '../assets/lambang_kota.png'
 export const Login = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-
-    const { isPending, error, setLoading, setError } = useDisplayContext();
+    const { notify, isPending, error, setLoading, setError } = useDisplayContext();
     const { login } = useLogin({ setError, setLoading });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        setLoading(true)
         const response = await login(name, password);
-
         if (!response.isError) {
-            setLoading(false);
+            notify.info(response.message);
+            setLoading(true);
         }
         else {
+            notify.error(response.message);
             setLoading(false)
         }
-    }
+    
 
     setLoading(false)
+        
+    }
 
     return (
         <div className=" flex flex-col justify-center font-poppins top-1/2 h-screen bg-white ">
@@ -64,4 +66,4 @@ export const Login = () => {
 
         </div>
     )
-}
+    }
