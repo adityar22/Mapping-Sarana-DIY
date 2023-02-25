@@ -19,7 +19,7 @@ const facility = db.define('facility',{
         }
     },
     imageURL:{
-        type: DataTypes.STRING
+        type: DataTypes.ARRAY(DataTypes.STRING)
     },
     status:{
         type: DataTypes.STRING

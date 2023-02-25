@@ -24,7 +24,7 @@ const connection = async(req, res)=>{
 connection()
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors({credentials:true, origin:'http://localhost:3000'}))
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())

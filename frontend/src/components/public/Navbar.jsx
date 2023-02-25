@@ -24,16 +24,6 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
         className={`${open ? "w-full sm:w-72" : "w-screen sm:w-20 h-20 sm:h-screen"
           }
             bg-blue p-5  sm:pt-8 duration-300 fixed sm:relative z-40`}>
-        {/* <select
-          ref={inputEl}
-          onChange={getFilterTerm}
-          className="sm:invisible bg-lightblue px-4 w-full flex justify-between font-bold text-sm rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3"
-        >
-          <option>Category </option>
-          {categories && categories.map(category => (
-            <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
-          ))}
-        </select> */}
         <div className="w-full visible sm:invisible">
           <input
             type='text'

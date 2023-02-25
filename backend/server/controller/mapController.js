@@ -1,20 +1,24 @@
 const facility = require('../model/facilityModel');
 const cloudinary = require('../database/cloudinary');
 
-exports.createMapping = async(req, res)=>{
-    const {name, coordinat, category, imageURL, atr1, atr2, atr3, atr4, atr5} = req.body
+exports.createMapping = async (req, res) => {
+    const { name, coordinat, category, imageURL, atr1, atr2, atr3, atr4, atr5 } = req.body
 
     try {
-        const resImage = await cloudinary.uploader.upload(imageURL, {
-            folder: 'MappingDIY',
-            width: 720,
-            crop: "scale"
-        })
+        const imgURL = []
+        for (let index = 0; index < imageURL.length; index++) {
+            const resImage = await cloudinary.uploader.upload(imageURL[index], {
+                folder: 'MappingDIY',
+                width: 720,
+                crop: "scale"
+            })
+            imgURL[index] = resImage.secure_url
+        }
         await facility.create({
             name: name,
             coordinat: coordinat,
             category: category,
-            imageURL: resImage.secure_url,
+            imageURL: imgURL,
             status: 'active',
             atribut1: atr1,
             atribut2: atr2,
@@ -32,10 +36,10 @@ exports.createMapping = async(req, res)=>{
     }
 }
 
-exports.getAllMapping = async(req, res)=>{
+exports.getAllMapping = async (req, res) => {
     try {
         const facilities = await facility.findAll({
-            where:{status: 'active'}
+            where: { status: 'active' }
         })
         res.status(200).json({
             success: true,
@@ -47,12 +51,12 @@ exports.getAllMapping = async(req, res)=>{
     }
 }
 
-exports.getMappingByCat = async(req, res)=>{
+exports.getMappingByCat = async (req, res) => {
     const cat = req.params.category
-    
+
     try {
         const facilities = await facility.findAll({
-            where:{category: cat}
+            where: { category: cat }
         })
         res.status(200).json({
             success: true,
@@ -64,13 +68,13 @@ exports.getMappingByCat = async(req, res)=>{
     }
 }
 
-exports.getMappingByID = async(req, res)=>{
+exports.getMappingByID = async (req, res) => {
     const id = req.params.id
     console.log(id)
-    
+
     try {
         const facilities = await facility.findAll({
-            where:{id: id}
+            where: { id: id }
         })
         res.status(200).json({
             success: true,
@@ -82,26 +86,31 @@ exports.getMappingByID = async(req, res)=>{
     }
 }
 
-exports.searchMapping = (req, res)=>{
+exports.searchMapping = (req, res) => {
 
 }
 
-exports.editMapping = async(req, res)=>{
+exports.editMapping = async (req, res) => {
     const id = req.params.id
-    const {name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5} = req.body
-    
+    const { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 } = req.body
+
     try {
+        const resImage = await cloudinary.uploader.upload(imageURL, {
+            folder: 'MappingDIY',
+            width: 720,
+            crop: "scale"
+        })
         await facility.update({
             name: name,
             coordinat: coordinat,
-            imageURL: imageURL,
+            imageURL: resImage.secure_url,
             atribut1: atr1,
             atribut2: atr2,
             atribut3: atr3,
             atribut4: atr4,
             atribut5: atr5
-        },{
-            where:{
+        }, {
+            where: {
                 id: id
             }
         })
@@ -116,15 +125,15 @@ exports.editMapping = async(req, res)=>{
     }
 }
 
-exports.deleteMapping = async(req, res)=>{
+exports.deleteMapping = async (req, res) => {
     const id = req.params.id;
 
     try {
         await facility.update({
-            status:'deactive'
-        },{
-            where:{
-                id:id
+            status: 'deactive'
+        }, {
+            where: {
+                id: id
             }
         })
 

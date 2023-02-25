@@ -44,7 +44,6 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
     }
     function handleKeyDown(e) {
         e.stopPropagation();
-
         if (e.key !== 'Enter') return
         const value = e.target.value
         if (!value.trim()) return
@@ -52,10 +51,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
         setAtributType([...atributType, "text"])
         e.target.value = ''
         setAtributTotal(prevTotal => prevTotal + 1)
-        console.log(atributTotal)
         e.preventDefault();
-        console.log(atribut)
-        console.log(atributType)
     }
 
     const [displayIcon, setDisplayIcon] = useState(false)
