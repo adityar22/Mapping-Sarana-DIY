@@ -10,12 +10,12 @@ export const useFilter = (data, data2) => {
         setFilterTerm(filterTerm);
         if (filterTerm !== "") {
             const newDataList = data.filter((item) => {
-                return item.category == filterTerm;
+                return item.category === filterTerm;
             });
             setFilterResult(newDataList)
             console.log(newDataList);
             const choosedCategory = data2.filter((item)=>{
-                return item.name == filterTerm;
+                return item.name === filterTerm;
             });
             setCategory(choosedCategory);
             console.log(choosedCategory);
@@ -27,7 +27,7 @@ export const useFilter = (data, data2) => {
         console.log(filterTerm)
     };
     const getFilterTerm = () => {
-        if (inputEl.current.value != "") {
+        if (inputEl.current.value !== "") {
             const val = JSON.parse(inputEl.current.value);
             const valFilter = val.name
             filterHandler(valFilter);

@@ -104,7 +104,7 @@ exports.editMapping = async (req, res) => {
             })
             imgURL[index] = resImage.secure_url
         }
-        await facility.update({
+        const updated = await facility.update({
             name: name,
             coordinat: coordinat,
             imageURL: imgURL,
@@ -116,13 +116,15 @@ exports.editMapping = async (req, res) => {
         }, {
             where: {
                 id: id
-            }
+            },
+            returning: true,
+            plain: true
         })
 
         res.status(200).json({
             success: true,
             message: 'Facility updated!',
-            data: req.body
+            data: updated
         })
     } catch (error) {
         console.log(error)
@@ -133,18 +135,20 @@ exports.deleteMapping = async (req, res) => {
     const id = req.params.id;
 
     try {
-        await facility.update({
+        const deleted = await facility.update({
             status: 'deactive'
         }, {
             where: {
                 id: id
-            }
+            },
+            returning: true,
+            plain: true
         })
 
         res.status(200).json({
             success: true,
             message: 'facility deactived!',
-            data: req.params.id
+            data: deleted
         })
     } catch (error) {
         console.log(error)

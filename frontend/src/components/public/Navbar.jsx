@@ -1,13 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import Map from "../../pages/map";
 
 import controller from "../../assets/controller.png";
 import menu_map from "../../assets/map.png";
 import list from "../../assets/list.png";
 import "../../App.css";
-
-import CatList from "../category/catList";
 
 const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
   const [open, setOpen] = useState(false);

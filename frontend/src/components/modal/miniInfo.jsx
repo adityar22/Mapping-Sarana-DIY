@@ -4,7 +4,7 @@ import 'react-slideshow-image/dist/styles.css'
 
 const MiniInfo = ({ facility, category, selfPopUp }) => {
     const cat = category.filter((item)=>{
-        return item.name == facility.category;
+        return item.name === facility.category;
     })
     return (
         <div>

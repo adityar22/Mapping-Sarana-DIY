@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Marker,
     Popup
@@ -11,7 +11,7 @@ const MarkerView = ({ filter, category, setMarker, infoPopup }) => {
         setMarker(item)
     }
     const cat = category.filter((item)=>{
-        return item.name == filter.category;
+        return item.name === filter.category;
     })
     var icon = L.icon({
         iconUrl: cat[0].icon,

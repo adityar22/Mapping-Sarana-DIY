@@ -14,7 +14,7 @@ export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError
             closePopup();
             setLoading(false);
             setError(null);
-            dispatch({ type: type, payload: json.data });
+            dispatch({ type: type, payload: json.data[1] });
             notify.info(json.message);
         }
         if (!json.success) {
