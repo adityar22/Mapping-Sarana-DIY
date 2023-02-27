@@ -14,14 +14,15 @@ import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
-import Navbar from "../components/public/Navbar";
 import SearchBar from "../components/searchbar/searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import MarkerView from "../components/maptiler/marker";
-import { useFilter } from "../hooks/useFilter";
 import MiniInfo from "../components/modal/miniInfo";
+
+import { useFilter } from "../hooks/useFilter";
+import { useSearch } from "../hooks/useSearch";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
@@ -138,6 +139,7 @@ export default function BasicMap() {
   }
 
   const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
+  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(filterResult)
 
   return (
     <div className="max-h-screen flex-col">
@@ -213,7 +215,7 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && filterResult.length != 0 &&
+            {!editMode && filterResult.length !== 0 &&
               filterResult.map((item) => (
                 <MarkerView
                   filter={item}

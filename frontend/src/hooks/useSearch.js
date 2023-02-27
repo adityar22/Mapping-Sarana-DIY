@@ -9,7 +9,7 @@ export const useSearch=(data)=>{
         setSearchTerm(searchTerm);
         if(searchTerm!==""){
             const newDataList = data.filter((item)=>{
-                return Object.values(item)
+                return Object.values(item.name)
                     .join(" ")
                     .toLowerCase()
                     .includes(searchTerm.toLowerCase());
