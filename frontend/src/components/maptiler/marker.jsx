@@ -6,9 +6,9 @@ import {
 import L from "leaflet/dist/leaflet";
 
 const MarkerView = ({ filter, category, setMarker, infoPopup }) => {  
-    const showDetail=()=>{
+    const showDetail=(item)=>{
         infoPopup(true)
-        setMarker(filter)
+        setMarker(item)
     }
     console.log(filter)
     var icon = L.icon({
@@ -26,7 +26,7 @@ const MarkerView = ({ filter, category, setMarker, infoPopup }) => {
                     <Popup on>
                         <div className="flex-col items-center inline-flex">
                             <span>{item.name}</span>
-                            <span onClick={showDetail} className="text-orange cursor-pointer"> Detail Info</span>
+                            <span onClick={(e)=>showDetail(item)} className="text-orange cursor-pointer"> Detail Info</span>
                         </div>
                     </Popup>
                 </Marker>
