@@ -22,11 +22,12 @@ export const useFilter = (data, data2) => {
         }
         else {
             setFilterResult(data)
+            setCategory(data2)
         }
         console.log(filterTerm)
     };
     const getFilterTerm = () => {
-        if (inputEl.current.value != "Pilih Kategori :") {
+        if (inputEl.current.value != "") {
             const val = JSON.parse(inputEl.current.value);
             const valFilter = val.name
             filterHandler(valFilter);

@@ -5,32 +5,32 @@ import {
 } from "react-leaflet";
 import L from "leaflet/dist/leaflet";
 
-const MarkerView = ({ filter, category, setMarker, infoPopup }) => {  
-    const showDetail=(item)=>{
+const MarkerView = ({ filter, category, setMarker, infoPopup }) => {
+    const showDetail = (item) => {
         infoPopup(true)
         setMarker(item)
     }
-    console.log(filter)
+    const cat = category.filter((item)=>{
+        return item.name == filter.category;
+    })
     var icon = L.icon({
-        iconUrl: category[0].icon,
+        iconUrl: cat[0].icon,
 
-        iconSize:     [38, 38],
-        iconAnchor:   [22, 94],
-        popupAnchor:  [-3, -76]
+        iconSize: [38, 38],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
     })
 
     return (
         <div>
-            {filter && filter.map(item => (
-                <Marker position={item.coordinat} icon={icon} >
-                    <Popup on>
-                        <div className="flex-col items-center inline-flex">
-                            <span>{item.name}</span>
-                            <span onClick={(e)=>showDetail(item)} className="text-orange cursor-pointer"> Detail Info</span>
-                        </div>
-                    </Popup>
-                </Marker>
-            ))}
+            <Marker position={filter.coordinat} icon={icon} >
+                <Popup on>
+                    <div className="flex-col items-center inline-flex">
+                        <span>{filter.name}</span>
+                        <span onClick={(e) => showDetail(filter)} className="text-orange cursor-pointer"> Detail Info</span>
+                    </div>
+                </Popup>
+            </Marker>
         </div>
     );
 }

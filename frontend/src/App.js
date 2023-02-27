@@ -16,8 +16,6 @@ function App() {
   return (
     <>
     <ToastContainer/>
-      <div className="max-w-screen flex-row sm:flex">
-        <div className="sm:overflow-y-scroll relative w-screen">
           <Router>
             <Routes>
               <Route
@@ -27,8 +25,6 @@ function App() {
               />
             </Routes>
           </Router>
-        </div>
-      </div>
     </>
   );
 }

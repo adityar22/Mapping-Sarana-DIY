@@ -7,9 +7,9 @@ import LocationList from "./LocationList";
 
 const Mainpage = () => {
   return (
-    <div className="max-w-screen flex-row sm:flex h-screen">
+    <div className="max-w-screen flex-row sm:flex">
       <Navbar />
-      <div className="sm:overflow-y-scroll relative w-full">
+      <div className="sm:overflow-y-scroll w-full relative">
         <Routes>
           <Route path="/" element={<Map />} />
           <Route path="/LocationList" element={<LocationList />} />
