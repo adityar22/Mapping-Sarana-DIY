@@ -158,6 +158,7 @@ export default function BasicMap() {
         {miniInfo && (
           <MiniInfo
             facility={marker}
+            category={category}
             selfPopUp={infoPopup}
           />
         )}
