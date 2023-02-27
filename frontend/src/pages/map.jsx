@@ -36,7 +36,7 @@ export default function BasicMap() {
   };
 
   const [miniInfo, setMiniInfo] = useState(false);
-  const infoPopup = (state) =>{
+  const infoPopup = (state) => {
     setMiniInfo(state)
   }
   const [chooseCatModal, setChooseCatModal] = useState(false);
@@ -187,7 +187,7 @@ export default function BasicMap() {
             notify={notify}
             setError={setError}
             pos={selectedPosition}
-            
+
           />
         )}
 
@@ -201,7 +201,7 @@ export default function BasicMap() {
           notify={notify}
         />}
       </div>
-      <div className="flex-col inline-flex">
+      <div className="inline-flex">
         <div id="mapview" className="z-0 w-full items-center justify-center">
           <MapContainer
             id="maps"
@@ -213,18 +213,20 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && filterResult.length > 0 &&
-              <MarkerView
-                filter={filterResult}
-                category={category}
-                setMarker={setMarker}
-                infoPopup={infoPopup}
-              />}
+            {!editMode && filterResult.length != 0 &&
+              filterResult.map((item) => (
+                <MarkerView
+                  filter={item}
+                  category={category}
+                  setMarker={setMarker}
+                  infoPopup={infoPopup}
+                />
+              ))
+            }
             <TileLayer
               url={osm.maptiler.url}
               attribution={osm.maptiler.attribution}
             />
-
           </MapContainer>
         </div>
       </div>

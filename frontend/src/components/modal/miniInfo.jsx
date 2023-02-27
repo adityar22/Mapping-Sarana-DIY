@@ -3,15 +3,9 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
 const MiniInfo = ({ facility, category, selfPopUp }) => {
-    console.log(facility)
-    const divStyle = {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundSize: 'cover',
-        height: '64px',
-        width: '144px',
-    }
+    const cat = category.filter((item)=>{
+        return item.name == facility.category;
+    })
     return (
         <div>
             <div className="container w-fit absolute z-50 top-1/2 right-0 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
@@ -27,11 +21,11 @@ const MiniInfo = ({ facility, category, selfPopUp }) => {
                         </Slide>
                     </div>
                     <h3 className="text-xl poppins font-medium">{facility.name}</h3>
-                    {category[0].atribut[0] && <p class="text-sm text-poppins mb-1">{category[0].atribut[0]} : {facility.atribut1}</p>}
-                    {category[0].atribut[1] && <p class="text-sm text-poppins mb-1">{category[0].atribut[1]} : {facility.atribut2}</p>}
-                    {category[0].atribut[2] && <p class="text-sm text-poppins mb-1">{category[0].atribut[2]} : {facility.atribut3}</p>}
-                    {category[0].atribut[3] && <p class="text-sm text-poppins mb-1">{category[0].atribut[3]} : {facility.atribut4}</p>}
-                    {category[0].atribut[4] && <p class="text-sm text-poppins mb-1">{category[0].atribut[4]} : {facility.atribut5}</p>}
+                    {cat[0].atribut[0] && <p class="text-sm text-poppins mb-1">{cat[0].atribut[0]} : {facility.atribut1}</p>}
+                    {cat[0].atribut[1] && <p class="text-sm text-poppins mb-1">{cat[0].atribut[1]} : {facility.atribut2}</p>}
+                    {cat[0].atribut[2] && <p class="text-sm text-poppins mb-1">{cat[0].atribut[2]} : {facility.atribut3}</p>}
+                    {cat[0].atribut[3] && <p class="text-sm text-poppins mb-1">{cat[0].atribut[3]} : {facility.atribut4}</p>}
+                    {cat[0].atribut[4] && <p class="text-sm text-poppins mb-1">{cat[0].atribut[4]} : {facility.atribut5}</p>}
                 </div>
             </div>
         </div>

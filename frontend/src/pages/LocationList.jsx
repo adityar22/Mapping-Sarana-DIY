@@ -35,23 +35,35 @@ export default function LocationList() {
 
   return (
     <>
-      <SearchBar
-        categories={categories}
-        setLoading={setLoading}
-        setError={setError}
-        filterTerm={filterTerm}
-        getFilterTerm={getFilterTerm}
-        inputEl={inputEl}
-      />
+      <div className="top-0 sticky flex justify-end z-10 bg-white">
+        <SearchBar
+          categories={categories}
+          setLoading={setLoading}
+          setError={setError}
+          filterTerm={filterTerm}
+          getFilterTerm={getFilterTerm}
+          inputEl={inputEl}
+        />
+      </div>
 
       <div className=" p-2 bg-gray min-h-full lg:min-h-full">
         <div className="mx-9 my-10 md:mx-[100px] flex flex-col">
           <div className="flex flex-col md:w-68">
-            {inputEl=='Category' ?? <p>Pilih kategori untuk menampilkan data</p>}
-            {filterResult &&
+            {inputEl == "" &&
+              <>
+                <p className="font-poppins text-sm">Pilih kategori untuk memfilter data</p>
+                {/* {facilities &&
+                  facilities.map((facility) => (
+                    <>
+                      <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} notify={notify} />
+                    </>
+                  ))} */}
+              </>
+            }
+            {filterResult.length != 0 &&
               filterResult.map((facility) => (
                 <>
-                  <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError}  notify={notify} />
+                  <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} notify={notify} />
                 </>
               ))}
           </div>

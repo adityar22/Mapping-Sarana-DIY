@@ -12,7 +12,7 @@ const SearchBar = ({ categories, setLoading, setError, filterTerm, getFilterTerm
                     onChange={getFilterTerm}
                     className="bg-orange px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"  
                 >
-                    <option>Category </option>
+                    <option value="">Pilih Kategori</option>
                     {categories && categories.map(category => (
                         <CatList key={category.name} category={category} setLoading={setLoading} setError={setError} />
                     ))}
