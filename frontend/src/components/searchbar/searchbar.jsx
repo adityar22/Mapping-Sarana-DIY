@@ -4,8 +4,8 @@ import CatList from "../category/catList";
 
 const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm, getFilterTerm, inputEl, searchTerm, getSearchTerm, searchEl }) => {
     return (
-        <div className=" relative flex items-start rounded-lg w-full">
-            <div className="z-20 w-1/5 pl-3 py-3">
+        <div className=" relative flex justify-end sm:justify-start rounded-lg w-full">
+            <div className="z-20 sm:w-1/5 pl-3 py-3">
                 {/* <select
                     ref={inputEl}
                     onChange={getFilterTerm}
@@ -18,7 +18,7 @@ const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm
                 </select> */}
                 <button
                     onClick={(e) => setOpen(!open)}
-                    className=" bg-orange px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"
+                    className=" bg-orange px-4 w-full flex justify-end sm:justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit"
                 >Pilih Kategori
                 </button>
             </div>
