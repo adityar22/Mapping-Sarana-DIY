@@ -102,11 +102,16 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                                 id="name"
                                 type="text"
                                 value={iconName}
-                                placeholder="Pilih icon..."
+                                placeholder="Icon..."
                                 readOnly
                             />
                             <div className="items-center py-2">
-                                <label onClick={(e) => toggleChooseIcon()}>Cari Icon</label>
+                                <label
+                                    onClick={(e) => toggleChooseIcon()}
+                                    className="text-orange cursor-pointer"
+                                >
+                                    Cari Icon
+                                </label>
                             </div>
                         </div>
 
@@ -151,7 +156,7 @@ const AddCategory = ({ url, selfPopUp, chooseCatPopUp, addButtonVisible, setLoad
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+                            className="bg-orange mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
                         >
                             Submit
                         </button>

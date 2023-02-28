@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheckTerm, getCheckTerm }) => {
+    useEffect(()=>{
+        getCheckTerm();
+    },[checkTerm])
     function onChecked(event) {
         if (event.target.checked === true) {
-            setCheckTerm(state => {return [...state, event.target.value]})
+            setCheckTerm(state => { return [...state, event.target.value] });
         }
         else if (event.target.checked === false) {
             const checked = checkTerm.filter((item) => {
@@ -12,16 +15,33 @@ const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheck
             setCheckTerm(checked)
         }
         getCheckTerm();
-        
     }
     function checkAll(event) {
         if (event.target.checked === true) {
-            setCheckTerm([event.target.value])
+            setCheckTerm([event.target.value]);
+            var check = document.querySelectorAll('.check');
+            for (var i = 0; i < check.length; i++) {
+                console.log(check[i].checked)
+                check[i].checked = true;
+            }
+        } else {
+            setCheckTerm([]);
+            var check = document.querySelectorAll('.check');
+            for (var i = 0; i < check.length; i++) {
+                console.log(check[i].checked)
+                check[i].checked = false;
+            }
+            getCheckTerm();
         }
+        getCheckTerm();
     }
     function deleteChecked() {
-        console.log('test')
         setCheckTerm([]);
+        var check = document.querySelectorAll('.check');
+        for (var i = 0; i < check.length; i++) {
+            console.log(check[i].checked)
+            check[i].checked = false;
+        }
         getCheckTerm();
     }
     return (
@@ -36,13 +56,14 @@ const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheck
                                 type="checkbox"
                                 value="Tampilkan Semua"
                                 onChange={checkAll}
+                                className="check"
                             />
                             <label className="ml-1">Tampilkan Semua</label>
                         </div>
                         <div>
                             <p
                                 className="mb-4 font-poppins cursor-pointer text-orange"
-                                onclick={deleteChecked}
+                                onClick={deleteChecked}
                             >
                                 Hapus semua filter
                             </p>
@@ -53,6 +74,7 @@ const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheck
                                     type="checkbox"
                                     value={category[index].name}
                                     onChange={onChecked}
+                                    className="check"
                                 />
                                 <label className="ml-1">{category[index].name}</label>
                             </div>

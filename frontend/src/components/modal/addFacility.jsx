@@ -132,7 +132,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="bg-lightblue mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
+                            className="bg-orange mt-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
                         >
                             Submit
                         </button>

@@ -233,7 +233,7 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && checkResult.length !== 0 &&
+            {checkResult.length !== 0 &&
               checkResult.map((item) => (
                 <MarkerView
                   filter={item}
