@@ -139,10 +139,10 @@ export default function BasicMap() {
   }
 
   const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
-  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(filterResult)
+  const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(filterResult)
 
   return (
-    <div className="max-h-screen flex-col">
+    <div className="h-screen flex-col">
       <div className="top-0 sticky flex justify-end z-10">
         <SearchBar
           categories={categories}

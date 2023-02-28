@@ -8,7 +8,7 @@ const Mainpage = () => {
   return (
     <div className="max-w-screen flex-row sm:flex">
       <Navbar />
-      <div className="sm:overflow-y-scroll w-full relative">
+      <div className="sm:overflow-y-scroll w-screen relative">
         <Routes>
           <Route path="/" element={<Map />} />
           <Route path="/LocationList" element={<LocationList />} />
