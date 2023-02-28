@@ -1,10 +1,12 @@
+import { useAuthContext } from "./useAuthContext";
 export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, setLoading, setError, closePopUp, notify }) => {
+    const user = useAuthContext();
     const edit = async()=>{
-        console.log(data)
         setLoading(true);
         const response = await fetch(url+data.id, {
             method: 'PUT',
             headers: {
+                'Authorization': `Bearer ${user.user.token}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(updatedData),

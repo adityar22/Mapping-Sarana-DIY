@@ -1,10 +1,12 @@
+import { useAuthContext } from "./useAuthContext";
 export const useHandleDelete = ({url, data, type, dispatch, setLoading, setError, closePopup, notify}) => {
+    const user = useAuthContext();
     const remove = async () => {
         setLoading(true);
         const response = await fetch(url + data.id, {
             method: 'DELETE',
             headers: {
-
+                'Authorization': `Bearer ${user.user.token}`
             }
         });
 
