@@ -3,8 +3,6 @@ import { createContext, useReducer } from "react";
 export const FacilityContext = createContext();
 
 export const facilityReducer = (state, action) => {
-    console.log(state)
-    console.log(action.payload)
     switch(action.type){
         case 'GET_FACILITIES':
             return{
