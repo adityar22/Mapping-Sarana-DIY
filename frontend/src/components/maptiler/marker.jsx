@@ -6,8 +6,6 @@ import {
 import L from "leaflet/dist/leaflet";
 
 const MarkerView = ({ filter, category, setMarker, infoPopup }) => {
-    console.log(category)
-    console.log(filter)
     const showDetail = (item) => {
         infoPopup(true)
         setMarker(item)
@@ -15,9 +13,8 @@ const MarkerView = ({ filter, category, setMarker, infoPopup }) => {
     const cat = category.filter((item)=>{
         return item.name === filter.category;
     })
-    console.log(cat)
     var icon = L.icon({
-        iconUrl: cat.icon,
+        iconUrl: cat[0].icon,
 
         iconSize: [38, 38],
         iconAnchor: [22, 94],

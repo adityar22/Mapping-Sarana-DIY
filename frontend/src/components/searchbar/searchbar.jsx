@@ -5,7 +5,7 @@ import CatList from "../category/catList";
 const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm, getFilterTerm, inputEl }) => {
     return (
         <div className="invisible sm:visible relative flex items-start rounded-lg w-full">
-            <div className="z-10 w-1/5 pl-3 py-3">
+            <div className="z-20 w-1/5 pl-3 py-3">
                 {/* <select
                     ref={inputEl}
                     onChange={getFilterTerm}

@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheckTerm, getCheckTerm }) => {
     function onChecked(event) {
-        console.log(event.target.checked)
         if (event.target.checked === true) {
             setCheckTerm(state => [...state, event.target.value])
         }
@@ -14,18 +13,27 @@ const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheck
         }
         getCheckTerm();
     }
+    function checkAll(event) {
+        if (event.target.checked === true) {
+            setCheckTerm(event.target.value)
+        }
+    }
+    const deleteChecked = () => {
+        setCheckTerm([])
+        getCheckTerm()
+    }
     return (
         <>
             <div className={`${open ? "w-full sm:w-52 p-5 sm:pt-8" : "w-screen sm:w-0"
                 }
-            bg-white shadow-sm duration-300 fixed sm:relative z-40`}>
+            bg-white shadow-sm duration-300 fixed sm:relative z-10`}>
                 <div lassName="flex justify-between flex-col">
                     <div className={!open ? "hidden" : "block pt3 sm:pt-6 flex-col"}>
                         <div className="mb-3">
                             <input
                                 type="checkbox"
                                 value="All category"
-                                onChange={onChecked}
+                                onChange={checkAll}
                             />
                             <label className="ml-1">Tampilkan Semua</label>
                         </div>
@@ -40,7 +48,12 @@ const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheck
                             </div>
                         ))}
                         <div>
-                            <p className="mt-4 font-poppins cursor-pointer text-orange">Hapus semua filter</p>
+                            <p
+                                className="mt-4 font-poppins cursor-pointer text-orange"
+                                onclick={deleteChecked}
+                            >
+                                Hapus semua filter
+                            </p>
                         </div>
                     </div>
                 </div>
