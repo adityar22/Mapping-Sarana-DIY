@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFilter } from "../../hooks/useFilter";
 import CatList from "../category/catList";
 
-const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm, getFilterTerm, inputEl }) => {
+const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm, getFilterTerm, inputEl, searchTerm, getSearchTerm, searchEl }) => {
     return (
         <div className="invisible sm:visible relative flex items-start rounded-lg w-full">
             <div className="z-20 w-1/5 pl-3 py-3">
@@ -25,6 +25,9 @@ const SearchBar = ({ categories, setLoading, setError, open, setOpen, filterTerm
             <div className="flex justify-between py-3 px-3 pr-6 bg-gray-50 border-none z-0 w-4/5">
                 <div className="w-full">
                     <input
+                        ref={searchEl}
+                        value={searchTerm}
+                        onChange={getSearchTerm}
                         type='text'
                         name="search"
                         placeholder="Search Facility"

@@ -8,7 +8,7 @@ export const useCheckFilter = (data, data2) => {
     const filterHandler = (checkTerm) => {
         console.log(data2)
         console.log(checkTerm)
-        if (checkTerm[0] !== "Tampilkan Semua") {
+        if (checkTerm !== "Tampilkan Semua") {
             const newDataList = data.filter((item) => {
                 return item.category === checkTerm;
             });
@@ -23,7 +23,7 @@ export const useCheckFilter = (data, data2) => {
                 setCategory(state=>[...state, item])
             })
         }
-        else if(checkTerm[0] === "Tampilkan Semua"){
+        else if(checkTerm === "Tampilkan Semua"){
             setCheckResult(data)
             setCategory(data2)
         }
