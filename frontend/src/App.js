@@ -15,16 +15,16 @@ function App() {
   console.log(user);
   return (
     <>
-    <ToastContainer/>
-          <Router>
-            <Routes>
-              <Route
-                exact
-                path="/*"
-                element={!user ? <Login /> : <Mainpage />}
-              />
-            </Routes>
-          </Router>
+      <ToastContainer />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/*"
+            element={!user ? <Login /> : <Mainpage />}
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
