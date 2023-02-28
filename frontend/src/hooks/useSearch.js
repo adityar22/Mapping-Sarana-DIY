@@ -4,6 +4,7 @@ export const useSearch=(data)=>{
     const [searchTerm, setSearchTerm] = useState("");
     const searchEl = useRef("");
     const [searchResult, setSearchResult] = useState([]);
+    const [renderSearch, setRenderSearch] = useState(false);
 
     const searchHandler = (searchTerm)=>{
         setSearchTerm(searchTerm);
@@ -21,6 +22,7 @@ export const useSearch=(data)=>{
     };
     const getSearchTerm=()=>{
         searchHandler(searchEl.current.value);
+        setRenderSearch(false)
     }
-    return{searchResult, searchHandler, getSearchTerm, searchEl, searchTerm};
+    return{searchResult, searchHandler, getSearchTerm, searchEl, searchTerm, renderSearch, setRenderSearch};
 }
