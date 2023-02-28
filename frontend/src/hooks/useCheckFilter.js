@@ -31,6 +31,8 @@ export const useCheckFilter = (data, data2) => {
     const getCheckTerm = () => {
         console.log(checkTerm)
         if (checkTerm.length !== 0) {
+            setCheckResult([])
+            setCategory([])
             checkTerm.map((item)=>(
                 filterHandler(item)
             ));
