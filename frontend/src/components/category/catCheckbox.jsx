@@ -1,13 +1,13 @@
-import { useState} from "react";
+import { useState } from "react";
 
 const CatCheckbox = ({ category, open, setLoading, setError, checkTerm, setCheckTerm, getCheckTerm }) => {
-    function onChecked(event){
-        console.log(event.target.value)
-        if(event.target.checked == true){
+    function onChecked(event) {
+        console.log(event.target.checked)
+        if (event.target.checked === true) {
             setCheckTerm(state => [...state, event.target.value])
         }
-        else{
-            const checked = checkTerm.map((item)=>{
+        else if (event.target.checked === false) {
+            const checked = checkTerm.filter((item) => {
                 return item !== event.target.value;
             })
             setCheckTerm(checked)

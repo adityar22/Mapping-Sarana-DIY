@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState} from "react";
 
 export const useCheckFilter = (data, data2) => {
     const [checkTerm, setCheckTerm] = useState([]);
@@ -6,28 +6,32 @@ export const useCheckFilter = (data, data2) => {
     const [category, setCategory] = useState([]);
 
     const filterHandler = (checkTerm) => {
-        setCheckTerm(checkTerm);
+        console.log(data2)
+        console.log(checkTerm)
         if (checkTerm[0] !== "Tampilkan Semua") {
             const newDataList = data.filter((item) => {
                 return item.category === checkTerm;
             });
-            setCheckResult([...checkResult, newDataList])
+            newDataList.map((item)=>{
+                setCheckResult(state=>[...state, item])
+            })
             console.log(newDataList);
             const choosedCategory = data2.filter((item)=>{
                 return item.name === checkTerm;
             });
-            setCategory([...category, choosedCategory]);
-            console.log(choosedCategory);
+            choosedCategory.map((item)=>{
+                setCategory(state=>[...state, item])
+            })
         }
         else if(checkTerm[0] === "Tampilkan Semua"){
             setCheckResult(data)
             setCategory(data2)
         }
-        console.log(checkTerm)
     };
     const getCheckTerm = () => {
+        console.log(checkTerm)
         if (checkTerm.length !== 0) {
-            checkTerm.forEach((item)=>(
+            checkTerm.map((item)=>(
                 filterHandler(item)
             ));
         }
