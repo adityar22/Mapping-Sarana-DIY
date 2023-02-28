@@ -4,6 +4,7 @@ export const useCheckFilter = (data, data2) => {
     const [checkTerm, setCheckTerm] = useState([]);
     const [checkResult, setCheckResult] = useState([]);
     const [category, setCategory] = useState([]);
+    const [renderCheck, setRenderCheck] = useState(false);
 
     const filterHandler = (checkTerm) => {
         console.log(data2)
@@ -41,6 +42,7 @@ export const useCheckFilter = (data, data2) => {
             setCheckResult([])
             setCategory([])
         }
+        setRenderCheck(false)
     }
-    return { checkResult, category, filterHandler, getCheckTerm, checkTerm, setCheckTerm }
+    return { checkResult, category, filterHandler, getCheckTerm, checkTerm, setCheckTerm, renderCheck, setRenderCheck }
 }

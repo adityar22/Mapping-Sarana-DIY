@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
@@ -38,7 +38,7 @@ export default function LocationList() {
 
   return (
     <>
-      <div className="top-0 sticky flex justify-end z-10 bg-white">
+      <div className="top-0 sticky flex justify-end z-20 bg-white">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -61,6 +61,7 @@ export default function LocationList() {
           checkTerm={checkTerm}
           setCheckTerm={setCheckTerm}
           getCheckTerm={getCheckTerm}
+          getSearchTerm={getSearchTerm}
         />
         <div className="mx-9 my-10 md:mx-[100px] flex flex-col">
           <div className="flex flex-col md:w-68">
@@ -76,7 +77,7 @@ export default function LocationList() {
               </>
             }
             {checkResult.length != 0 &&
-              searchResult.map((facility) => (
+              checkResult.map((facility) => (
                 <>
                   <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} notify={notify} />
                 </>
