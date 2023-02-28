@@ -15,6 +15,7 @@ import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
 import SearchBar from "../components/searchbar/searchbar";
+import CatCheckbox from "../components/category/catCheckbox";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
@@ -23,6 +24,7 @@ import MiniInfo from "../components/modal/miniInfo";
 
 import { useFilter } from "../hooks/useFilter";
 import { useSearch } from "../hooks/useSearch";
+import { useCheckFilter } from "../hooks/useCheckFilter";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
@@ -30,6 +32,8 @@ export default function BasicMap() {
   const { notify, isPending, error, setLoading, setError } = useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
   const [marker, setMarker] = useState({});
+
+  const [open, setOpen] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -138,7 +142,8 @@ export default function BasicMap() {
     );
   }
 
-  const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
+  const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
+  const {checkResult, category, getCheckTerm, checkTerm, setCheckTerm} = useCheckFilter(facilities, categories)
   const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(filterResult)
 
   return (
@@ -151,6 +156,8 @@ export default function BasicMap() {
           filterTerm={filterTerm}
           getFilterTerm={getFilterTerm}
           inputEl={inputEl}
+          open={open}
+          setOpen={setOpen}
         />
         <div className="hidden sm:block">
           <ToggleButton />
@@ -204,6 +211,13 @@ export default function BasicMap() {
         />}
       </div>
       <div className="inline-flex">
+        <CatCheckbox 
+          category={categories} 
+          open={open} 
+          checkTerm={checkTerm}
+          setCheckTerm={setCheckTerm}
+          getCheckTerm={getCheckTerm}
+        />
         <div id="mapview" className="z-0 w-full items-center justify-center">
           <MapContainer
             id="maps"
@@ -215,8 +229,8 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && filterResult.length !== 0 &&
-              filterResult.map((item) => (
+            {!editMode && checkResult.length !== 0 &&
+              checkResult.map((item) => (
                 <MarkerView
                   filter={item}
                   category={category}
