@@ -122,7 +122,7 @@ export default function BasicMap() {
     return (
       <div className="mx-4 my-2">
         {editMode ?
-          <div className="flex sm:justify-end">
+          <div className="flex justify-end">
             <button
               className="bg-orange hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus :outline-none focus:shadow-outline"
               onClick={(e) => toggleMapMode(false)}>
@@ -145,9 +145,9 @@ export default function BasicMap() {
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
   const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(checkResult)
-  useEffect(()=>{
+  useEffect(() => {
     getSearchTerm()
-  },[checkResult])
+  }, [checkResult])
 
   return (
     <div className="h-screen flex-col">
@@ -253,17 +253,19 @@ export default function BasicMap() {
           </MapContainer>
         </div>
       </div>
-      <div className="z-10 absolute bottom-0 right-0 cursor-pointer sm:hidden">
-        <ToggleButton />
-      </div>
-      <div className="z-10 cursor-pointer sm:hidden w-full flex-col">
-        <SearchBar
-          categories={categories}
-          setLoading={setLoading}
-          setError={setError}
-          open={open}
-          setOpen={setOpen}
-        />
+      <div className="z-10 absolute bottom-0 right-0 sm:hidden flex-col w-screen justify-end">
+        <div className="z-20 cursor-pointer sm:hidden w-full">
+          <SearchBar
+            categories={categories}
+            setLoading={setLoading}
+            setError={setError}
+            open={open}
+            setOpen={setOpen}
+          />
+        </div>
+        <div className="cursor-pointer">
+          <ToggleButton />
+        </div>
       </div>
     </div>
   );
