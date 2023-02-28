@@ -35,6 +35,9 @@ export default function LocationList() {
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
   const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(checkResult)
+  useEffect(()=>{
+    getSearchTerm()
+  },[checkResult])
 
   return (
     <>
@@ -77,7 +80,7 @@ export default function LocationList() {
               </>
             }
             {checkResult.length != 0 &&
-              checkResult.map((facility) => (
+              searchResult.map((facility) => (
                 <>
                   <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} notify={notify} />
                 </>
