@@ -145,10 +145,13 @@ export default function BasicMap() {
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
   const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(checkResult)
+  useEffect(()=>{
+    getSearchTerm()
+  },[checkResult])
 
   return (
     <div className="h-screen flex-col">
-      <div className="invisible sm:visible top-0 sticky flex justify-end z-10">
+      <div className="invisible sm:visible top-0 sticky flex justify-end z-20">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -234,7 +237,7 @@ export default function BasicMap() {
           >
             {editMode && <ClickLocation />}
             {checkResult.length !== 0 &&
-              checkResult.map((item) => (
+              searchResult.map((item) => (
                 <MarkerView
                   filter={item}
                   category={category}
@@ -258,12 +261,6 @@ export default function BasicMap() {
           categories={categories}
           setLoading={setLoading}
           setError={setError}
-          filterTerm={filterTerm}
-          getFilterTerm={getFilterTerm}
-          inputEl={inputEl}
-          searchTerm={searchTerm}
-          getSearchTerm={getSearchTerm}
-          searchEl={searchEl}
           open={open}
           setOpen={setOpen}
         />
