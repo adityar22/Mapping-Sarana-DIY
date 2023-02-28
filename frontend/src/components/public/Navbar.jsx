@@ -21,17 +21,6 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
         className={`${open ? "w-full sm:w-72 sm:h-screen" : "w-screen sm:w-20 h-20 sm:h-screen"
           }
             bg-blue p-5  sm:pt-8 duration-300 fixed sm:relative z-40`}>
-        <div className="w-full visible sm:invisible">
-          <input
-            type='text'
-            name="search"
-            placeholder="Search Facility"
-            autoComplete="off"
-            aria-label="Search Facility"
-            className="px-3 py-3 font-semibold rounded-lg border-transparent w-full text-lg"
-          >
-          </input>
-        </div>
         <img
           src={controller}
           className={`absolute cursor-pointer -right-0 mr-6 sm:mr-0 sm:-right-3 w-5 scale-150 rounded-full  ${!open
