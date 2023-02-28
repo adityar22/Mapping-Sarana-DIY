@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/public/Navbar";
 import Map from "./map";
 import LocationList from "./LocationList";
+import SearchBar from "../components/searchbar/searchbar";
 
 const Mainpage = () => {
   return (

@@ -148,7 +148,7 @@ export default function BasicMap() {
 
   return (
     <div className="h-screen flex-col">
-      <div className="top-0 sticky flex justify-end z-10">
+      <div className="invisible sm:visible top-0 sticky flex justify-end z-10">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -252,6 +252,21 @@ export default function BasicMap() {
       </div>
       <div className="z-10 absolute bottom-0 right-0 cursor-pointer sm:hidden">
         <ToggleButton />
+      </div>
+      <div className="z-10 cursor-pointer sm:hidden w-full flex-col">
+        <SearchBar
+          categories={categories}
+          setLoading={setLoading}
+          setError={setError}
+          filterTerm={filterTerm}
+          getFilterTerm={getFilterTerm}
+          inputEl={inputEl}
+          searchTerm={searchTerm}
+          getSearchTerm={getSearchTerm}
+          searchEl={searchEl}
+          open={open}
+          setOpen={setOpen}
+        />
       </div>
     </div>
   );
