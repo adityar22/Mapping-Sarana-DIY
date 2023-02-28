@@ -144,7 +144,7 @@ export default function BasicMap() {
 
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const {checkResult, category, getCheckTerm, checkTerm, setCheckTerm} = useCheckFilter(facilities, categories)
-  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(filterResult)
+  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(checkResult)
 
   return (
     <div className="max-h-screen flex-col">
@@ -156,6 +156,9 @@ export default function BasicMap() {
           filterTerm={filterTerm}
           getFilterTerm={getFilterTerm}
           inputEl={inputEl}
+          searchTerm={searchTerm}
+          getSearchTerm={getSearchTerm}
+          searchEl={searchEl}
           open={open}
           setOpen={setOpen}
         />
@@ -217,6 +220,7 @@ export default function BasicMap() {
           checkTerm={checkTerm}
           setCheckTerm={setCheckTerm}
           getCheckTerm={getCheckTerm}
+          getSearchTerm={getSearchTerm}
         />
         <div id="mapview" className="z-0 w-full items-center justify-center">
           <MapContainer

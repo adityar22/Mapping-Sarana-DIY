@@ -8,13 +8,12 @@ export const useSearch=(data)=>{
     const searchHandler = (searchTerm)=>{
         setSearchTerm(searchTerm);
         if(searchTerm!==""){
+            console.log(data)
             const newDataList = data.filter((item)=>{
-                return Object.values(item.name)
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase());
+                return item.name.toLowerCase().includes(searchTerm.toLowerCase());
             });
             setSearchResult(newDataList)
+            console.log(newDataList)
         }
         else{
             setSearchResult(data)

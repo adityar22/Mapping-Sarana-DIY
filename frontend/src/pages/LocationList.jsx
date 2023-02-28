@@ -8,6 +8,7 @@ import useFetch from "../hooks/useFetch";
 
 import { useFilter } from "../hooks/useFilter";
 import { useCheckFilter } from "../hooks/useCheckFilter";
+import { useSearch } from "../hooks/useSearch";
 
 import SearchBar from "../components/searchbar/searchbar";
 import FacilityCard from "../components/facility/facilityCard";
@@ -33,6 +34,7 @@ export default function LocationList() {
 
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
+  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(checkResult)
 
   return (
     <>
@@ -44,6 +46,9 @@ export default function LocationList() {
           filterTerm={filterTerm}
           getFilterTerm={getFilterTerm}
           inputEl={inputEl}
+          searchTerm={searchTerm}
+          getSearchTerm={getSearchTerm}
+          searchEl={searchEl}
           open={open}
           setOpen={setOpen}
         />
@@ -71,7 +76,7 @@ export default function LocationList() {
               </>
             }
             {checkResult.length != 0 &&
-              checkResult.map((facility) => (
+              searchResult.map((facility) => (
                 <>
                   <FacilityCard facility={facility} category={category} url={url} setLoading={setLoading} setError={setError} notify={notify} />
                 </>
