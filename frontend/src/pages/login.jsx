@@ -19,17 +19,15 @@ export const Login = () => {
         const response = await login(name, password);
         if (!response.isError) {
             notify.info(response.message);
-            setLoading(true);
+            setLoading(false);
         }
         else {
             notify.error(response.message);
-            setLoading(false)
+            setLoading(false);
         }
-    
-
-    setLoading(false)
-        
+          
     }
+    setLoading(false);
 
     return (
         <div className=" flex flex-col justify-center font-poppins top-1/2 h-screen bg-white ">

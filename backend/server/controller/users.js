@@ -46,10 +46,10 @@ exports.login = async (req, res) => {
             const name = user[0].name
             console.log(process.env.ACCESS_TOKEN_SECRET)
             const token = jwt.sign({ id, name }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '20s'
+                expiresIn: "1d"
             })
             const refreshToken = jwt.sign({ id, name }, process.env.REFRESH_TOKEN_SECRET, {
-                expiresIn: '1d'
+                expiresIn: "1d"
             })
             await users.update({ refresh_token: refreshToken }, {
                 where: {
@@ -71,9 +71,9 @@ exports.login = async (req, res) => {
                 }
             })
         }
-        else if (!match) res.status(400).json({ msg: "Password tidak sesuai" })
+        else if (!match) res.status(400).json({ message: "Password tidak sesuai" })
     } catch (error) {
-        res.status(404).json({ msg: error.message })
+        res.status(404).json({ message: error.message })
     }
 }
 

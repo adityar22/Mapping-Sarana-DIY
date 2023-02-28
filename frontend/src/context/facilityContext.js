@@ -15,6 +15,7 @@ export const facilityReducer = (state, action) => {
         case 'EDIT_FACILITIES':
             return{
                 facilities: state.facilities.map((item)=>{
+                    console.log(item)
                     return item.id !== action.payload.id ? item:action.payload
                 })
             }

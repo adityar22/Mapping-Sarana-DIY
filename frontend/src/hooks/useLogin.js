@@ -31,7 +31,7 @@ export const useLogin = ({ setError, setLoading }) => {
             setLoading(false);
             return {
                 isError: true,
-                message: user.error
+                message: 'Login Error'
             }
         }
     }

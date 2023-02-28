@@ -1,10 +1,33 @@
-import { Route, Routes } from "react-router-dom";
+
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from 'axios'
+import jwt_decoded from 'jwt-decode'
+
 
 import Navbar from "../components/public/Navbar";
 import Map from "./map";
 import LocationList from "./LocationList";
 
 const Mainpage = () => {
+  // const [name, setName] = useState('');
+  // const [token, setToken] = useState('');
+
+  // useEffect(() => {
+  //   refreshToken();
+  // }, [])
+
+  // const refreshToken = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:5000/account/token')
+  //     setToken(response.data.accessToken);
+  //     const decoded = jwt_decoded(response.data.accessToken)
+  //   } catch (error) {
+
+  //   }
+  // }
+
+
   return (
     <div className="max-w-screen flex-row sm:flex">
       <Navbar />
