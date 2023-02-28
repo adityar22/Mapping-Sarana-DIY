@@ -8,6 +8,7 @@ import "../../App.css";
 
 const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
   const [open, setOpen] = useState(false);
+  const [catOpen, setCatOpen] = useState(false);
   const active = "bg-white text-white font-poppins font-bold";
   const deactive = "text-gray font-poppins font-bold";
   const Menus = [
@@ -64,6 +65,11 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
             ))}
           </div>
         </div>
+        {/* <button
+          onClick={(e) => setCatOpen(!catOpen)}
+          className=" bg-orange px-4 w-full flex justify-between font-bold text-base rounded-2xl tracking-wider border-transparent active:border-white duration-300 text-white z-10 py-3 object-fit visible sm:invisible"
+        >Pilih Kategori
+        </button> */}
       </div>
     </>
   );

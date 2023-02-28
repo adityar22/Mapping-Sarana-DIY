@@ -143,12 +143,12 @@ export default function BasicMap() {
   }
 
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
-  const {checkResult, category, getCheckTerm, checkTerm, setCheckTerm} = useCheckFilter(facilities, categories)
-  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(checkResult)
+  const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
+  const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(checkResult)
 
   return (
-    <div className="max-h-screen flex-col">
-      <div className="top-0 sticky flex justify-end z-10">
+    <div className="h-screen flex-col">
+      <div className="invisible sm:visible top-0 sticky flex justify-end z-10">
         <SearchBar
           categories={categories}
           setLoading={setLoading}
@@ -214,9 +214,9 @@ export default function BasicMap() {
         />}
       </div>
       <div className="inline-flex">
-        <CatCheckbox 
-          category={categories} 
-          open={open} 
+        <CatCheckbox
+          category={categories}
+          open={open}
           checkTerm={checkTerm}
           setCheckTerm={setCheckTerm}
           getCheckTerm={getCheckTerm}
@@ -252,6 +252,21 @@ export default function BasicMap() {
       </div>
       <div className="z-10 absolute bottom-0 right-0 cursor-pointer sm:hidden">
         <ToggleButton />
+      </div>
+      <div className="z-10 cursor-pointer sm:hidden w-full flex-col">
+        <SearchBar
+          categories={categories}
+          setLoading={setLoading}
+          setError={setError}
+          filterTerm={filterTerm}
+          getFilterTerm={getFilterTerm}
+          inputEl={inputEl}
+          searchTerm={searchTerm}
+          getSearchTerm={getSearchTerm}
+          searchEl={searchEl}
+          open={open}
+          setOpen={setOpen}
+        />
       </div>
     </div>
   );

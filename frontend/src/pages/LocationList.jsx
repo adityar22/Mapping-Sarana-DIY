@@ -34,7 +34,7 @@ export default function LocationList() {
 
   const { filterResult, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
   const { checkResult, category, getCheckTerm, checkTerm, setCheckTerm } = useCheckFilter(facilities, categories)
-  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(checkResult)
+  const { searchResult, getSearchTerm, searchEl, searchTerm } = useSearch(checkResult)
 
   return (
     <>
