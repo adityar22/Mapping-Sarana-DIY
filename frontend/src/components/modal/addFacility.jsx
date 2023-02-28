@@ -51,6 +51,10 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
         }
         setTotalImage(prevTotal => prevTotal + 1);
     }
+    const deleteImage = (index)=>{
+        setImageURL(imageURL.filter((el, i)=>i!==index))
+        setTotalImage(prevTotal=>prevTotal-1)
+    }
 
     const newFacility = { name, coordinat, category: catName, imageURL, atr1, atr2, atr3, atr4, atr5 }
     const { handleAdd: handleSubmit } = useFacilityHandleAdd({ url, type: 'ADD_FACILITIES', dispatch, data: newFacility, setLoading, setError, closePopUp: closeAdd, notify })
@@ -58,7 +62,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
     return (
         <>
             <div className="overlay z-20"></div>
-            <div className="container w-fit mx-auto absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
+            <div className="container w-fit mx-auto absolute z-50 top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-between">
                         <button className="" onClick={(e) => backChooseCat()}>kembali</button>
@@ -95,15 +99,18 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                         />
                     </div>
                     <div className="mb-4">
-                        <label>Image : </label>
-                        <div className="flex-col">
-                            <div className="inline-flex">
+                        <div className="flex-col inline-flex">
+                            <label>Image : </label>
+                            <div className="inline-flex mb-1">
                                 {totalImage != 0 && imageURL.map((image, index) => (
-                                    <div key={index} className="mr-2">
+                                    <div key={index} className="mr-2 flex-col inline-flex">
                                         <img
-                                            class=" object-cover w-32 lg:w-48 rounded-xl border-2"
+                                            class=" object-cover w-32 h-32 lg:w-32 rounded-xl border-2"
                                             src={image}
                                             alt="" />
+                                        <div className="inline-flex mb-1 justify-end">
+                                            <span className="text-red-700 cursor-pointer" onClick={(e)=>{deleteImage(index)}}>Delete</span>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -120,7 +127,7 @@ const AddFacility = ({ url, category, selfPopUp, chooseCatPopUp, addButtonVisibl
                         </div>
                     </div>
                     {category.atribut.length > 0 && category.atribut.map((atribut, index) => (
-                        <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} notify={notify}/>
+                        <AtributColumn key={atribut} atribut={atribut} atrVal={atrVal[index]} atrSet={atrSet[index]} notify={notify} />
                     ))}
                     <div className="flex justify-end">
                         <button

@@ -1,5 +1,6 @@
 export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, setLoading, setError, closePopUp, notify }) => {
     const edit = async()=>{
+        console.log(data)
         setLoading(true);
         const response = await fetch(url+data.id, {
             method: 'PUT',
@@ -12,11 +13,12 @@ export const useFacilityHandleEdit = ({url, data, updatedData, type, dispatch, s
         const json = await response.json();
 
         if (json.success) {
-            dispatch({ type: type, payload: json.data });
+            console.log(json.data[1]);
+            dispatch({ type: type, payload: json.data[1] });
             closePopUp();
             setLoading(false);
             setError(null);
-            notify.info(json.message);
+            // notify.info(json.message);
         }
         if (!json.success) {
             setLoading(false);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useCategoryContext } from "../../hooks/usecategoryContext";
 import { useFacilityContext } from "../../hooks/useFacilityContext";
 import { useFacilityHandleEdit } from "../../hooks/useFacilityHandleEdit"
@@ -25,29 +25,58 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
     const atrSet = [
         setAtr1, setAtr2, setAtr3, setAtr4, setAtr5
     ]
+    const [totalImage, setTotalImage] = useState(imageURL.length)
 
     const handleImage = (e) => {
+        e.stopPropagation()
         const file = e.target.files[0];
         setFileToBase(file)
+        e.target.files[0] = null;
+        e.preventDefault();
     }
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setImageURL(reader.result);
+            setImageURL([...imageURL, reader.result]);
         }
+        setTotalImage(prevTotal => prevTotal + 1);
+    }
+    const handleClick = () => {
+        const file = document.getElementById("imageEdit")
+        file.click()
+        console.log(imageURL)
+    };
+    const editImage = (e, index) => {
+        e.stopPropagation()
+        const file = e.target.files[0];
+        setEditFile(file, index)
+        e.target.files[0] = null;
+        e.preventDefault();
+    }
+    const setEditFile = (file, index) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        const newURL = imageURL
+        newURL[index] = reader.result
+        reader.onloadend = () => {
+            setImageURL(newURL);
+        }
+    }
+    const deleteImage = (index) => {
+        setImageURL(imageURL.filter((el, i) => i !== index))
+        setTotalImage(prevTotal => prevTotal - 1)
     }
 
     const updatedData = { name, coordinat, imageURL, atr1, atr2, atr3, atr4, atr5 }
     const { handleEdit: handleSubmit } = useFacilityHandleEdit({ url, data: facility, updatedData, type: 'EDIT_FACILITIES', dispatch, setLoading, setError, closePopUp: togglePopup, notify })
 
-
     return (
         <>
             <div className="overlay z-20"></div>
-            <div className="container w-fit mx-auto absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
+            <div className="container w-fit mx-auto absolute z-50 top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-all duration-700">
                 <form className="w-screen max-w-xl mx-8 bg-white shadow-xl rounded-3xl px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-                    <div className="flex justify-between">
+                    <div className="flex justify-end">
                         <button className="" onClick={togglePopup}>x</button>
                     </div>
                     <h3 className="text-center text-2xl font -bold mb-3">Tambah Fasilitas</h3>
@@ -55,19 +84,40 @@ const EditLocation = ({ facility, url, category, togglePopup, setLoading, setErr
                         <label>Kategori : </label>
                         <label>{cat}</label>
                     </div>
-                    <div className="mb-2">
-                        <img src={imageURL} class=" object-cover w-84 h-full lg:w-64 sm:h-full rounded-xl" alt=""></img>
+                    <div className="mb-2 inline-flex">
+                        {imageURL.map((imgURL, index) => (
+                            <div
+                                key={index}
+                                style={{ backgroundImage: `url(${imgURL})` }}
+                                className="w-36 h-32 bg-cover bg-center mr-3"
+                            >
+                                <div className="inline-flex mr-1 justify-between w-full px-1">
+                                    <input
+                                        style={{ display: 'none' }}
+                                        className=""
+                                        id="imageEdit"
+                                        type="file"
+                                        onChange={(e)=>editImage(e, index)}
+                                        accept="image/png, image/jpeg"
+                                    />
+                                    <span className="cursor-pointer mt-1 px-1 py-1 rounded bg-white border-2 border-orange text-orange" onClick={handleClick}>Edit</span>
+                                    <span className="cursor-pointer mt-1 px-2 py-1 rounded bg-red-700 text-white" onClick={(e) => deleteImage(index)}>x</span>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <div className="mb-2">
-                        <label>Ubah Gambar : </label>
-                        <input
-                            className=""
-                            id="image"
-                            type="file"
-                            onChange={handleImage}
-                            accept="image/png, image/jpeg"
-                        />
-                    </div>
+                    {totalImage != 3 && (
+                        <div className="mb-4">
+                            <label>Tambah Gambar : </label>
+                            <input
+                                className=""
+                                id="image"
+                                type="file"
+                                onChange={handleImage}
+                                accept="image/png, image/jpeg"
+                            />
+                        </div>
+                    )}
                     <div className="mb-2">
                         {name != "" && <label className="">Nama : </label>}
                         <input

@@ -8,27 +8,28 @@ import {
 } from "react-leaflet";
 import osm from "../components/maptiler/osm-providers";
 import { useRef } from "react";
-import L from "leaflet/dist/leaflet";
 
 import { useFacilityContext } from "../hooks/useFacilityContext";
 import { useCategoryContext } from "../hooks/usecategoryContext";
 import { useDisplayContext } from "../hooks/useDisplayContext";
 import useFetch from "../hooks/useFetch";
 
-import Navbar from "../components/public/Navbar";
 import SearchBar from "../components/searchbar/searchbar";
 import ChooseCategory from "../components/modal/chooseCategory";
 import AddCategory from "../components/modal/addCategory";
 import AddFacility from "../components/modal/addFacility";
 import MarkerView from "../components/maptiler/marker";
+import MiniInfo from "../components/modal/miniInfo";
+
 import { useFilter } from "../hooks/useFilter";
-import FacilityDetail from "../components/facility/facilityDetail";
+import { useSearch } from "../hooks/useSearch";
 
 export default function BasicMap() {
   const { facilities, dispatch } = useFacilityContext();
   const { categories, dispatch2 } = useCategoryContext();
   const { notify, isPending, error, setLoading, setError } = useDisplayContext();
   const [choosedCat, setChoosedCat] = useState({});
+  const [marker, setMarker] = useState({});
 
   const [editMode, setEditMode] = useState(false);
   const toggleMapMode = (mode) => {
@@ -36,6 +37,9 @@ export default function BasicMap() {
   };
 
   const [miniInfo, setMiniInfo] = useState(false);
+  const infoPopup = (state) => {
+    setMiniInfo(state)
+  }
   const [chooseCatModal, setChooseCatModal] = useState(false);
   const chooseCatPopUp = (state) => {
     setChooseCatModal(state);
@@ -49,10 +53,6 @@ export default function BasicMap() {
   const addFacPopUp = (state) => {
     setAddFacModal(state);
   };
-  const [detailModal, setDetailModal] = useState(false);
-  const showDetail = ()=>{
-    setDetailModal(!detailModal);
-  }
 
   const url = "http://localhost:3100/api/mapping";
   useFetch({ url, dispatch, setError, setLoading, type: "GET_FACILITIES" });
@@ -139,6 +139,7 @@ export default function BasicMap() {
   }
 
   const { filterResult, category, getFilterTerm, inputEl, filterTerm } = useFilter(facilities, categories);
+  const {searchResult, getSearchTerm, searchEl, searchTerm}= useSearch(filterResult)
 
   return (
     <div className="max-h-screen flex-col">
@@ -155,13 +156,15 @@ export default function BasicMap() {
           <ToggleButton />
         </div>
       </div>
-      {/* <div id="btnCurrent" className="z-10 absolute bottom-20 right-20 cursor-pointer">
-        <span>
-          Current Pos
-        </span>
-
-      </div> */}
       <div className="z-10">
+        {miniInfo && (
+          <MiniInfo
+            facility={marker}
+            category={category}
+            selfPopUp={infoPopup}
+          />
+        )}
+
         {chooseCatModal && (
           <ChooseCategory
             categories={categories}
@@ -186,7 +189,7 @@ export default function BasicMap() {
             notify={notify}
             setError={setError}
             pos={selectedPosition}
-            
+
           />
         )}
 
@@ -200,7 +203,7 @@ export default function BasicMap() {
           notify={notify}
         />}
       </div>
-      <div className="flex-col inline-flex">
+      <div className="inline-flex">
         <div id="mapview" className="z-0 w-full items-center justify-center">
           <MapContainer
             id="maps"
@@ -212,18 +215,20 @@ export default function BasicMap() {
             minZoom={2}
           >
             {editMode && <ClickLocation />}
-            {!editMode && filterResult.length > 0 &&
-              <MarkerView
-                filter={filterResult}
-                category={category}
-                detail={detailModal}
-                detailPopup={showDetail}
-              />}
+            {!editMode && filterResult.length !== 0 &&
+              filterResult.map((item) => (
+                <MarkerView
+                  filter={item}
+                  category={category}
+                  setMarker={setMarker}
+                  infoPopup={infoPopup}
+                />
+              ))
+            }
             <TileLayer
               url={osm.maptiler.url}
               attribution={osm.maptiler.attribution}
             />
-
           </MapContainer>
         </div>
       </div>

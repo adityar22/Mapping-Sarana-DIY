@@ -1,13 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import Map from "../../pages/map";
 
 import controller from "../../assets/controller.png";
 import menu_map from "../../assets/map.png";
 import list from "../../assets/list.png";
 import "../../App.css";
-
-import CatList from "../category/catList";
 
 const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, inputEl }) => {
   const [open, setOpen] = useState(false);
@@ -21,7 +18,7 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
   return (
     <>
       <div
-        className={`${open ? "w-full sm:w-72" : "w-screen sm:w-20 h-20 sm:h-screen"
+        className={`${open ? "w-full sm:w-72 sm:h-screen" : "w-screen sm:w-20 h-20 sm:h-screen"
           }
             bg-blue p-5  sm:pt-8 duration-300 fixed sm:relative z-40`}>
         <div className="w-full visible sm:invisible">
@@ -44,7 +41,7 @@ const Navbar = ({ categories, setLoading, setError, filterTerm, getFilterTerm, i
           onClick={() => setOpen(!open)}
           alt=""
         />
-        <div className="flex justify-between flex-col h-full ">
+        <div className="flex justify-between flex-col">
           <div
             className={!open ? "hidden sm:block sm:pt-6" : "block pt3 sm:pt-6"}
           >

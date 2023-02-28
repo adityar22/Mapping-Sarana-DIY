@@ -5,7 +5,6 @@ import './components/loading.css'
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-
 import DisplayContextProvider from './context/displayContext';
 import FacilitesContextProvider from './context/facilityContext';
 import CategoriesContextProvider from './context/categoryContext';
